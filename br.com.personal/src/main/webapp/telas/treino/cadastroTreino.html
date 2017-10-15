@@ -1,0 +1,33 @@
+<div ng-controller="treinoController">
+<div class="col-sm-12">
+		<div class="col-sm-6">
+			<div class="pull-left" style="margin-top: 28px; margin-bottom: 20px">
+				<button type="button" class="btn btn-info"
+					ng-click="voltarBuscaTreino()"
+					title="Voltar para busca do treino">Voltar</button>
+			</div>
+			<div class="pull-left" style="margin-top: 28px; margin-bottom: 20px">
+				<button type="button" class="btn btn-success" ng-click ="gravarTreino()"
+					title="Gravar Treino">Gravar</button>
+			</div>
+			<div class="pull-left" style="margin-top: 28px; margin-bottom: 20px">
+				<button type="button" class="btn btn-warning" ng-click="limparCampos()"
+					title="Limpar campos">Limpar</button>
+			</div>
+		</div>
+		<div class="col-sm-6">
+			<div class="pull-right">
+				<h2>Cadastro Treino</h2>
+			</div>
+		</div>
+	</div>
+	<div class="col-sm-12">
+	<hr>
+		<div class="col-sm-6">
+			<label class="pull-left">Nome do treino</label>
+			<input type="text"  class="form-control" ng-model="treino.nome" id ="txtTreino" autofocus>
+		</div>
+		
+	</div>
+
+</div>

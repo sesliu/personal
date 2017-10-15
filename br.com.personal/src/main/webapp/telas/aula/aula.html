@@ -1,0 +1,61 @@
+<div ng-controller="aulaController">
+	<div class="col-sm-12">
+		<div class="col-sm-6">
+			<div class="pull-left" style="margin-top: 28px; margin-bottom: 20px">
+				<button type="button" class="btn btn-success" ng-click="cadastraAula()"
+					title="Cadastrar Aula">Cadastrar</button>
+			</div>
+		</div>
+		<div class="col-sm-6">
+			<div class="pull-right">
+				<h2>Aula</h2>
+			</div>
+		</div>
+	</div>
+	<div class="col-sm-12">
+		<hr>
+		<div class="col-sm-6">
+			<div class="input-group">
+				<input type="text" class="form-control" ng-model = "busca"
+					placeholder="Digite o nome da aula para busca"> <span
+					class="input-group-btn">
+					<button class="btn btn-search" type="button" ng-click="buscarAula(busca)">
+						<i class="fa fa-search fa-fw"></i> Busca
+					</button>
+				</span>
+			</div>
+
+		</div>
+	</div>
+	<div class="col-md-12">
+				<div class="table-responsive"
+					style="margin-top: 16px; position: relative">
+					<table class="table table-striped table-hover" width="90%">
+						<thead>
+							<tr>
+								<td><strong>Nome</strong></td>
+								<td><strong>Dia da Semana</strong></td>
+								<td><strong>Duração</strong></td>
+								<td></td>
+								<td></td>
+								<td></td>
+							</tr>
+
+						</thead>
+
+						<tbody>
+							<tr ng-repeat ="pesq in listaAula">
+								<td>{{pesq.nome}}</td>
+								<td>{{pesq.diaSemana}}</td>
+								<td>{{pesq.duracao}}</td>
+								<td></td>
+								<td><button type="button" title="Vincular alunos para aula" class="btn btn-default">Vincular Aluno</button></td>
+								<td><span><a href="" ng-click="atualizaAula(pesq.idAula)"
+									class="fa fa-edit  fa-2x" title="Alterar" style="color: blue"></a></span></td>
+								<td><span><a href="" ng-click="excluirAula(pesq.idAula)"
+									class="fa fa-times fa-2x" title="Excluir" style="color: red"></a></span></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+</div>
