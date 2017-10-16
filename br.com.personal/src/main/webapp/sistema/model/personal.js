@@ -8,7 +8,7 @@ var personal = angular.module('personal',
                              'ngDialog',
                              'checklist-model',
                              'ngLoadingSpinner',
-                            
+                             'ngMask',
                              'ngAnimate']
                               
   );

@@ -9,6 +9,7 @@
 			</div>
 			<div class="pull-left" style="margin-top: 28px; margin-bottom: 20px">
 				<button type="button" class="btn btn-success" ng-click="gravarAluno()"
+					ng-disabled="formAluno.$invalid"
 					title="Gravar Aluno">Gravar</button>
 			</div>
 			<div class="pull-left" style="margin-top: 28px; margin-bottom: 20px">
@@ -22,20 +23,23 @@
 			</div>
 		</div>
 	</div>
+<form name="formAluno">	
 	<div class="col-sm-12">
 	<hr>
 		<div class="col-sm-6">
 			<label class="pull-left">Nome</label>
-			<input type="text"  class="form-control" ng-model="aluno.nome">
+			<input type="text"  class="form-control" ng-model="aluno.nome" required="required" autofocus
+			maxlength="50">
 		</div>
 		<div class="col-sm-4">
 			<label class="pull-left">Email</label>
-			<input type="text"  class="form-control" ng-model="aluno.email">
+			<input type="email"  maxlength="30"  required="required"
+			       class="form-control" ng-model="aluno.email">
 		</div>
 		
 		<div class="col-sm-2">
 			<label class="pull-left">Sexo</label>
-			<select class="form-control" ng-model="aluno.sexo">
+			<select class="form-control" ng-model="aluno.sexo" required>
 				<option value ="">Selecione</option>
 				<option value ="F">Feminino</option>
 				<option value ="M">Masculino</option>
@@ -56,7 +60,7 @@
 				class="input-group-btn">
 
 				<button type="button" class="btn btn-default"
-					ng-click="opened('dataIni')" uib-tooltip="Abrir Calendário">
+					ng-click="opened('dataIni')" uib-tooltip="Abrir Calend�rio">
 					<i class="glyphicon glyphicon-calendar"></i>
 				</button>
 
@@ -66,7 +70,7 @@
 		</div>
 		<div class="col-sm-8">
 			<label class="pull-left">Profissão</label>
-			<input type="text"  class="form-control" ng-model="aluno.profissao">
+			<input type="text"  class="form-control" ng-model="aluno.profissao" required>
 		</div>
 		
 	
@@ -74,29 +78,32 @@
 	<div class="col-sm-12"  style = "margin-top:12px">
 		<div class="col-sm-4">
 			<label class="pull-left">Telefone Residencial</label>
-			<input type="text"  class="form-control" ng-model="aluno.telefoneResidencial">
+			<input type="text"  class="form-control" ng-model="aluno.telefoneResidencial" required 
+			       mask="(99)9999-9999">
 		</div>
 		<div class="col-sm-4">
 			<label class="pull-left">Telefone Celular</label>
-			<input type="text"  class="form-control"  ng-model="aluno.telefoneCelular">
+			<input type="text"  class="form-control"  ng-model="aluno.telefoneCelular" required
+				   mask="(99)99999-9999">
 		</div>
 		<div class="col-sm-4">
 			<label class="pull-left">Telefone Comercial</label>
-			<input type="text"  class="form-control" ng-model="aluno.telefoneComercial">
+			<input type="text"  class="form-control" ng-model="aluno.telefoneComercial" 
+			    	mask="(99)9999-9999">
 		</div>
 		
 	</div>
 	<div class="col-sm-12" style = "margin-top:12px">
 	<hr>	
 		<div class="col-sm-2">
-			<label class="pull-left">Hora/Aula</label>
-			<input type="text"  class="form-control" ng-model="aluno.horaAula">
+			<label class="pull-left">Hora/Aula (R$)</label>
+			<input type="text"  class="form-control" ng-model="aluno.horaAula" required mask="9?9?9?9?.9?9?">
 		</div>
 		<div class="col-sm-2">
 			<label class="pull-left">% Ajuste Hora/Aula</label>
-			<input type="text"  class="form-control"  ng-model="aluno.ajuste">
+			<input type="text"  class="form-control"  ng-model="aluno.ajuste" mask="9?9?9?.9?9?">
 		</div>
 	
 	</div>
-
+</form>
 </div>

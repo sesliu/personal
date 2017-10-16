@@ -12,14 +12,19 @@
 			</div>
 		</div>
 	</div>
+<div class="text-center">
+		<h5><span style="color:red"><strong>Ajuda: Cadastro/Atualização dos alunos</strong></span></h5>
+	</div>	
+<form name="formBusca">	
 	<div class="col-sm-12">
 		<hr>
 		<div class="col-sm-6">
 			<div class="input-group">
-				<input type="text" class="form-control" ng-model="busca"
+				<input type="text" class="form-control" ng-model="busca" autofocus="autofocus" required="required"
 					placeholder="Digite o nome do aluno para busca"> <span
 					class="input-group-btn">
-					<button class="btn btn-search" type="button" ng-click="buscarAluno(busca)">
+					<button class="btn btn-search" type="button" ng-click="buscarAluno(busca)"
+							ng-disabled="formBusca.$invalid">
 						<i class="fa fa-search fa-fw"></i> Busca
 					</button>
 				</span>
@@ -27,6 +32,7 @@
 
 		</div>
 	</div>
+</form>	
 	<div class="col-md-12">
 				<div class="table-responsive"
 					style="margin-top: 16px; position: relative">

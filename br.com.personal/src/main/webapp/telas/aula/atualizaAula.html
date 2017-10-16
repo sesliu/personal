@@ -6,7 +6,7 @@
 					ng-click="voltarBuscaAula()" title="Voltar para busca da Aula">Voltar</button>
 			</div>
 			<div class="pull-left" style="margin-top: 28px; margin-bottom: 20px">
-				<button type="button" class="btn btn-success" 
+				<button type="button" class="btn btn-success"  ng-disabled="formAula.$invalid"
 				ng-click="atualizarAula()" title="atualizar Aula">Atualizar</button>
 			</div>
 			
@@ -17,6 +17,7 @@
 			</div>
 		</div>
 	</div>
+	<form name="formAula">
 	<div class="col-sm-12" style = "margin-top:12px">
 		<div class="col-sm-2">
 			<label class="pull-left">Data da Aula</label>
@@ -30,7 +31,7 @@
 				class="input-group-btn">
 
 				<button type="button" class="btn btn-default"
-					ng-click="opened('dataIni')" uib-tooltip="Abrir CalendÃ¡rio">
+					ng-click="opened('dataIni')" uib-tooltip="Abrir Calendário">
 					<i class="glyphicon glyphicon-calendar"></i>
 				</button>
 
@@ -40,7 +41,7 @@
 		</div>
 		<div class="col-sm-6">
 			<label class="pull-left">Nome</label>
-			<input type="text"  class="form-control" ng-model="aula.nome">
+			<input type="text"  class="form-control" ng-model="aula.nome" maxlength="50"   required="required">
 		</div>
 		
 	
@@ -52,12 +53,12 @@
 		<div class="col-sm-2">
 		
 			<label class="pull-left">Duração (minuntos)</label> <input type="text"
-				class="form-control" ng-model="aula.duracao">
+				class="form-control" ng-model="aula.duracao"  mask="9?9?9?9?9?">
 		</div>
 
 		<div class="col-sm-3">
 			<label class="pull-left">Dia da Semana</label> <select
-				class="form-control" ng-model="aula.diaSemana">
+				class="form-control" ng-model="aula.diaSemana" required="required">
 				<option value="">Selecione</option>
 				<option value="domingo">Domingo</option>
 				<option value="segunda">Segunda</option>
@@ -70,5 +71,5 @@
 		</div>
 
 	</div>
-	
+</form>	
 </div>

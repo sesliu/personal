@@ -8,6 +8,7 @@
 			</div>
 			<div class="pull-left" style="margin-top: 28px; margin-bottom: 20px">
 				<button type="button" class="btn btn-success" ng-click ="gravarTreino()"
+				    ng-disabled="formTreino.$invalid"
 					title="Gravar Treino">Gravar</button>
 			</div>
 			<div class="pull-left" style="margin-top: 28px; margin-bottom: 20px">
@@ -21,13 +22,15 @@
 			</div>
 		</div>
 	</div>
+<form name="formTreino">	
 	<div class="col-sm-12">
 	<hr>
 		<div class="col-sm-6">
 			<label class="pull-left">Nome do treino</label>
-			<input type="text"  class="form-control" ng-model="treino.nome" id ="txtTreino" autofocus>
+			<input type="text"  class="form-control" ng-model="treino.nome" id ="txtTreino" 
+					autofocus required maxlength="50">
 		</div>
 		
 	</div>
-
+</form>
 </div>
