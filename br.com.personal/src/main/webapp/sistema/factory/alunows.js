@@ -24,14 +24,35 @@ personal.factory("webservicesAluno", function($http) {
 	var _buscarAlunoId = function(codigo) {
 		return $http.get(url + '/buscaralunoId/' + codigo);
 	};
+	
+	var _buscarAlunoIdTreino = function(codigo) {
+		return $http.get(url + '/buscaralunoIdtreino/' + codigo);
+	};
 
+	var _buscarAlunoIdTreinoVinculado = function(codigo) {
+		return $http.get(url + '/buscaralunoIdtreinovinculado/' + codigo);
+	};
+
+	var _buscarAlunoIdAula = function(codigo) {
+		return $http.get(url + '/buscaralunoIdAula/' + codigo);
+	};
+
+	var _buscarAlunoIdAulaVinculada = function(codigo) {
+		return $http.get(url + '/buscaralunoIdAulavinculado/' + codigo);
+	};
+
+	
 	return {
 
 		gravarAluno : _gravarAluno,
 		buscarAluno : _buscarAluno,
 		excluirAluno: _excluirAluno,
 		buscarAlunoId: _buscarAlunoId,
-		atualizarAluno:_atualizarAluno
+		atualizarAluno:_atualizarAluno,
+		buscarAlunoIdTreino:_buscarAlunoIdTreino,
+		buscarAlunoIdTreinoVinculado:_buscarAlunoIdTreinoVinculado,
+		buscarAlunoIdAula:_buscarAlunoIdAula,
+		buscarAlunoIdAulaVinculada:_buscarAlunoIdAulaVinculada
 	}
 
 });

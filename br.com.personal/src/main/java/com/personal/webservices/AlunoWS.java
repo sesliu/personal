@@ -94,6 +94,78 @@ public class AlunoWS {
 	}
 	
 	
+	@RequestMapping(value = "/buscaralunoIdtreino/{codigo}", method = RequestMethod.GET, produces = "application/json")
+	public List<Aluno> buscaTreino(@PathVariable("codigo") Integer codigo) {
+
+		Aluno aluno  = new Aluno();
+		AlunoDao alunoDao  = new AlunoDao();
+		List<Aluno> lst = new ArrayList<Aluno>();
+		
+		try {
+			lst = alunoDao.findByIdTreino(codigo);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return lst;
+	}
+	
+	
+
+	@RequestMapping(value = "/buscaralunoIdtreinovinculado/{codigo}", method = RequestMethod.GET, produces = "application/json")
+	public List<Aluno> buscaTreinoVinculado(@PathVariable("codigo") Integer codigo) {
+
+		Aluno aluno  = new Aluno();
+		AlunoDao alunoDao  = new AlunoDao();
+		List<Aluno> lst = new ArrayList<Aluno>();
+		
+		try {
+			lst = alunoDao.findByIdTreinoVinculado(codigo);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return lst;
+	}
+	
+	
+	@RequestMapping(value = "/buscaralunoIdAula/{codigo}", method = RequestMethod.GET, produces = "application/json")
+	public List<Aluno> buscaAula(@PathVariable("codigo") Integer codigo) {
+
+		Aluno aluno  = new Aluno();
+		AlunoDao alunoDao  = new AlunoDao();
+		List<Aluno> lst = new ArrayList<Aluno>();
+		
+		try {
+			lst = alunoDao.findByIdAula(codigo);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return lst;
+	}
+	
+	@RequestMapping(value = "/buscaralunoIdAulavinculado/{codigo}", method = RequestMethod.GET, produces = "application/json")
+	public List<Aluno> buscaAulaVinculado(@PathVariable("codigo") Integer codigo) {
+
+		Aluno aluno  = new Aluno();
+		AlunoDao alunoDao  = new AlunoDao();
+		List<Aluno> lst = new ArrayList<Aluno>();
+		
+		try {
+			lst = alunoDao.findByIdAulaVinculado(codigo);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return lst;
+	}
+	
+	
 	
 	@RequestMapping(value = "/alunos", method = RequestMethod.GET)
 	public List<Aluno> listar2() {

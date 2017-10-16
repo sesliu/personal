@@ -21,6 +21,10 @@ personal.factory("webservicesAula", function($http) {
 	var _buscarAulaId = function(codigo) {
 		return $http.get(url + '/buscaraulaId/' + codigo);
 	};
+	
+	var _vincularAula = function(codigo,obj) {
+		return $http.get(url + '/vincularaula/' + codigo+'/'+obj);
+	};
 
 	return {
 
@@ -28,7 +32,8 @@ personal.factory("webservicesAula", function($http) {
 		buscarAula : _buscarAula,
 		excluirAula:_excluirAula,
 		buscarAulaId: _buscarAulaId,
-		atualizarAula:_atualizarAula
+		atualizarAula:_atualizarAula,
+		vincularAula:_vincularAula
 	}
 
 });

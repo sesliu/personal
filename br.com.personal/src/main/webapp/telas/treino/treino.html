@@ -46,7 +46,8 @@
 							<tr ng-repeat="pesq in listaTreino" >
 								<td>{{pesq.nome}}</td>
 								<td></td>
-								<td><button type="button" title="Vincular alunos no treino" class="btn btn-default">Vincular Aluno</button></td>
+								<td><button type="button" title="Vincular alunos no treino" class="btn btn-default" 
+									ng-click="exibirVinculo(pesq)">Vincular Aluno</button></td>
 								<td><span><a href="" ng-click="atualizaTreino(pesq.idTreino)"
 									class="fa fa-edit  fa-2x" title="Alterar" style="color: blue"></a></span></td>
 								<td><span><a href="" ng-click="excluirTreino(pesq.idTreino)"

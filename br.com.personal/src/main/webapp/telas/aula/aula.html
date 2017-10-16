@@ -49,7 +49,9 @@
 								<td>{{pesq.diaSemana}}</td>
 								<td>{{pesq.duracao}}</td>
 								<td></td>
-								<td><button type="button" title="Vincular alunos para aula" class="btn btn-default">Vincular Aluno</button></td>
+								<td><button type="button" title="Vincular alunos para aula" class="btn btn-default"
+								ng-click="exibirVinculo(pesq)"
+								>Vincular Aluno</button></td>
 								<td><span><a href="" ng-click="atualizaAula(pesq.idAula)"
 									class="fa fa-edit  fa-2x" title="Alterar" style="color: blue"></a></span></td>
 								<td><span><a href="" ng-click="excluirAula(pesq.idAula)"

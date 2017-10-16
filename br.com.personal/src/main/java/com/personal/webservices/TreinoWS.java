@@ -1,6 +1,7 @@
 package com.personal.webservices;
 
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -93,6 +94,31 @@ public class TreinoWS {
 		}
 
 		return treino;
+	}
+	
+	
+	@RequestMapping(value = "/vinculartreino/{codigo}/{obj}", method = RequestMethod.GET, produces = "application/json")
+	public void busca(@PathVariable("codigo")  Integer codigo, @PathVariable("obj") List<Integer> obj) {
+
+		
+		TreinoDao treinoDao  = new TreinoDao();
+		
+		try {
+			treinoDao.vincularTreino(codigo, obj);
+		} catch (InstantiationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
 	}
 	
 	

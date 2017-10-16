@@ -21,6 +21,11 @@ personal.factory("webservices", function($http) {
 	var _buscarTreinoId = function(codigo) {
 		return $http.get(url + '/buscartreinoId/' + codigo);
 	};
+	
+	var _vincularTreino = function(codigo,obj) {
+		return $http.get(url + '/vinculartreino/' + codigo+'/'+obj);
+	};
+
 
 	return {
 
@@ -28,7 +33,8 @@ personal.factory("webservices", function($http) {
 		buscarTreino : _buscarTreino,
 		excluirTreino:_excluirTreino,
 		buscarTreinoId: _buscarTreinoId,
-		atualizarTreino:_atualizarTreino
+		atualizarTreino:_atualizarTreino,
+		vincularTreino: _vincularTreino
 	}
 
 });

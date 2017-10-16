@@ -15,6 +15,9 @@ public class AulaDao extends Dao {
 	private String procDeletaAula = "call sp_excluiAula(?)";
 	private String procBuscaAulaID = "call sp_buscaAulaId(?)";
 	private String procAtualizaAula = "call sp_atualizaAula(?,?,?,?,?)";
+	private String procReorganizaAlunoAula = "call sp_reogarnizarAlunoAula(?)";
+	private String procCadastrarAlunoAula = "call sp_cadastrarAlunoAula(?,?)";
+
 
 	
 	public void create(Aula a)
@@ -156,5 +159,62 @@ public class AulaDao extends Dao {
 		close();
 
 	}
+private void excluirAlunoAula(int codigo) throws SQLException, InstantiationException, IllegalAccessException, ClassNotFoundException{
+		
+		open();
+
+		stmt = con.prepareStatement(procReorganizaAlunoAula);
+		stmt.setInt(1, codigo);
+		stmt.execute();
+
+		stmt.close();
+		close();
+
+	}
+	
+	
+	public void vincularAula(int codigo, List<Integer> lista)
+			throws SQLException, InstantiationException, IllegalAccessException, ClassNotFoundException {
+
+		
+		
+		try {
+			excluirAlunoAula(codigo);
+		} catch (InstantiationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		open();
+		
+		int idAluno = 0;
+		
+		for(Integer id: lista){
+			
+			
+			
+		if(id != null){
+			
+			stmt = con.prepareStatement(procCadastrarAlunoAula);	
+			stmt.setInt(1, codigo);
+			stmt.setInt(2, id);
+			stmt.execute();
+			
+		}	
+			
+			
+		}
+		
+		
+		stmt.close();
+		close();
+
+	}
+
 
 }

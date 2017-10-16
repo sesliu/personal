@@ -1,5 +1,6 @@
 package com.personal.webservices;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -95,6 +96,30 @@ public class AulaWS {
 		return aula;
 	}
 	
+	
+	@RequestMapping(value = "/vincularaula/{codigo}/{obj}", method = RequestMethod.GET, produces = "application/json")
+	public void buscaAula(@PathVariable("codigo")  Integer codigo, @PathVariable("obj") List<Integer> obj) {
+
+		
+		AulaDao aulaDao  = new AulaDao();
+		
+		try {
+			aulaDao.vincularAula(codigo, obj);
+		} catch (InstantiationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
 	
 	
 	@RequestMapping(value = "/aulas", method = RequestMethod.GET)

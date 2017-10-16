@@ -1,4 +1,4 @@
-personal.controller('aulaController',function($scope, $rootScope, $compile,webservicesAula){
+personal.controller('aulaController',function($scope, $rootScope, $compile,webservicesAula, ngDialog){
 	
 
 	$scope.aula ={};
@@ -73,6 +73,25 @@ personal.controller('aulaController',function($scope, $rootScope, $compile,webse
 			$("#paginas").append(compiledeHTML);
 		
 		}
+		
+		
+/////////////exibe vinculo treino////////////////////
+		
+		$scope.exibirVinculo = function(aula) {
+			$rootScope.aula = aula;
+				ngDialog.open({
+					template : 'telas/dialogo/dialogoVinculaAula.html',
+					className : 'ngdialog-theme-default'
+					
+					
+				});
+				
+				
+			}
+		
+		
+////////////////////////////////////////////////////////////////
+		
 		
 		$scope.gravarAula = function() {
 
@@ -182,4 +201,101 @@ personal.controller('atualizaAulaController',
 	}
 	
 	
-});		
+});	
+
+personal.controller('vinculaAulaController',
+		function($scope, $compile, $rootScope, webservicesAula, $timeout,webservicesAluno){
+	
+
+	
+	var listaAlunos =[];
+	var listaAlunoSelecionado = [];
+	var dadoAula = [];
+	var listaIdAluno =[];
+	var objetoId = {};
+	var gravarLista = [];
+	
+
+	$scope.nomeAula = $rootScope.aula.nome;
+	$scope.diaSemana = $rootScope.aula.diaSemana;
+	
+
+	$scope.inicio = function(){
+		
+		webservicesAluno.buscarAlunoIdAula($rootScope.aula.idAula).success(function(data){
+			
+			listaAlunos = data;
+		
+			
+		});
+		
+	 webservicesAluno.buscarAlunoIdAulaVinculada($rootScope.aula.idAula).success(function(data){
+			
+		 listaAlunoSelecionado = data;
+			
+			
+		});
+		
+	}
+	
+
+	
+	
+$timeout(function(){
+	
+	
+	
+	
+	$scope.demoOptions = {
+			title : 'Vincular alunos à aula',
+			filterPlaceHolder : 'Buscar nome do aluno abaixo',
+			labelAll : 'Não vinculados',
+			labelSelected : 'vinculados',
+			helpMessage : 'Clicar no nome do aluno para transferir entre os campos',
+			orderProperty : 'nome',
+			items : listaAlunos,
+			selectedItems : listaAlunoSelecionado
+};			
+
+	
+},1000);	
+	
+
+$scope.gravar = function(){
+	
+	var listaIdAluno = []
+	
+	dadoAula = $scope.demoOptions.selectedItems;
+
+	for (var i = 0; i < dadoAula.length; i++) {
+
+		listaIdAluno.push(dadoAula[i].idAluno);
+		
+		
+	}
+
+	if(listaIdAluno.length == 0){
+		
+		listaIdAluno = 0;
+	}
+
+	
+
+	webservicesAula.vincularAula($rootScope.aula.idAula,listaIdAluno).success(function(data){
+		
+	})
+	
+	
+	
+	
+	
+	
+	
+	
+}
+
+
+
+
+
+});	

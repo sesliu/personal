@@ -1,17 +1,32 @@
 var personal = angular.module('personal', 
-							['ui.bootstrap',
+							[
+							'dualmultiselect',
+							'ui.bootstrap',
                              'ngSanitize',
                              'ui.router',
                              'ngStorage',
                              'ngDialog',
                              'checklist-model',
                              'ngLoadingSpinner',
+                            
                              'ngAnimate']
                               
   );
 
 
 
+
+personal.config(function(ngDialogProvider) {
+
+	ngDialogProvider.setDefaults({
+
+		showClose : true,
+		closeByDocument : false,
+		closeByEscape : false
+
+	});
+
+});
 
 personal.config(function($stateProvider, $urlRouterProvider) {
 	
@@ -41,3 +56,4 @@ personal.config(function($stateProvider, $urlRouterProvider) {
 
 	
 });
+
