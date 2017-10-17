@@ -1,4 +1,5 @@
 <div ng-controller="aulaController">
+<div growl></div>
 	<div class="col-sm-12">
 		<div class="col-sm-6">
 			<div class="pull-left" style="margin-top: 28px; margin-bottom: 20px">
@@ -13,7 +14,7 @@
 		</div>
 	</div>
 	<div class="text-center">
-		<h5><span style="color:red"><strong>Ajuda: Vinculo dos alunos com a aula</strong></span></h5>
+		<h5><span style="color:red"><strong>Ajuda: Cadastro/ Atualização de Aulas e vinculo dos alunos</strong></span></h5>
 	</div>
 	<form name="formBusca">
 	<div class="col-sm-12">
@@ -42,6 +43,7 @@
 								<td><strong>Nome</strong></td>
 								<td><strong>Dia da Semana</strong></td>
 								<td><strong>Duração</strong></td>
+								<td><strong>Tipo</strong></td>
 								<td></td>
 								<td></td>
 								<td></td>
@@ -54,6 +56,7 @@
 								<td>{{pesq.nome}}</td>
 								<td>{{pesq.diaSemana}}</td>
 								<td>{{pesq.duracao}}</td>
+								<td>{{pesq.tipo}}</td>
 								<td></td>
 								<td><button type="button" title="Vincular alunos para aula" class="btn btn-default"
 								ng-click="exibirVinculo(pesq)"

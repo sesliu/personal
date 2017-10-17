@@ -8,7 +8,16 @@ public class Aula {
 	private Integer duracao;
 	private String dataAula;
 	private String diaSemana;
+	private String tipo;
 	
+	
+	
+	public String getTipo() {
+		return tipo;
+	}
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
+	}
 	public Integer getIdAula() {
 		return idAula;
 	}

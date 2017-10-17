@@ -65,7 +65,7 @@
 }
 
 .ngdialog.ngdialog-theme-default2 .ngdialog-content {
-  -webkit-animation: ngdialog-flyin .5s;
+   -webkit-animation: ngdialog-flyin .5s;
   -webkit-overflow-scrolling: touch!important;
   animation: ngdialog-flyin .5s;
   background: #ffffff;
@@ -74,11 +74,11 @@
   font-family: 'Helvetica',sans-serif;
   font-size: 1.1em;
   line-height: 1.5em;
-  margin: 0 auto;
+  margin: 50px auto;
   max-width: 100%;
   padding: 1em;
   position: relative;
-  width: 1200px;
+  width: 780px;
 }
 
 .ngdialog.ngdialog-theme-default2 .ngdialog-close {

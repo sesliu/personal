@@ -1,5 +1,5 @@
 personal.controller('treinoController',
-		function($scope, $compile, $rootScope, webservices, $timeout, $rootScope, ngDialog) {
+		function($scope, $compile, $rootScope, webservices, $timeout, $rootScope, ngDialog, growl) {
 
 			$scope.treino = {};
 			$scope.busca;
@@ -8,6 +8,13 @@ personal.controller('treinoController',
 			$rootScope.codigo;
 			$scope.nomeTreino;
 
+			var mensagemErroGravar = "Erro ao gravar registro";
+			var mensagemErroBuscar = "Sem registros para busca";
+			var mensagemOK = "Registros gravados com sucesso";
+			var mensagemOKExcluir = "Registro excluído com sucesso";
+			
+			
+			
 			$scope.cadastraTreino = function() {
 
 				$scope.exibeTela = false;
@@ -58,30 +65,40 @@ personal.controller('treinoController',
 ////////////////////////////////////////////////////////////////			
 			
 			
-		
-				
-				
-		
-			
 			$scope.gravarTreino = function() {
-
-				webservices.gravarTreino($scope.treino).success(
-						function(data, status) {
-
-							if (status == 200) {
-
-								$scope.exibeTela = false;
-								$("#paginas").empty();
-								var compiledeHTML = $compile(
-										"<cadastratreino></cadastratreino>")(
-										$scope);
-								$("#paginas").append(compiledeHTML);
-
-							}
-
+				
+				
+				ngDialog.openConfirm({
+					template : 'telas/dialogo/dialogoAdiciona.html',
+					className : 'ngdialog-theme-default',
+					controller : 'treinoController'
+				}).then(
+						function(success) {
+							webservices.gravarTreino($scope.treino).success(function(data,status) {
+							
+								
+							$timeout(function(){
+								growl.addSuccessMessage(mensagemOK);
+								
+							},100)	
+								
+								
+								
+									$("#paginas").empty();
+									var compiledeHTML = $compile(
+											"<cadastratreino></cadastratreino>")(
+											$scope);
+									$("#paginas").append(compiledeHTML);
+							}).error(function(){
+								growl.addErrorMessage(mensagemErroGravar);
+							});
+							
+								},
+						function(error) {
+							
 						});
 
-			}
+		}
 
 			$scope.limparCampos = function() {
 
@@ -98,6 +115,11 @@ personal.controller('treinoController',
 				ultimabusca = nome;
 				webservices.buscarTreino(nome).success(function(data, status) {
 
+					if(data == ''){
+						
+						growl.addErrorMessage(mensagemErroBuscar);
+					}
+					
 					$scope.listaTreino = data;
 					
 
@@ -107,18 +129,36 @@ personal.controller('treinoController',
 
 			$scope.excluirTreino = function(codigo) {
 
-				webservices.excluirTreino(codigo).success(function(data, status) {
+				
+				ngDialog.openConfirm({
+					template : 'telas/dialogo/dialogoExcluir.html',
+					className : 'ngdialog-theme-default',
+					controller : 'treinoController'
+				}).then(
+						function(success) {
+							
+							
+							webservices.excluirTreino(codigo).success(function(data, status)  {
 
-					webservices.buscarTreino(ultimabusca).success(function(data, status) {
+								growl.addSuccessMessage(mensagemOKExcluir);
+								webservices.buscarTreino(ultimabusca).success(function(data, status) {
 
-						$scope.listaTreino = data;
+									$scope.listaTreino = data;
+									
+
+								});
+								
+							}).error(function(){
+								growl.addErrorMessage(mensagemErroGravar);
+							});
 						
+						},
+						function(error) {
+							
+						});
 
-					});
-					
-
-				});
-
+				
+				
 				}
 
 		
@@ -126,31 +166,56 @@ personal.controller('treinoController',
 		})
 		
 personal.controller('atualizaTreinoController',
-		function($scope, $compile, $rootScope, webservices, $timeout){
+		function($scope, $compile, $rootScope, webservices, $timeout, ngDialog, growl){
 	
-	
+	var mensagemOK = "Registros atualizados com sucesso";
+	var mensagemErro = "Registros não atualizados";
 	
 	webservices.buscarTreinoId($rootScope.codigo).success(function(data, status) {
 
 		$scope.treino = data;
 	});
 	
+		
+	
 	$scope.atualizaTreino = function() {
 
-		webservices.atualizarTreino($scope.treino).success(
-				function(data, status) {
+		ngDialog.openConfirm({
+			template : 'telas/dialogo/dialogoAltera.html',
+			className : 'ngdialog-theme-default',
+			controller : 'treinoController'
+		}).then(
+				function(success) {
+					
+					webservices.atualizarTreino($scope.treino).success(function(data, status)  {
 
-					if (status == 200) {
+					$timeout(function(){
+						growl.addSuccessMessage(mensagemOK);
+						
+					},200)	
+						
+						
+						if (status == 200) {
 
-						$("#paginas").empty();
-						var compiledeHTML = $compile("<buscatreino></buscatreino>")(
-								$rootScope);
-						$("#paginas").append(compiledeHTML);
+							$("#paginas").empty();
+							var compiledeHTML = $compile("<buscatreino></buscatreino>")(
+									$rootScope);
+							$("#paginas").append(compiledeHTML);
 
-					}
+						}
+						
+					}).error(function(){
+						growl.addErrorMessage(mensagemErro);
+					});
+					
+				
 
+				},
+				function(error) {
+					
 				});
 
+		
 	}
 	
 	

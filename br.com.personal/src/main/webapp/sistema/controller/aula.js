@@ -1,4 +1,4 @@
-personal.controller('aulaController',function($scope, $rootScope, $compile,webservicesAula, ngDialog){
+personal.controller('aulaController',function($scope, $rootScope, $compile,webservicesAula, ngDialog , growl, $timeout){
 	
 
 	$scope.aula ={};
@@ -7,6 +7,11 @@ personal.controller('aulaController',function($scope, $rootScope, $compile,webse
 	var ultimabusca;
 	$rootScope.codigo;
 	var data = new Date;
+	
+	var mensagemErroGravar = "Erro ao gravar registro";
+	var mensagemErroBuscar = "Sem registros para busca";
+	var mensagemOK = "Registros gravados com sucesso";
+	var mensagemOKExcluir = "Registro excluído com sucesso";
 	
 	$scope.data =  new Date(data.getFullYear(), data.getMonth(), new Date().getDate());
 	
@@ -95,24 +100,45 @@ personal.controller('aulaController',function($scope, $rootScope, $compile,webse
 		
 		$scope.gravarAula = function() {
 
-			$scope.aula.dataAula = $scope.data.getFullYear()+'-'+('00'+($scope.data.getMonth()+1)).slice(-2)+'-'+('00'+$scope.data.getDate()).slice(-2);
 			
-			webservicesAula.gravarAula($scope.aula).success(
-					function(data, status) {
+			ngDialog.openConfirm({
+				template : 'telas/dialogo/dialogoAdiciona.html',
+				className : 'ngdialog-theme-default',
+				controller : 'aulaController'
+			}).then(
+					function(success) {
+						$scope.aula.dataAula = $scope.data.getFullYear()+'-'+('00'+($scope.data.getMonth()+1)).slice(-2)+'-'+('00'+$scope.data.getDate()).slice(-2);
+						
+						webservicesAula.gravarAula($scope.aula).success(
+								function(data, status) {
 
-						if (status == 200) {
+									$timeout(function(){
+										growl.addSuccessMessage(mensagemOK);
+										
+									},100)	
+										
+									
+									
+									if (status == 200) {
 
-							$scope.exibeTela = false;
-							$("#paginas").empty();
-							var compiledeHTML = $compile(
-									"<cadastraaula></cadastraaula>")(
-									$scope);
-							$("#paginas").append(compiledeHTML);
+										$scope.exibeTela = false;
+										$("#paginas").empty();
+										var compiledeHTML = $compile(
+												"<cadastraaula></cadastraaula>")(
+												$scope);
+										$("#paginas").append(compiledeHTML);
 
-						}
+									}
 
+								}).error(function(){
+									growl.addErrorMessage(mensagemErroGravar);
+								});
+							},
+					function(error) {
+						
 					});
 
+			
 		}
 		
 		$scope.limparCampos = function() {
@@ -130,6 +156,12 @@ personal.controller('aulaController',function($scope, $rootScope, $compile,webse
 			ultimabusca = nome;
 			webservicesAula.buscarAula(nome).success(function(data, status) {
 
+				if(data == ''){
+					
+					growl.addErrorMessage(mensagemErroBuscar);
+				}
+				
+				
 				$scope.listaAula = data;
 				
 
@@ -139,14 +171,31 @@ personal.controller('aulaController',function($scope, $rootScope, $compile,webse
 
 		$scope.excluirAula = function(codigo) {
 
-			webservicesAula.excluirAula(codigo).success(function(data, status) {
+			
+			ngDialog.openConfirm({
+				template : 'telas/dialogo/dialogoExcluir.html',
+				className : 'ngdialog-theme-default',
+				controller : 'aulaController'
+			}).then(
+					function(success) {
 
-				webservicesAula.buscarAula(ultimabusca).success(function(data, status) {
+						webservicesAula.excluirAula(codigo).success(function(data, status) {
+							growl.addSuccessMessage(mensagemOKExcluir);
+							webservicesAula.buscarAula(ultimabusca).success(function(data, status) {
 
-					$scope.listaAula = data;
-					
+								$scope.listaAula = data;
+								
 
-				});
+							}).error(function(){
+								growl.addErrorMessage(mensagemErroGravar);
+							});
+							},
+					function(error) {
+						
+					});
+
+			
+
 				
 
 			});
@@ -158,9 +207,11 @@ personal.controller('aulaController',function($scope, $rootScope, $compile,webse
 
 
 personal.controller('atualizaAulaController',
-		function($scope, $compile, $rootScope, webservicesAula, $timeout, $rootScope){
+		function($scope, $compile, $rootScope, webservicesAula, $timeout, $rootScope, ngDialog, growl){
 	
-	
+
+	var mensagemOK = "Registros atualizados com sucesso";
+	var mensagemErro = "Registros não atualizados";
 	
 	webservicesAula.buscarAulaId($rootScope.codigo).success(function(data, status) {
 
@@ -184,18 +235,38 @@ personal.controller('atualizaAulaController',
 
 		$scope.aula.dataAula = $scope.data.getFullYear()+'-'+('00'+($scope.data.getMonth()+1)).slice(-2)+'-'+('00'+$scope.data.getDate()).slice(-2);
 		
-		webservicesAula.atualizarAula($scope.aula).success(
-				function(data, status) {
+		
+		ngDialog.openConfirm({
+			template : 'telas/dialogo/dialogoAltera.html',
+			className : 'ngdialog-theme-default',
+			controller : 'atualizaAulaController'
+		}).then(
+				function(success) {
+					webservicesAula.atualizarAula($scope.aula).success(
+							function(data, status) {
+								
+								$timeout(function(){
+									growl.addSuccessMessage(mensagemOK);
+									
+								},200)	
 
-					if (status == 200) {
+								if (status == 200) {
 
-						$("#paginas").empty();
-						var compiledeHTML = $compile("<buscaaula></buscaaula>")(
-								$rootScope);
-						$("#paginas").append(compiledeHTML);
+									$("#paginas").empty();
+									var compiledeHTML = $compile("<buscaaula></buscaaula>")(
+											$rootScope);
+									$("#paginas").append(compiledeHTML);
 
-					}
+								}
 
+							}).error(function(){
+								growl.addErrorMessage(mensagemErro);
+							});
+							
+
+						},
+				function(error) {
+					
 				});
 
 	}

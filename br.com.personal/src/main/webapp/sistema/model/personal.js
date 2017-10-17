@@ -9,6 +9,7 @@ var personal = angular.module('personal',
                              'checklist-model',
                              'ngLoadingSpinner',
                              'ngMask',
+                             'angular-growl',
                              'ngAnimate']
                               
   );
@@ -16,8 +17,10 @@ var personal = angular.module('personal',
 
 
 
-personal.config(function(ngDialogProvider) {
+personal.config(function(growlProvider,ngDialogProvider) {
 
+	growlProvider.globalTimeToLive(2500);
+	
 	ngDialogProvider.setDefaults({
 
 		showClose : true,
