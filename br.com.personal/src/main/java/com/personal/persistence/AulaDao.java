@@ -75,6 +75,7 @@ public class AulaDao extends Dao {
 			a.setIdAula(rs.getInt(1));
 			a.setNome(rs.getString(2));
 			a.setDuracao(rs.getInt(3));
+			a.setDataAula(rs.getString(4));
 			a.setDiaSemana(rs.getString(5));
 			a.setTipo(rs.getString(6));
 			

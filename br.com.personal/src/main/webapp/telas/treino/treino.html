@@ -1,5 +1,9 @@
 <div ng-controller="treinoController">
 <div growl></div>
+<div ng-show ="carregaSpinner">
+	<span style="margin-top: 15%"
+		us-spinner="{radius:25,width:8,length:16}" spinner-on="showSpinner"></span>
+</div>
 	<div class="col-sm-12">
 		<div class="col-sm-6">
 			<div class="pull-left" style="margin-top: 28px; margin-bottom: 20px">
@@ -15,17 +19,17 @@
 		</div>
 	</div>
 	<div class="text-center">
-		<h5><span style="color:red"><strong>Ajuda:  Cadastro/ Atualização de treinos e vinculo dos alunos</strong></span></h5>
+		<h5><span style="color:red"><strong>Ajuda:  Cadastro/Atualização de treinos e vinculo dos alunos</strong></span></h5>
 	</div>
 <form name="formBusca">	
 	<div class="col-sm-12">
 		<hr>
 		<div class="col-sm-6">
 			<div class="input-group">
-				<input type="text" class="form-control" ng-model="busca" required
+				<input type="text" class="form-control" ng-model="busca" required autocomplete="on"
 					placeholder="Digite o nome do treino para busca"> <span
 					class="input-group-btn">
-					<button class="btn btn-search" type="button" ng-click="buscarTreino(busca)"
+					<button class="btn btn-search" type="submit" ng-click="buscarTreino(busca)"
 							ng-disabled="formBusca.$invalid">
 						<i class="fa fa-search fa-fw"></i> Busca
 					</button>
@@ -36,7 +40,7 @@
 	</div>
 </form>	
 	<div class="col-md-12">
-				<div class="table-responsive"
+				<div class="table-responsive scrollTabela"
 					style="margin-top: 16px; position: relative">
 					<table class="table table-striped table-hover" width="90%">
 						<thead>

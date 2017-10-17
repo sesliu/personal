@@ -27,7 +27,7 @@ public class TreinoWS {
 	
 		TreinoDao treinoDao  = new TreinoDao();
 		
-		System.out.println(treino.getNome());
+	
 		
 		try {
 			

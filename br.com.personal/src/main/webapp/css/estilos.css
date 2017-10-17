@@ -104,3 +104,9 @@
 }
 
 button:focus {outline:0;!important;}
+
+.scrollTabela {
+	
+	height: 310px;
+	overflow: auto;
+}

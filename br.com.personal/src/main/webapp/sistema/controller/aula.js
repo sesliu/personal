@@ -7,6 +7,7 @@ personal.controller('aulaController',function($scope, $rootScope, $compile,webse
 	var ultimabusca;
 	$rootScope.codigo;
 	var data = new Date;
+	$scope.carregaSpinner = false;
 	
 	var mensagemErroGravar = "Erro ao gravar registro";
 	var mensagemErroBuscar = "Sem registros para busca";
@@ -107,6 +108,7 @@ personal.controller('aulaController',function($scope, $rootScope, $compile,webse
 				controller : 'aulaController'
 			}).then(
 					function(success) {
+						$scope.carregaSpinner = true;
 						$scope.aula.dataAula = $scope.data.getFullYear()+'-'+('00'+($scope.data.getMonth()+1)).slice(-2)+'-'+('00'+$scope.data.getDate()).slice(-2);
 						
 						webservicesAula.gravarAula($scope.aula).success(
@@ -114,6 +116,7 @@ personal.controller('aulaController',function($scope, $rootScope, $compile,webse
 
 									$timeout(function(){
 										growl.addSuccessMessage(mensagemOK);
+										$scope.carregaSpinner = false;
 										
 									},100)	
 										
@@ -132,6 +135,7 @@ personal.controller('aulaController',function($scope, $rootScope, $compile,webse
 
 								}).error(function(){
 									growl.addErrorMessage(mensagemErroGravar);
+									$scope.carregaSpinner = false;
 								});
 							},
 					function(error) {
@@ -154,8 +158,9 @@ personal.controller('aulaController',function($scope, $rootScope, $compile,webse
 		$scope.buscarAula = function(nome) {
 
 			ultimabusca = nome;
+			$scope.carregaSpinner = true;
 			webservicesAula.buscarAula(nome).success(function(data, status) {
-
+				
 				if(data == ''){
 					
 					growl.addErrorMessage(mensagemErroBuscar);
@@ -163,7 +168,7 @@ personal.controller('aulaController',function($scope, $rootScope, $compile,webse
 				
 				
 				$scope.listaAula = data;
-				
+				$scope.carregaSpinner = false;
 
 			});
 
@@ -178,27 +183,26 @@ personal.controller('aulaController',function($scope, $rootScope, $compile,webse
 				controller : 'aulaController'
 			}).then(
 					function(success) {
+						$scope.carregaSpinner = true;
 
 						webservicesAula.excluirAula(codigo).success(function(data, status) {
 							growl.addSuccessMessage(mensagemOKExcluir);
 							webservicesAula.buscarAula(ultimabusca).success(function(data, status) {
 
 								$scope.listaAula = data;
-								
+								$scope.carregaSpinner = false;
+
 
 							}).error(function(){
 								growl.addErrorMessage(mensagemErroGravar);
+								$scope.carregaSpinner = false;
+
 							});
 							},
 					function(error) {
 						
 					});
-
-			
-
-				
-
-			});
+		});
 
 			}
 
@@ -212,6 +216,8 @@ personal.controller('atualizaAulaController',
 
 	var mensagemOK = "Registros atualizados com sucesso";
 	var mensagemErro = "Registros não atualizados";
+	$scope.carregaSpinner = false;
+
 	
 	webservicesAula.buscarAulaId($rootScope.codigo).success(function(data, status) {
 
@@ -242,11 +248,15 @@ personal.controller('atualizaAulaController',
 			controller : 'atualizaAulaController'
 		}).then(
 				function(success) {
+					$scope.carregaSpinner = true;
+
 					webservicesAula.atualizarAula($scope.aula).success(
 							function(data, status) {
 								
 								$timeout(function(){
 									growl.addSuccessMessage(mensagemOK);
+									$scope.carregaSpinner = false;
+
 									
 								},200)	
 
@@ -261,6 +271,8 @@ personal.controller('atualizaAulaController',
 
 							}).error(function(){
 								growl.addErrorMessage(mensagemErro);
+								$scope.carregaSpinner = false;
+
 							});
 							
 
@@ -275,7 +287,7 @@ personal.controller('atualizaAulaController',
 });	
 
 personal.controller('vinculaAulaController',
-		function($scope, $compile, $rootScope, webservicesAula, $timeout,webservicesAluno){
+		function($scope, $compile, $rootScope, webservicesAula, $timeout,webservicesAluno,growl){
 	
 
 	
@@ -285,6 +297,8 @@ personal.controller('vinculaAulaController',
 	var listaIdAluno =[];
 	var objetoId = {};
 	var gravarLista = [];
+	var exibeMensagemOk = false;
+	var mensagemOK = "Registros atualizados com sucesso";
 	
 
 	$scope.nomeAula = $rootScope.aula.nome;
@@ -353,6 +367,12 @@ $scope.gravar = function(){
 	
 
 	webservicesAula.vincularAula($rootScope.aula.idAula,listaIdAluno).success(function(data){
+		
+		$scope.exibeMensagemOk = true
+		$timeout(function(){
+			
+			$scope.exibeMensagemOk = false 
+		},1500)
 		
 	})
 	

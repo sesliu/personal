@@ -1,5 +1,9 @@
 <div ng-controller="alunoController">
 <div growl></div>
+<div ng-show ="carregaSpinner">
+	<span style="margin-top: 15%"
+		us-spinner="{radius:25,width:8,length:16}" spinner-on="showSpinner"></span>
+</div>
 	<div class="col-sm-12">
 		<div class="col-sm-6">
 			<div class="pull-left" style="margin-top: 28px; margin-bottom: 20px">
@@ -60,7 +64,7 @@
 				class="input-group-btn">
 
 				<button type="button" class="btn btn-default"
-					ng-click="opened('dataIni')" uib-tooltip="Abrir Calendário">
+					ng-click="opened('dataIni')" uib-tooltip="Abrir CalendÃ¡rio">
 					<i class="glyphicon glyphicon-calendar"></i>
 				</button>
 

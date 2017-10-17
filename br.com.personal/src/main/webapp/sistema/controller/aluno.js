@@ -6,6 +6,7 @@ personal.controller('alunoController',function($scope, $compile, $rootScope,webs
 	var ultimabusca;
 	$rootScope.codigo;
 	var data = new Date;
+	$scope.carregaSpinner = false;
 	
 	var mensagemErroGravar = "Erro ao gravar registro";
 	var mensagemErroBuscar = "Sem registros para busca";
@@ -88,13 +89,15 @@ personal.controller('alunoController',function($scope, $compile, $rootScope,webs
 			controller : 'alunoController'
 		}).then(
 				function(success) {
-
+					
+					$scope.carregaSpinner = true;
 					$scope.aluno.dataNascimento = $scope.data.getFullYear()+'-'+('00'+($scope.data.getMonth()+1)).slice(-2)+'-'+('00'+$scope.data.getDate()).slice(-2);
 					webservicesAluno.gravarAluno($scope.aluno).success(
 							function(data, status) {
 								
 								$timeout(function(){
 									growl.addSuccessMessage(mensagemOK);
+									$scope.carregaSpinner = false;
 									
 								},100)	
 								
@@ -111,6 +114,7 @@ personal.controller('alunoController',function($scope, $compile, $rootScope,webs
 
 							}).error(function(){
 								growl.addErrorMessage(mensagemErroGravar);
+								$scope.carregaSpinner = false;
 							});
 
 				},
@@ -133,7 +137,7 @@ personal.controller('alunoController',function($scope, $compile, $rootScope,webs
 	}
 
 	$scope.buscarAluno = function(nome) {
-
+		$scope.carregaSpinner = true;
 		ultimabusca = nome;
 		webservicesAluno.buscarAluno(nome).success(function(data, status) {
 
@@ -142,7 +146,7 @@ personal.controller('alunoController',function($scope, $compile, $rootScope,webs
 				growl.addErrorMessage(mensagemErroBuscar);
 			}
 			$scope.listaAluno = data;
-			
+			$scope.carregaSpinner = false;
 
 		});
 
@@ -157,15 +161,18 @@ personal.controller('alunoController',function($scope, $compile, $rootScope,webs
 			controller : 'alunoController'
 		}).then(
 				function(success) {
+					$scope.carregaSpinner = true;
 					webservicesAluno.excluirAluno(codigo).success(function(data, status) {
 
 						webservicesAluno.buscarAluno(ultimabusca).success(function(data, status) {
 
 							$scope.listaAluno = data;
 							growl.addSuccessMessage(mensagemOKExcluir);
+							$scope.carregaSpinner = false;
 
 						}).error(function(){
 							growl.addErrorMessage(mensagemErroGravar);
+							$scope.carregaSpinner = false;
 						});
 						},
 				function(error) {
@@ -187,6 +194,7 @@ personal.controller('atualizaAlunoController',
 	
 	var mensagemOK = "Registros atualizados com sucesso";
 	var mensagemErro = "Registros não atualizados";
+	$scope.carregaSpinner = false;
 	
 	webservicesAluno.buscarAlunoId($rootScope.codigo).success(function(data, status) {
 
@@ -214,6 +222,7 @@ personal.controller('atualizaAlunoController',
 			controller : 'atualizaAlunoController'
 		}).then(
 				function(success) {
+					$scope.carregaSpinner = true;
 					$scope.aluno.dataNascimento = $scope.data.getFullYear()+'-'+('00'+($scope.data.getMonth()+1)).slice(-2)+'-'+('00'+$scope.data.getDate()).slice(-2);
 					
 					webservicesAluno.atualizarAluno($scope.aluno).success(
@@ -221,6 +230,7 @@ personal.controller('atualizaAlunoController',
 
 								$timeout(function(){
 									growl.addSuccessMessage(mensagemOK);
+									$scope.carregaSpinner = false;
 									
 								},200)	
 								
@@ -236,6 +246,7 @@ personal.controller('atualizaAlunoController',
 
 							}).error(function(){
 								growl.addErrorMessage(mensagemErro);
+								$scope.carregaSpinner = false;
 							});
 
 

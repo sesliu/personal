@@ -60,3 +60,20 @@ personal.config(function($stateProvider, $urlRouterProvider) {
 	
 });
 
+personal .filter('formataData',function(){
+    return function(input){
+        if(angular.isDefined(input)){
+        	
+        	input = input.replace("-","");
+        	input = input.replace("-","");
+            if(input.length >= 8){
+                input = input.slice(0,8);
+                
+                input = input.slice(6,8)  + '/' + input.slice(4,6) + '/' + input.slice(0,4);
+            }
+           
+        }
+        return input;
+    };
+});
+

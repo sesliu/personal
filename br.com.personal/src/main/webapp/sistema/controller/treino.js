@@ -7,6 +7,7 @@ personal.controller('treinoController',
 			var ultimabusca;
 			$rootScope.codigo;
 			$scope.nomeTreino;
+			$scope.carregaSpinner = false;
 
 			var mensagemErroGravar = "Erro ao gravar registro";
 			var mensagemErroBuscar = "Sem registros para busca";
@@ -74,11 +75,15 @@ personal.controller('treinoController',
 					controller : 'treinoController'
 				}).then(
 						function(success) {
+							$scope.carregaSpinner = true;
+
 							webservices.gravarTreino($scope.treino).success(function(data,status) {
 							
 								
 							$timeout(function(){
 								growl.addSuccessMessage(mensagemOK);
+								$scope.carregaSpinner = false;
+
 								
 							},100)	
 								
@@ -113,6 +118,8 @@ personal.controller('treinoController',
 			$scope.buscarTreino = function(nome) {
 
 				ultimabusca = nome;
+				$scope.carregaSpinner = true;
+
 				webservices.buscarTreino(nome).success(function(data, status) {
 
 					if(data == ''){
@@ -121,7 +128,8 @@ personal.controller('treinoController',
 					}
 					
 					$scope.listaTreino = data;
-					
+					$scope.carregaSpinner = false;
+
 
 				});
 
@@ -137,19 +145,23 @@ personal.controller('treinoController',
 				}).then(
 						function(success) {
 							
-							
+							$scope.carregaSpinner = true;
+
 							webservices.excluirTreino(codigo).success(function(data, status)  {
 
 								growl.addSuccessMessage(mensagemOKExcluir);
 								webservices.buscarTreino(ultimabusca).success(function(data, status) {
 
 									$scope.listaTreino = data;
-									
+									$scope.carregaSpinner = false;
+
 
 								});
 								
 							}).error(function(){
 								growl.addErrorMessage(mensagemErroGravar);
+								$scope.carregaSpinner = false;
+
 							});
 						
 						},
@@ -170,6 +182,8 @@ personal.controller('atualizaTreinoController',
 	
 	var mensagemOK = "Registros atualizados com sucesso";
 	var mensagemErro = "Registros não atualizados";
+	$scope.carregaSpinner = false;
+
 	
 	webservices.buscarTreinoId($rootScope.codigo).success(function(data, status) {
 
@@ -186,11 +200,14 @@ personal.controller('atualizaTreinoController',
 			controller : 'treinoController'
 		}).then(
 				function(success) {
-					
+					$scope.carregaSpinner = true;
+
 					webservices.atualizarTreino($scope.treino).success(function(data, status)  {
 
 					$timeout(function(){
 						growl.addSuccessMessage(mensagemOK);
+						$scope.carregaSpinner = false;
+
 						
 					},200)	
 						
@@ -232,7 +249,7 @@ personal.controller('vinculaTreinoController',
 	var listaIdAluno =[];
 	var objetoId = {};
 	var gravarLista = [];
-	
+	var exibeMensagemOk = false;
 	$scope.alunoTreino ={};
 	
 	$scope.nomeTreino = $rootScope.treino.nome;
@@ -283,6 +300,7 @@ $scope.gravar = function(){
 	
 	var listaIdAluno = []
 	
+
 	dadoTreino = $scope.demoOptions.selectedItems;
 
 	for (var i = 0; i < dadoTreino.length; i++) {
@@ -301,6 +319,13 @@ $scope.gravar = function(){
 
 	webservices.vincularTreino($rootScope.treino.idTreino,listaIdAluno).success(function(data){
 		
+		$scope.exibeMensagemOk = true
+		$timeout(function(){
+			
+			$scope.exibeMensagemOk = false 
+		},1500)
+		
+	
 	})
 	
 	
