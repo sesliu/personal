@@ -14,6 +14,17 @@ personal.controller('principalController',function($scope,$compile){
 		
 	}
 	
+	$scope.buscarAlunoHora = function(){
+		
+		$scope.exibeTela = false;
+		
+		$("#paginas").empty();
+		var compiledeHTML = $compile("<alunohora></alunohora>")
+		($scope);
+		$("#paginas").append(compiledeHTML);
+		
+	}
+	
 	
 	$scope.buscarTreino = function(){
 		
@@ -32,6 +43,17 @@ personal.controller('principalController',function($scope,$compile){
 		console.log('teste');
 		$("#paginas").empty();
 		var compiledeHTML = $compile("<buscaaula></buscaaula>")
+		($scope);
+		$("#paginas").append(compiledeHTML);
+		
+	}
+	
+	$scope.buscarHistorico = function(){
+		
+		$scope.exibeTela = false;
+		
+		$("#paginas").empty();
+		var compiledeHTML = $compile("<historicofinanceiro></historicofinanceiro>")
 		($scope);
 		$("#paginas").append(compiledeHTML);
 		

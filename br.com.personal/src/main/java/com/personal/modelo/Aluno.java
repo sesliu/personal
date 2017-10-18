@@ -11,10 +11,27 @@ public class Aluno {
 	private String telefoneResidencial;
 	private String telefoneComercial;
 	private String telefoneCelular;
-	private Double horaAula;
-	private Double ajuste;
+	private String horaAula;
+	private String ajuste;
+	private Integer quantidadeAula;
+	private String valorTotal;
 	
 	
+	
+	
+	
+	public Integer getQuantidadeAula() {
+		return quantidadeAula;
+	}
+	public void setQuantidadeAula(Integer quantidadeAula) {
+		this.quantidadeAula = quantidadeAula;
+	}
+	public String getValorTotal() {
+		return valorTotal;
+	}
+	public void setValorTotal(String valorTotal) {
+		this.valorTotal = valorTotal;
+	}
 	public Integer getIdAluno() {
 		return idAluno;
 	}
@@ -69,16 +86,16 @@ public class Aluno {
 	public void setTelefoneCelular(String telefoneCelular) {
 		this.telefoneCelular = telefoneCelular;
 	}
-	public Double getHoraAula() {
+	public String getHoraAula() {
 		return horaAula;
 	}
-	public void setHoraAula(Double horaAula) {
+	public void setHoraAula(String horaAula) {
 		this.horaAula = horaAula;
 	}
-	public Double getAjuste() {
+	public String getAjuste() {
 		return ajuste;
 	}
-	public void setAjuste(Double ajuste) {
+	public void setAjuste(String ajuste) {
 		this.ajuste = ajuste;
 	}
 	

@@ -69,7 +69,13 @@
  .btn {
   		border-radius: 12px; 
   		
+  		
   } 
+  
+  .btnTamanho {
+  
+  		width: 120px;
+  }
 
   .dualmultiselect label {
   margin: 10px;

@@ -182,7 +182,21 @@ public class AlunoWS {
 		return lst;
 	}
 	
+	@RequestMapping(value = "/alunoHora", method = RequestMethod.GET)
+	public List<Aluno> listarAlunoHora() {
 
+		List<Aluno> lst = new ArrayList<Aluno>();
+
+		try {
+			lst = new AlunoDao().findAllAlunoHora();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return lst;
+	}
+	
 	@RequestMapping(value = "/excluiraluno/{codigo}", method = RequestMethod.DELETE, produces = "application/json")
 	public void atualiza(@PathVariable Integer codigo) throws Exception {
 
@@ -191,5 +205,25 @@ public class AlunoWS {
 		alunoDao.delete(codigo);
 
 	}
+	
+	@RequestMapping(value="/alteravalor", method = RequestMethod.POST, consumes = "application/json")
+	public void atualizarValor(@RequestBody Aluno aluno) {
+	
+
+		AlunoDao alunoDao  = new AlunoDao();
+		
+		try {
+			
+			alunoDao.updateValor(aluno);
+		
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+		
+		}
+		
+		
+	
+	}	
 
 }

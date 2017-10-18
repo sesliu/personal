@@ -19,6 +19,8 @@ public class AlunoDao extends Dao{
 	private String procListaAlunoTreino = "call sp_listaAlunoTreino(?)";
 	private String procVerificaAlunoAula = "call sp_verificaAlunoAula(?)";
 	private String procListaAlunoAula = "call sp_listaAlunoAula(?)";
+	private String procListaAulaHora = "call sp_listaAlunoHora()";
+	private String procAtualizaValor = "call sp_atualizaAlunoHora(?,?,?)";
 
 	
 	public void create(Aluno a)
@@ -35,8 +37,8 @@ public class AlunoDao extends Dao{
 		stmt.setString(6, a.getTelefoneResidencial());
 		stmt.setString(7, a.getTelefoneComercial());
 		stmt.setString(8, a.getTelefoneCelular());
-		stmt.setDouble(9, a.getHoraAula());
-		stmt.setDouble(10, a.getAjuste());
+		stmt.setString(9, a.getHoraAula());
+		stmt.setString(10, a.getAjuste());
 	
 		stmt.execute();
 		stmt.close();
@@ -60,8 +62,8 @@ public class AlunoDao extends Dao{
 		stmt.setString(6, a.getTelefoneResidencial());
 		stmt.setString(7, a.getTelefoneComercial());
 		stmt.setString(8, a.getTelefoneCelular());
-		stmt.setDouble(9, a.getHoraAula());
-		stmt.setDouble(10, a.getAjuste());
+		stmt.setString(9, a.getHoraAula());
+		stmt.setString(10, a.getAjuste());
 		stmt.setDouble(11, a.getIdAluno());
 		stmt.execute();
 		stmt.close();
@@ -122,8 +124,8 @@ public class AlunoDao extends Dao{
 			a.setTelefoneResidencial(rs.getString(7));
 			a.setTelefoneComercial(rs.getString(8));
 			a.setTelefoneCelular(rs.getString(9));
-			a.setHoraAula(rs.getDouble(10));
-			a.setAjuste(rs.getDouble(11));
+			a.setHoraAula(rs.getString(10));
+			a.setAjuste(rs.getString(11));
 			
 			
 		}
@@ -298,5 +300,58 @@ public class AlunoDao extends Dao{
 		close();
 
 	}
+	
+	
+	public List<Aluno> findAllAlunoHora()
+			throws SQLException, InstantiationException, IllegalAccessException, ClassNotFoundException {
+
+		open();
+
+		ArrayList<Aluno> alunos = new ArrayList<Aluno>();
+
+		stmt = con.prepareStatement(procListaAulaHora);
+		rs = stmt.executeQuery();
+		while (rs.next()) {
+
+			Aluno a = new Aluno();
+
+
+			a.setIdAluno(rs.getInt(1));
+			a.setNome(rs.getString(2));
+			a.setQuantidadeAula(rs.getInt(3));
+			a.setHoraAula(rs.getString(4));
+			a.setAjuste(rs.getString(5));
+			a.setValorTotal(rs.getString(6));
+			
+
+			alunos.add(a);
+		}
+
+		rs.close();
+		stmt.close();
+
+		close();
+
+		return alunos;
+
+	}
+	
+	
+	public void updateValor(Aluno a)
+			throws SQLException, InstantiationException, IllegalAccessException, ClassNotFoundException {
+
+		open();
+
+		stmt = con.prepareStatement(procAtualizaValor);
+		stmt.setInt(1, a.getIdAluno());
+		stmt.setString(2, a.getHoraAula());
+		stmt.setString(3, a.getAjuste());
+		stmt.execute();
+		stmt.close();
+
+		close();
+
+	}
+
 
 }

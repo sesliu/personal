@@ -63,3 +63,18 @@ personal.directive("atualizaaluno", function() {
 		templateUrl : 'telas/aluno/atualizaAluno.html'
 	};
 });
+
+personal.directive("alunohora", function() {
+	return {
+		templateUrl : 'telas/aluno/alunoHora.html'
+	};
+});
+
+//////////////////////financeiro//////////////////////////
+
+
+personal.directive("historicofinanceiro", function() {
+	return {
+		templateUrl : 'telas/financeiro/financeiro.html'
+	};
+});

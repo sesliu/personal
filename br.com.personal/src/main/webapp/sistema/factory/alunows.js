@@ -41,6 +41,14 @@ personal.factory("webservicesAluno", function($http) {
 		return $http.get(url + '/buscaralunoIdAulavinculado/' + codigo);
 	};
 
+	var _buscarAlunoHora = function() {
+		return $http.get(url + '/alunoHora');
+	};
+
+	var _atualizarValor = function(aluno) {
+		return $http.post(url + '/alteravalor', aluno);
+	};
+	
 	
 	return {
 
@@ -52,7 +60,9 @@ personal.factory("webservicesAluno", function($http) {
 		buscarAlunoIdTreino:_buscarAlunoIdTreino,
 		buscarAlunoIdTreinoVinculado:_buscarAlunoIdTreinoVinculado,
 		buscarAlunoIdAula:_buscarAlunoIdAula,
-		buscarAlunoIdAulaVinculada:_buscarAlunoIdAulaVinculada
+		buscarAlunoIdAulaVinculada:_buscarAlunoIdAulaVinculada,
+		buscarAlunoHora: _buscarAlunoHora,
+		atualizarValor: _atualizarValor
 	}
 
 });
