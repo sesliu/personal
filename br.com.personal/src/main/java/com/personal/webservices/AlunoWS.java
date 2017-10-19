@@ -35,10 +35,46 @@ public class AlunoWS {
 		
 		}
 		
+	}	
+	
+	@RequestMapping(value="/gravarpagamento", method = RequestMethod.POST, consumes = "application/json")
+	public void gravaràgamento(@RequestBody Aluno aluno) {
+	
+		AlunoDao alunoDao  = new AlunoDao();
+		
+		
+		try {
+			
+			alunoDao.createFinanceiro(aluno);
+		
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+		
+		}
+		
 		
 	
 	}	
+	@RequestMapping(value="/estornapagamento", method = RequestMethod.POST, consumes = "application/json")
+	public void estornapagamento(@RequestBody Aluno aluno) {
 	
+		AlunoDao alunoDao  = new AlunoDao();
+		
+		
+		try {
+			
+			alunoDao.deleteFinanceiro(aluno);
+		
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+		
+		}
+		
+		
+	
+	}	
 	
 	
 	@RequestMapping(value="/atualizaraluno", method = RequestMethod.POST, consumes = "application/json")
@@ -68,6 +104,23 @@ public class AlunoWS {
 		List<Aluno> lst = new ArrayList<Aluno>();
 		try {
 			lst = alunoDao.findByName(nome);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return lst;
+	}
+	
+	
+	@RequestMapping(value = "/buscarFinanceiro/{mes}/{ano}", method = RequestMethod.GET, produces = "application/json")
+	public List<Aluno> buscaFinanceiro(@PathVariable("mes") String mes, @PathVariable("ano") Integer ano) {
+
+		AlunoDao alunoDao  = new AlunoDao();
+		
+		List<Aluno> lst = new ArrayList<Aluno>();
+		try {
+			lst = alunoDao.findByFinanceiro(mes, ano);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

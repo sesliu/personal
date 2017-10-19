@@ -10,11 +10,11 @@ import com.personal.modelo.Aula;
 public class AulaDao extends Dao {
 
 	
-	private String procCadastraAula = "call sp_cadastraAula(?,?,?,?,?)";
+	private String procCadastraAula = "call sp_cadastraAula(?,?,?,?,?,?)";
 	private String procBuscaAula = "call sp_buscaAula(?)";
 	private String procDeletaAula = "call sp_excluiAula(?)";
 	private String procBuscaAulaID = "call sp_buscaAulaId(?)";
-	private String procAtualizaAula = "call sp_atualizaAula(?,?,?,?,?,?)";
+	private String procAtualizaAula = "call sp_atualizaAula(?,?,?,?,?,?,?)";
 	private String procReorganizaAlunoAula = "call sp_reogarnizarAlunoAula(?)";
 	private String procCadastrarAlunoAula = "call sp_cadastrarAlunoAula(?,?)";
 
@@ -31,6 +31,7 @@ public class AulaDao extends Dao {
 		stmt.setString(3, a.getDiaSemana());
 		stmt.setString(4, a.getDataAula());
 		stmt.setString(5, a.getTipo());
+		stmt.setString(6, a.getHorario());
 		stmt.execute();
 		stmt.close();
 
@@ -51,6 +52,7 @@ public class AulaDao extends Dao {
 		stmt.setString(4, a.getDataAula());
 		stmt.setInt(5, a.getIdAula());
 		stmt.setString(6, a.getTipo());
+		stmt.setString(7, a.getHorario());
 		stmt.execute();
 		stmt.close();
 
@@ -78,6 +80,7 @@ public class AulaDao extends Dao {
 			a.setDataAula(rs.getString(4));
 			a.setDiaSemana(rs.getString(5));
 			a.setTipo(rs.getString(6));
+			a.setHorario(rs.getString(7));
 			
 			aulas.add(a);
 		}
@@ -108,7 +111,7 @@ public class AulaDao extends Dao {
 			a.setDataAula(rs.getString(4));
 			a.setDiaSemana(rs.getString(5));
 			a.setTipo(rs.getString(6));
-			
+			a.setHorario(rs.getString(7));
 		}
 
 		rs.close();
@@ -139,7 +142,7 @@ public class AulaDao extends Dao {
 			a.setDataAula(rs.getString(4));
 			a.setDiaSemana(rs.getString(5));
 			a.setTipo(rs.getString(6));
-
+			a.setHorario(rs.getString(7));
 			aula.add(a);
 		}
 

@@ -47,6 +47,7 @@
 								<td><strong>Nome</strong></td>
 								<td><strong>Data</strong></td>
 								<td><strong>Dia da Semana</strong></td>
+								<td><strong>Horário</strong></td>
 								<td><strong>Duração</strong></td>
 								<td><strong>Tipo</strong></td>
 								<td></td>
@@ -60,6 +61,7 @@
 							<tr ng-repeat ="pesq in listaAula">
 								<td>{{pesq.nome}}</td>
 								<td>{{pesq.dataAula | formataData}}</td>
+								<td>{{pesq.horario}}</td>
 								<td>{{pesq.diaSemana}}</td>
 								<td>{{pesq.duracao}}</td>
 								<td>{{pesq.tipo}}</td>

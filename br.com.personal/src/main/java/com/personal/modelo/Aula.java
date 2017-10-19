@@ -9,9 +9,17 @@ public class Aula {
 	private String dataAula;
 	private String diaSemana;
 	private String tipo;
+	private String horario;
 	
 	
 	
+	
+	public String getHorario() {
+		return horario;
+	}
+	public void setHorario(String horario) {
+		this.horario = horario;
+	}
 	public String getTipo() {
 		return tipo;
 	}

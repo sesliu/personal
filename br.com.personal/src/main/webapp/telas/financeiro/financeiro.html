@@ -17,11 +17,11 @@
 	<hr>
 	    <div class="col-sm-2">
 	    <label class="pull-left">Ano Vigente</label>
-	    	<select class="form-control" ng-model="vingente.ano" >
-	    			<option value = "" >Selecione</option>
-	    			<option value = "2000" >2000</option>
-	    			<option value = "2001" >2001</option>
-	    			<option value = "2002" >2002</option>
+	    	<select class="form-control" ng-model="vigente.ano" >
+	    			<option value="" >Selecione</option>
+	    			<option value="2000" >2000</option>
+	    			<option value="2001" >2001</option>
+	    			<option value="2002" >2002</option>
 	    			<option value = "2003" >2003</option>
 	    			<option value = "2004" >2004</option>
 	    			<option value = "2005" >2005</option>
@@ -78,20 +78,20 @@
 	    
 		<div class="col-sm-3">
 			<label class="pull-left">Mês Vigente</label>
-			<select  class="form-control" ng-model="vingente.mes" >
-				<option value = "" >Selecione</option>
-				<option value = "0" >Janeiro</option>
-				<option value = "1" >Fevereiro</option>
-				<option value = "2" >Março</option>
-				<option value = "3" >Abril</option>
-				<option value = "4" >Maio</option>
-				<option value = "5" >Junho</option>
-				<option value = "6" >Julho</option>
-				<option value = "7" >Agosto</option>
-				<option value = "8" >Setembro</option>
-				<option value = "9" >Outubro</option>	
-				<option value = "10" >Novembro</option>	
-				<option value = "11" >Dezembro</option>	
+			<select  class="form-control" ng-model="vigente.mes">
+				<option value="">Selecione</option>
+				<option value="0">Janeiro</option>
+				<option value="1">Fevereiro</option>
+				<option value="2">Março</option>
+				<option value="3">Abril</option>
+				<option value="4">Maio</option>
+				<option value="5">Junho</option>
+				<option value="6">Julho</option>
+				<option value="7">Agosto</option>
+				<option value="8">Setembro</option>
+				<option value="9">Outubro</option>	
+				<option value="10">Novembro</option>	
+				<option value="11">Dezembro</option>	
 			</select>
 		</div>
 	</div>
@@ -103,11 +103,10 @@
 					<table class="table table-striped table-hover" width="90%">
 						<thead>
 							<tr>
-								<td><strong>Nome</strong></td>
-								<td><strong>aula</strong></td>
-								<td><strong>horário</strong></td>
+								<td><strong>Nome do aluno</strong></td>
 								<td><strong>valor devido</strong></td>
 								<td><strong>valor pago</strong></td>
+								<td><strong>Data Pagamento</strong></td>
 								<td></td>
 								<td></td>
 								<td></td>
@@ -117,15 +116,16 @@
 
 						<tbody>
 				
-							<tr>
+							<tr ng-repeat ='pesq in listaFinancas'>
+								<td>{{pesq.nome}}</td>
+								<td>{{pesq.horaAula}}</td>
+								<td>{{pesq.valorPagamento}}</td>
+								<td>{{pesq.dataPagamento}} </td>
 								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td><button type="button" title="Alterar valor" class="btn btn-default"
-										ng-click="exibirValor(pesq)">Ajustar Valor</button></td>
+								<td><button type="button" title="Pagar mensalidade" class="btn btn-success"
+										ng-click="pagarValor(pesq)" ng-disabled= "pesq.pago == 1" >Pagar</button></td>
+								<td><button type="button" title="Estornar mensalidade" class="btn btn-danger"
+										ng-click="estornarValor(pesq)" ng-disabled= "pesq.pago == 0">Estornar</button></td>		
 								
 							</tr>
 						</tbody>

@@ -15,11 +15,53 @@ public class Aluno {
 	private String ajuste;
 	private Integer quantidadeAula;
 	private String valorTotal;
+	private String dtPagamento;
+	private String valorPagamento;
+	private String dataPagamento;
+	private String mes;
+	private int ano;
+	private String pago;
 	
 	
 	
 	
 	
+	public String getPago() {
+		return pago;
+	}
+	public void setPago(String pago) {
+		this.pago = pago;
+	}
+	public String getMes() {
+		return mes;
+	}
+	public void setMes(String mes) {
+		this.mes = mes;
+	}
+	public int getAno() {
+		return ano;
+	}
+	public void setAno(int ano) {
+		this.ano = ano;
+	}
+	public String getDtPagamento() {
+		return dtPagamento;
+	}
+	public void setDtPagamento(String dtPagamento) {
+		this.dtPagamento = dtPagamento;
+	}
+	public String getValorPagamento() {
+		return valorPagamento;
+	}
+	public void setValorPagamento(String valorPagamento) {
+		this.valorPagamento = valorPagamento;
+	}
+	public String getDataPagamento() {
+		return dataPagamento;
+	}
+	public void setDataPagamento(String dataPagamento) {
+		this.dataPagamento = dataPagamento;
+	}
 	public Integer getQuantidadeAula() {
 		return quantidadeAula;
 	}
