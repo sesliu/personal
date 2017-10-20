@@ -1,5 +1,6 @@
 personal.controller('principalController',function($scope,$compile){
 	
+	
 	$scope.exibeTela = true;
 	
 	

@@ -1,4 +1,6 @@
 @CHARSET "UTF-8";
+
+
  .navbar {
       margin-bottom: 0;
       border-radius: 0;
@@ -8,44 +10,9 @@
     .row.content {height: 505px}
     
     /* Set gray background color and 100% height */
-    .sidenav {
-      padding-top: 10px;
-      background-color: #f1edee;
-      height: 100%;
-      
     
-    }
     
-    /* Set black background color, white text and some padding */
-    footer {
-      background-color: #555;
-      color: white;
-      padding: 15px;
-    }
-    
-    /* On small screens, set height to 'auto' for sidenav and grid */
-    @media screen and (max-width: 767px) {
-      .sidenav {
-        height: auto;
-        padding: 15px;
-      }
-      .row.content {height:auto;} 
-    }
-    
-      @media (max-width: 1200px) {
-     
-    
-      
-    }
-    
-    #menu{
-    
-    	position: absolute;
-    	margin-top:40%;
-    	border: 1px solid black;
-    }
-
-
+   
     
  li{
  	content: none;
@@ -58,10 +25,12 @@
 	vertical-align: middle;
 	padding-top: 18%;
 	margin-top:auto;
-	font-size: 45px;
+	font-size: 55px;
 	color: #008e00;
 	opacity: 0.7;
 	text-shadow: 10px 5px 5px gray;
+	font-stretch: condensed;
+	clear: both;
 	
 }
 
@@ -125,4 +94,17 @@ button:focus {outline:0;!important;}
 	
 	height: 310px;
 	overflow: auto;
+}
+
+
+input {
+	
+	box-shadow: inset 10px 10px 10px gray;
+}
+
+
+.obrigatorio {
+	
+		border-color: red;
+	
 }

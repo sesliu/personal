@@ -32,18 +32,18 @@
 	<hr>
 		<div class="col-sm-6">
 			<label class="pull-left">Nome</label>
-			<input type="text"  class="form-control" ng-model="aluno.nome" required="required" autofocus
+			<input type="text"  class="form-control obrigatorio" ng-model="aluno.nome" required="required" autofocus
 			maxlength="50">
 		</div>
 		<div class="col-sm-4">
 			<label class="pull-left">Email</label>
 			<input type="email"  maxlength="30"  required="required"
-			       class="form-control" ng-model="aluno.email">
+			       class="form-control obrigatorio" ng-model="aluno.email">
 		</div>
 		
 		<div class="col-sm-2">
 			<label class="pull-left">Sexo</label>
-			<select class="form-control" ng-model="aluno.sexo" required>
+			<select class="form-control obrigatorio" ng-model="aluno.sexo" required>
 				<option value ="">Selecione</option>
 				<option value ="F">Feminino</option>
 				<option value ="M">Masculino</option>
@@ -55,7 +55,7 @@
 		<div class="col-sm-2">
 			<label class="pull-left">Data Nascimento</label>
 			<div class="input-group">
-			<input type="text" name="dataIni" class="form-control"
+			<input type="text" name="dataIni" class="form-control obrigatorio"
 				ng-model="data" show-button-bar="false"
 				uib-datepicker-popup="dd/MM/yyyy" is-open="openDatIni"
 				datepicker-options="options" alt-input-formats="!d/!M/yyyy"
@@ -74,7 +74,7 @@
 		</div>
 		<div class="col-sm-8">
 			<label class="pull-left">Profissão</label>
-			<input type="text"  class="form-control" ng-model="aluno.profissao" required>
+			<input type="text"  class="form-control obrigatorio" ng-model="aluno.profissao" required>
 		</div>
 		
 	
@@ -82,12 +82,12 @@
 	<div class="col-sm-12"  style = "margin-top:12px">
 		<div class="col-sm-4">
 			<label class="pull-left">Telefone Residencial</label>
-			<input type="text"  class="form-control" ng-model="aluno.telefoneResidencial" required 
+			<input type="text"  class="form-control obrigatorio" ng-model="aluno.telefoneResidencial" required 
 			       mask="(99)9999-9999">
 		</div>
 		<div class="col-sm-4">
 			<label class="pull-left">Telefone Celular</label>
-			<input type="text"  class="form-control"  ng-model="aluno.telefoneCelular" required
+			<input type="text"  class="form-control obrigatorio"  ng-model="aluno.telefoneCelular" required
 				   mask="(99)99999-9999">
 		</div>
 		<div class="col-sm-4">
@@ -101,7 +101,7 @@
 	<hr>	
 		<div class="col-sm-2">
 			<label class="pull-left">Hora/Aula (R$)</label>
-			<input type="text"  class="form-control" ng-model="aluno.horaAula" required mask="9?9?9?9?.9?9?">
+			<input type="text"  class="form-control obrigatorio" ng-model="aluno.horaAula" required mask="9?9?9?9?.9?9?">
 		</div>
 		<div class="col-sm-2">
 			<label class="pull-left">% Ajuste Hora/Aula</label>

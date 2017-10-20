@@ -23,41 +23,46 @@
 		</div>
 	</div>
 	<form name="formAula">
-	<div class="col-sm-12" style = "margin-top:12px">
-	<hr>
-		<div class="col-sm-2">
+		<hr>
+	<div class="col-sm-4" style = "margin-top:12px">
+	<div class="col-sm-6">
 			<label class="pull-left">Data da Aula</label>
 			<div class="input-group">
-			<input type="text" name="dataIni" class="form-control"
-				ng-model="data" show-button-bar="false"
-				uib-datepicker-popup="dd/MM/yyyy" is-open="openDatIni"
-				datepicker-options="options" alt-input-formats="!d/!M/yyyy"
-				maxlength="10" locate="pt-br" onkeyup="formatDate(this);"
-				size="15" placeholder="DD/MM/AAAA" /> <span
-				class="input-group-btn">
-
-				<button type="button" class="btn btn-default"
-					ng-click="opened('dataIni')" uib-tooltip="Abrir Calendário">
-					<i class="glyphicon glyphicon-calendar"></i>
-				</button>
-
-			</span>
+				<input type="text" name="dataIni" class="form-control obrigatorio"
+					ng-model="data" show-button-bar="false"
+					uib-datepicker-popup="dd/MM/yyyy" is-open="openDatIni"
+					datepicker-options="options" alt-input-formats="!d/!M/yyyy"
+					maxlength="10" locate="pt-br" onkeyup="formatDate(this);"
+					size="15" placeholder="DD/MM/AAAA" /> <span
+					class="input-group-btn">
+	
+					<button type="button" class="btn btn-default"
+						ng-click="opened('dataIni')" uib-tooltip="Abrir Calendário">
+						<i class="glyphicon glyphicon-calendar"></i>
+					</button>
+	
+				</span>
 		
 		</div>
 		</div>
-		<div class="col-sm-6">
+	
+	
+	</div>
+		<div class="col-sm-12" style = "margin-top:12px">
+			<div class="col-sm-6">
 			<label class="pull-left">Nome</label>
-			<input type="text"  class="form-control" ng-model="aula.nome" maxlength="50"   required="required">
+			<input type="text"  class="form-control obrigatorio" ng-model="aula.nome"  maxlength="50" required="required">
+			</div>
 		</div>
 		
 	
-	</div>
+
 	
 	<div class="col-sm-12">
 		<hr>
 		<div class="col-sm-2">
 			<label class="pull-left">Tipo Aula</label>
-				<select class="form-control" ng-model="aula.tipo" required>
+				<select class="form-control obrigatorio" ng-model="aula.tipo" required>
 				<option value ="">Selecione</option>
 				<option value ="Normal">Normal</option>
 				<option value ="Extra">Extra</option>
@@ -71,7 +76,7 @@
 
 		<div class="col-sm-3">
 			<label class="pull-left">Dia da Semana</label> <select
-				class="form-control" ng-model="aula.diaSemana" required="required">
+				class="form-control obrigatorio" ng-model="aula.diaSemana" required="required">
 				<option value="">Selecione</option>
 				<option value="domingo">Domingo</option>
 				<option value="segunda">Segunda</option>
@@ -84,7 +89,7 @@
 		</div>
 		<div class="col-sm-3">
 			<label class="pull-left">Horário</label> <select
-				class="form-control" ng-model="aula.horario" required>
+				class="form-control obrigatorio" ng-model="aula.horario" required>
 				<option value="">Selecione</option>
 							<option value="00:00">00:00</option>
 							<option value="00:30">00:30</option>

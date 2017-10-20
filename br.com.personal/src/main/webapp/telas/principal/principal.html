@@ -1,46 +1,61 @@
 <div ng-controller="principalController">
-<nav class="navbar navbar-inverse">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <a class="navbar-brand" href="#">Personal GYM Manager</a>
-    </div>
-   
-  </div>
-</nav>
-  
-<div class="container-fluid text-center">    
-  <div class="row content">
-    <div class="col-sm-2 sidenav">
-    <div>
-      <p><h4>Cadastros</h4></p>	
-      <p><a href="" ng-click="buscarAula()"><h5>Aula</h5></a></p>
-      <p><a href="" ng-click="buscarTreino()"><h5>Treino</h5></a></p>
-    </div>
-    <div><h4>Alunos</h4>
-    	   <p><a href="" ng-click="buscarAluno()"><h5>Aluno</h5></a></p>
-    	   <p><a href="" ng-click="buscarAlunoHora()"><h5>Aluno Hora/Aula</h5></a></p>
-    </div>
-    <div><h4>Financeiro</h4>
-    	  <p><a href="" ng-click="buscarHistorico()" ><h5>Controle Financeiro</h5></a></p>
-    	 
-    </div>
-   </div> 
-    <div class="col-sm-10" > 
-    <div id="centro">
-    
-    <div ng-show="exibeTela">
-      <div id="logo"> 
-          <h1>Personal GYM Manager</h1>
-      </div> 
-      </div>
-      <div ui-view="paginas"></div>
-    </div>
-   
-   </div>
-  </div>
+	<nav class="navbar navbar-inverse">
+		<div class="container-fluid">
+			<div class="navbar-header"></div>
+
+		</div>
+	</nav>
+
+	<div class="nav-side-menu">
+		<div class="brand">Personal GYM Manager</div>
+		<i class="fa fa-bars fa-2x toggle-btn" data-toggle="collapse"
+			data-target="#menu-content"></i>
+		<div class="menu-list">
+			<ul id="menu-content" class="menu-content collapsed out">
+				<li data-toggle="collapse" data-target="#cadastros"
+					class="collapsed active"><a href=""><i
+						class="fa fa-users fa-lg"></i> Cadastros <span class="arrow"></span></a>
+				</li>
+				<ul class="sub-menu collapse" id="cadastros">
+					<li class="active"><a href="" ng-click="buscarAula()">Aula</a></li>
+					<li><a href="" ng-click="buscarTreino()">Treino</a></li>
+				</ul>
+				<li data-toggle="collapse" data-target="#alunos" class="collapsed">
+					<a href=""><i class="fa fa-users fa-lg"></i> Alunos <span
+						class="arrow"></span></a>
+				</li>
+				<ul class="sub-menu collapse" id="alunos">
+					<li><a href="" ng-click="buscarAluno()">Aluno</a></li>
+					<li><a href="" ng-click="buscarAlunoHora()">Aluno Hora/Aula</a></li>
+				</ul>
+
+				<li data-toggle="collapse" data-target="#financeiro" class="collapsed">
+					<a href="#"><i class="fa fa-users fa-lg"></i>Financeiro<span
+						class="arrow"></span></a>
+				</li>
+				<ul class="sub-menu collapse" id="financeiro">
+					<li><a href="" ng-click="buscarHistorico()">Controle Financeiro</a></li>
+				
+				</ul>
+			</ul>
+		</div>
+	</div>
+
+	<div class="container" id="main">
+		<div class="row">
+			<div class="col-md-12">
+				<div ng-show="exibeTela">
+					<div id="logo">
+						<h1>Personal GYM Manager</h1>
+					</div>
+				</div>
+				<div ui-view="paginas"></div>
+			</div>
+		</div>
+	</div>
+
+
+
 </div>
 
-<footer class="container-fluid text-center">
-  <p>Footer Text</p>
-</footer>
-</div>
+
