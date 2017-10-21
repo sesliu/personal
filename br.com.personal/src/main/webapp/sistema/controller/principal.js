@@ -60,5 +60,16 @@ personal.controller('principalController',function($scope,$compile){
 		
 	}
 	
+	$scope.buscarAulaExtra = function(){
+		
+		$scope.exibeTela = false;
+		
+		$("#paginas").empty();
+		var compiledeHTML = $compile("<historicoaulaextra></historicoaulaextra>")
+		($scope);
+		$("#paginas").append(compiledeHTML);
+		
+	}
+	
 	
 });

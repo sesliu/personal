@@ -78,3 +78,9 @@ personal.directive("historicofinanceiro", function() {
 		templateUrl : 'telas/financeiro/financeiro.html'
 	};
 });
+
+personal.directive("historicoaulaextra", function() {
+	return {
+		templateUrl : 'telas/financeiro/aulaExtra.html'
+	};
+});

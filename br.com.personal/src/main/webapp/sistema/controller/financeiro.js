@@ -69,3 +69,41 @@ personal.controller('financeiroController',function($scope, $rootScope,$timeout,
 	}
 
 });
+
+personal.controller('aulaExtraController',function($scope, $rootScope,$timeout, webservicesAulaExtra, $interval, growl){
+	
+	$scope.vigente ={};
+	$scope.listaAulaExtras=[];
+	
+	$scope.carregaSpinner = true;
+	
+	var data = new Date();
+	var mes = data.getMonth();
+	var ano = data.getFullYear();
+	
+	webservicesAulaExtra.buscaAulaExtra(mes, ano).success(function(data){
+		
+		$scope.listaAulaExtras = data;
+		$scope.carregaSpinner = false;
+		
+		console.log(data);
+	});
+	
+	mes = JSON.stringify(mes);
+	ano = JSON.stringify(ano);
+	
+	$scope.vigente = {'mes':mes , 'ano':ano};
+	
+	$interval(function(){
+		
+		webservicesAulaExtra.buscaAulaExtra($scope.vigente.mes, $scope.vigente.ano).success(function(data){
+			
+			$scope.listaAulaExtras = data;
+		});
+		
+		
+	},1000, false)
+	
+	
+	
+});
