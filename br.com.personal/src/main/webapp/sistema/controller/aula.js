@@ -310,6 +310,7 @@ personal.controller('vinculaAulaController',
 		webservicesAluno.buscarAlunoIdAula($rootScope.aula.idAula).success(function(data){
 			
 			listaAlunos = data;
+			
 		
 			
 		});

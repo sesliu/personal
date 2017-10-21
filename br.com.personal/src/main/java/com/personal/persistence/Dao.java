@@ -15,7 +15,7 @@ public class Dao {
 	
 	
 	public void open() throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException{
-		
+		// thh2lzgakldp794r.cbetxkdyhwsb.us-east-1.rds.amazonaws.com:3306/fcpqky1zldibdigg
 		String url = "jdbc:mysql://localhost:3306/personal";
 		String user =  "root";                 
 		String password =  "root";               
