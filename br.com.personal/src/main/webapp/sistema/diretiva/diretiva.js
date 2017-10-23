@@ -84,3 +84,12 @@ personal.directive("historicoaulaextra", function() {
 		templateUrl : 'telas/financeiro/aulaExtra.html'
 	};
 });
+
+//////////////////////Mobile//////////////////////////
+
+
+personal.directive("mobile", function() {
+	return {
+		templateUrl : 'telas/mobile/mobile.html'
+	};
+});

@@ -56,6 +56,21 @@ personal.config(function($stateProvider, $urlRouterProvider) {
 
 		
 	})
+	.state('mobile', {
+
+		url : '/mobile',
+		
+		views : {
+			'' : {
+					templateUrl : 'telas/mobile/mobile.html',
+				}
+				
+				
+			}
+
+		
+	})
+	
 
 	
 });
