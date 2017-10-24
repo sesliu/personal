@@ -97,6 +97,14 @@ button:focus {outline:0;!important;}
 }
 
 
+.scrolltela {
+    
+    display: block;	
+	height: 310px;
+	overflow: auto;
+}
+
+
 input {
 	
 	box-shadow: inset 10px 10px 10px gray;

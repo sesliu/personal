@@ -15,13 +15,18 @@ personal.factory("webservicesMobile", function($http) {
 		return $http.get(url + '/buscaraulaalunoTreino/'+idAluno);
 	};
 
+	var _buscarTodosTreinos = function() {
+		return $http.get(url + '/buscartodostreinos');
+	};
+
 
 	
 	return{
 		
 		buscarAula: _buscarAula,
 		buscarAulaAluno:_buscarAulaAluno,
-		buscarAulaAlunoTreino:_buscarAulaAlunoTreino
+		buscarAulaAlunoTreino:_buscarAulaAlunoTreino,
+		buscarTodosTreinos:_buscarTodosTreinos
 	}
 	
 });

@@ -7,6 +7,7 @@ public class Mobile {
 	private String nomeAluno;
 	private Integer idAluno;
 	private Integer idAula;
+	private Integer idTreino;
 	private String nomeTreino;
 	
 	
@@ -46,6 +47,12 @@ public class Mobile {
 	}
 	public void setHorarioAula(String horarioAula) {
 		this.horarioAula = horarioAula;
+	}
+	public Integer getIdTreino() {
+		return idTreino;
+	}
+	public void setIdTreino(Integer idTreino) {
+		this.idTreino = idTreino;
 	}
 	
 	

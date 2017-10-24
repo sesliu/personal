@@ -4,13 +4,17 @@ public class Aula {
 
 	
 	private Integer idAula;
-	private String nome;
-	private Integer duracao;
+    private Integer nomeAluno;
 	private String dataAula;
 	private String diaSemana;
 	private String tipo;
 	private String horario;
-	
+	private String presenca;
+    private String falta;
+    private String faltajusticada;
+    private String obsjustificada;
+    private String observação;
+    private String resultado;
 	
 	
 	
@@ -32,18 +36,6 @@ public class Aula {
 	public void setIdAula(Integer idAula) {
 		this.idAula = idAula;
 	}
-	public String getNome() {
-		return nome;
-	}
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
-	public Integer getDuracao() {
-		return duracao;
-	}
-	public void setDuracao(Integer duracao) {
-		this.duracao = duracao;
-	}
 	public String getDataAula() {
 		return dataAula;
 	}
@@ -56,6 +48,50 @@ public class Aula {
 	public void setDiaSemana(String diaSemana) {
 		this.diaSemana = diaSemana;
 	}
+	
+	public Integer getNomeAluno() {
+		return nomeAluno;
+	}
+	public void setNomeAluno(Integer nomeAluno) {
+		this.nomeAluno = nomeAluno;
+	}
+	public String getPresenca() {
+		return presenca;
+	}
+	public void setPresenca(String presenca) {
+		this.presenca = presenca;
+	}
+	public String getFalta() {
+		return falta;
+	}
+	public void setFalta(String falta) {
+		this.falta = falta;
+	}
+	public String getFaltajusticada() {
+		return faltajusticada;
+	}
+	public void setFaltajusticada(String faltajusticada) {
+		this.faltajusticada = faltajusticada;
+	}
+	public String getObsjustificada() {
+		return obsjustificada;
+	}
+	public void setObsjustificada(String obsjustificada) {
+		this.obsjustificada = obsjustificada;
+	}
+	public String getObservação() {
+		return observação;
+	}
+	public void setObservação(String observação) {
+		this.observação = observação;
+	}
+	public String getResultado() {
+		return resultado;
+	}
+	public void setResultado(String resultado) {
+		this.resultado = resultado;
+	}
+	
 	
 	
 	

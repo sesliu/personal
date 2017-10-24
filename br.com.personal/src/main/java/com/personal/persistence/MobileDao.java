@@ -80,6 +80,7 @@ public class MobileDao extends Dao {
 		while (rs.next()) {
 			Mobile m = new Mobile();
 			m.setNomeTreino(rs.getString(1));
+			m.setIdTreino(rs.getInt(2));
 			lst.add(m);
 		}
 

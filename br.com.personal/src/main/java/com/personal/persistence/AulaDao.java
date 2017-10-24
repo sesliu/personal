@@ -26,8 +26,7 @@ public class AulaDao extends Dao {
 		open();
 
 		stmt = con.prepareStatement(procCadastraAula);
-		stmt.setString(1, a.getNome());
-		stmt.setInt(2, a.getDuracao());
+		
 		stmt.setString(3, a.getDiaSemana());
 		stmt.setString(4, a.getDataAula());
 		stmt.setString(5, a.getTipo());
@@ -46,8 +45,7 @@ public class AulaDao extends Dao {
 		open();
 
 		stmt = con.prepareStatement(procAtualizaAula);
-		stmt.setString(1, a.getNome());
-		stmt.setInt(2, a.getDuracao());
+		
 		stmt.setString(3, a.getDiaSemana());
 		stmt.setString(4, a.getDataAula());
 		stmt.setInt(5, a.getIdAula());
@@ -75,8 +73,7 @@ public class AulaDao extends Dao {
 			Aula a = new Aula();
 
 			a.setIdAula(rs.getInt(1));
-			a.setNome(rs.getString(2));
-			a.setDuracao(rs.getInt(3));
+			
 			a.setDataAula(rs.getString(4));
 			a.setDiaSemana(rs.getString(5));
 			a.setTipo(rs.getString(6));
@@ -106,8 +103,7 @@ public class AulaDao extends Dao {
 		if (rs.next()) {
 
 			a.setIdAula(rs.getInt(1));
-			a.setNome(rs.getString(2));
-			a.setDuracao(rs.getInt(3));
+			
 			a.setDataAula(rs.getString(4));
 			a.setDiaSemana(rs.getString(5));
 			a.setTipo(rs.getString(6));
@@ -137,8 +133,7 @@ public class AulaDao extends Dao {
 			Aula a = new Aula();
 
 			a.setIdAula(rs.getInt(1));
-			a.setNome(rs.getString(2));
-			a.setDuracao(rs.getInt(3));
+			
 			a.setDataAula(rs.getString(4));
 			a.setDiaSemana(rs.getString(5));
 			a.setTipo(rs.getString(6));

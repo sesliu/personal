@@ -10,11 +10,11 @@ import com.personal.modelo.Aluno;
 public class AlunoDao extends Dao{
 
 
-	private String procCadastraAluno = "call sp_cadastraAluno(?,?,?,?,?,?,?,?,?,?)";
+	private String procCadastraAluno = "call sp_cadastraAluno(?,?,?,?,?,?,?,?)";
 	private String procBuscaAluno = "call sp_buscaAluno(?)";
 	private String procDeletaAluno = "call sp_excluiAluno(?)";
 	private String procBuscaAlunoID = "call sp_buscaAlunoId(?)";
-	private String procAtualizaAluno = "call sp_atualizaAluno(?,?,?,?,?,?,?,?,?,?,?)";
+	private String procAtualizaAluno = "call sp_atualizaAluno(?,?,?,?,?,?,?,?,?)";
 	private String procVerificaAlunoTreino = "call sp_verificaAlunoTreino(?)";
 	private String procListaAlunoTreino = "call sp_listaAlunoTreino(?)";
 	private String procVerificaAlunoAula = "call sp_verificaAlunoAula(?)";
@@ -116,11 +116,9 @@ public class AlunoDao extends Dao{
 		stmt.setString(3, a.getSexo());
 		stmt.setString(4, a.getDataNascimento());
 		stmt.setString(5, a.getProfissao());
-		stmt.setString(6, a.getTelefoneResidencial());
-		stmt.setString(7, a.getTelefoneComercial());
-		stmt.setString(8, a.getTelefoneCelular());
-		stmt.setString(9, a.getHoraAula());
-		stmt.setString(10, a.getAjuste());
+		stmt.setString(6, a.getTelefoneCelular());
+		stmt.setString(7, a.getHoraAula());
+		stmt.setString(8, a.getAjuste());
 	
 		stmt.execute();
 		stmt.close();
@@ -141,12 +139,10 @@ public class AlunoDao extends Dao{
 		stmt.setString(3, a.getSexo());
 		stmt.setString(4, a.getDataNascimento());
 		stmt.setString(5, a.getProfissao());
-		stmt.setString(6, a.getTelefoneResidencial());
-		stmt.setString(7, a.getTelefoneComercial());
-		stmt.setString(8, a.getTelefoneCelular());
-		stmt.setString(9, a.getHoraAula());
-		stmt.setString(10, a.getAjuste());
-		stmt.setDouble(11, a.getIdAluno());
+		stmt.setString(6, a.getTelefoneCelular());
+		stmt.setString(7, a.getHoraAula());
+		stmt.setString(8, a.getAjuste());
+		stmt.setDouble(9, a.getIdAluno());
 		stmt.execute();
 		stmt.close();
 
@@ -171,8 +167,7 @@ public class AlunoDao extends Dao{
 			a.setIdAluno(rs.getInt(1));
 			a.setNome(rs.getString(2));
 			a.setEmail(rs.getString(3));
-			a.setTelefoneResidencial(rs.getString(7));
-			a.setTelefoneCelular(rs.getString(9));
+			a.setTelefoneCelular(rs.getString(7));
 			
 			alunos.add(a);
 		}
@@ -203,11 +198,9 @@ public class AlunoDao extends Dao{
 			a.setSexo(rs.getString(4));
 			a.setDataNascimento(rs.getString(5));
 			a.setProfissao(rs.getString(6));
-			a.setTelefoneResidencial(rs.getString(7));
-			a.setTelefoneComercial(rs.getString(8));
-			a.setTelefoneCelular(rs.getString(9));
-			a.setHoraAula(rs.getString(10));
-			a.setAjuste(rs.getString(11));
+			a.setTelefoneCelular(rs.getString(7));
+			a.setHoraAula(rs.getString(8));
+			a.setAjuste(rs.getString(9));
 			
 			
 		}
