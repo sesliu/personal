@@ -1,4 +1,4 @@
-<div ng-controller="alunoController">
+<div ng-controller="alunoController" ng-init="inicio()">
 <div growl></div>
 <div ng-show ="carregaSpinner">
 	<span style="margin-top: 15%"
@@ -23,18 +23,9 @@
 <form name="formBusca">	
 	<div class="col-sm-12">
 		<hr>
-		<div class="col-sm-6">
-			<div class="input-group">
-				<input type="text" class="form-control" ng-model="busca" autofocus="autofocus" required="required"
-					placeholder="Digite o nome do aluno para busca"> <span
-					class="input-group-btn">
-					<button class="btn btn-search" type="submit" ng-click="buscarAluno(busca)"
-							ng-disabled="formBusca.$invalid">
-						<i class="fa fa-search fa-fw"></i> Busca
-					</button>
-				</span>
-			</div>
-
+		<div class="col-sm-4">
+			<input type="text" class="form-control" ng-model="busca" autofocus="autofocus" 
+					placeholder="Digite o nome do aluno para busca"> 
 		</div>
 	</div>
 </form>	
@@ -55,7 +46,7 @@
 						</thead>
 
 						<tbody>
-							<tr ng-repeat ="pesq in listaAluno">
+							<tr ng-repeat ="pesq in listaAluno | filter : busca">
 								<td>{{pesq.nome}}</td>
 								<td>{{pesq.email}}</td>
 								<td>{{pesq.telefoneCelular}}</td>

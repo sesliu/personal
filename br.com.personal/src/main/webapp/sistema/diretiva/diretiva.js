@@ -85,6 +85,28 @@ personal.directive("historicoaulaextra", function() {
 	};
 });
 
+//////////////////////Profissão//////////////////////////
+
+
+personal.directive("profissao", function() {
+	return {
+		templateUrl : 'telas/profissao/profissao.html'
+	};
+});
+
+
+personal.directive("cadastraprofissao", function() {
+	return {
+		templateUrl : 'telas/profissao/cadastroProfissao.html'
+	};
+});
+
+personal.directive("atualizaprofissao", function() {
+	return {
+		templateUrl : 'telas/profissao/atualizaProfissao.html'
+	};
+});
+
 //////////////////////Mobile//////////////////////////
 
 
@@ -93,3 +115,17 @@ personal.directive("mobile", function() {
 		templateUrl : 'telas/mobile/mobile.html'
 	};
 });
+
+
+
+
+
+//////////////////////Dashboard//////////////////////////
+
+personal.directive("dashboard", function() {
+	return {
+		templateUrl : 'telas/principal/home.html'
+	};
+});
+
+

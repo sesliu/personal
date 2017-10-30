@@ -1,4 +1,5 @@
-personal.controller('alunoController',function($scope, $compile, $rootScope,webservicesAluno,ngDialog, growl, $timeout){
+personal.controller('alunoController',function($scope, $compile, $rootScope,webservicesAluno,ngDialog, growl, $timeout,
+		webservicesProfissao){
 	
 	$scope.aluno ={};
 	$scope.busca;
@@ -48,7 +49,32 @@ personal.controller('alunoController',function($scope, $compile, $rootScope,webs
 		}
 	}
 	;
+	
+	
+	$scope.inicioTela = function(){
+		
+		webservicesProfissao.buscarProfissao().success(function(data, status) {
 
+			
+			$scope.listaProfissao = data;
+			$scope.carregaSpinner = false;
+
+
+		});
+		
+	}
+
+	$scope.inicio = function(){
+		
+		$scope.carregaSpinner = true;
+		webservicesAluno.buscarAluno().success(function(data, status) {
+
+			$scope.listaAluno = data;
+			$scope.carregaSpinner = false;
+		
+		
+		});
+	}		
 	
 	$scope.cadastraAluno = function(){
 		
@@ -192,11 +218,25 @@ personal.controller('alunoController',function($scope, $compile, $rootScope,webs
 
 
 personal.controller('atualizaAlunoController',
-		function($scope, $compile, $rootScope, webservicesAluno, $timeout, $rootScope, ngDialog, growl){
+		function($scope, $compile, $rootScope, webservicesAluno, $timeout, $rootScope, ngDialog, growl,webservicesProfissao){
 	
 	var mensagemOK = "Registros atualizados com sucesso";
 	var mensagemErro = "Registros não atualizados";
 	$scope.carregaSpinner = false;
+	
+	$scope.inicioTela = function(){
+		
+		webservicesProfissao.buscarProfissao().success(function(data, status) {
+
+			
+			$scope.listaProfissao = data;
+			$scope.carregaSpinner = false;
+
+
+		});
+		
+	}
+	
 	
 	webservicesAluno.buscarAlunoId($rootScope.codigo).success(function(data, status) {
 

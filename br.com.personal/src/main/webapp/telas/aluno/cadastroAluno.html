@@ -1,4 +1,4 @@
-<div ng-controller="alunoController">
+<div ng-controller="alunoController" ng-init="inicioTela()">
 <div growl></div>
 <div ng-show ="carregaSpinner">
 	<span style="margin-top: 15%"
@@ -72,16 +72,16 @@
 		
 		</div>
 		</div>
-		<div class="col-sm-8">
+		<div class="col-sm-4">
 			<label class="pull-left">Profissão</label>
-			<input type="text"  class="form-control obrigatorio" ng-model="aluno.profissao" required>
+			<select class="form-control obrigatorio" ng-model="aluno.profissao"
+						required="required">
+						<option value="">Selecione</option>
+						<option ng-repeat=" lista in listaProfissao" value="{{lista.idProfissao}}">{{lista.nome}}</option>
+					</select>
 		</div>
 		
-	
-	</div>
-	<div class="col-sm-12"  style = "margin-top:12px">
-		
-		<div class="col-sm-4">
+			<div class="col-sm-4">
 			<label class="pull-left">Telefone Celular</label>
 			<input type="text"  class="form-control obrigatorio"  ng-model="aluno.telefoneCelular" required
 				   mask="(99)99999-9999" placeholder="(99)99999-9999">

@@ -1,0 +1,64 @@
+<div ng-controller="profissaoController" ng-init="inicio()">
+<div growl></div>
+<div ng-show ="carregaSpinner">
+	<span style="margin-top: 15%"
+		us-spinner="{radius:25,width:8,length:16}" spinner-on="showSpinner"></span>
+</div>
+	<div class="col-sm-12">
+		<div class="col-sm-6">
+			<div class="pull-left" style="margin-top: 28px; margin-bottom: 20px">
+				<button type="button" class="btn btn-success btnTamanho" ng-click="cadastraProfissao()" 
+					title="Cadastrar Profissão">Cadastrar</button>
+			</div>
+		</div>
+		<div class="col-sm-6">
+			<div class="pull-right">
+				<h2>Profissão</h2>
+			</div>
+		</div>
+	</div>
+	<div class="text-center">
+		<h5><span style="color:red"><strong>Ajuda: Cadastro/Atualizações de Profissões</strong></span></h5>
+	</div>
+	<form name="formBusca">
+	<div class="col-sm-12">
+		<hr>
+		<div class="col-sm-4">
+			
+			<input type="text" class="form-control" ng-model = "busca"
+					placeholder="Digite um nome para a busca" required> 
+			
+
+		</div>
+	</div>
+</form>	
+	<div class="col-md-12">
+				<div class="table-responsive scrollTabela"
+					style="margin-top: 16px; position: relative">
+					<table class="table table-striped table-hover" width="90%">
+						<thead>
+							<tr>
+								<td><strong>Nome da Profissão</strong></td>
+								<td><strong>Dia da Profissão</strong></td>
+								<td></td>
+								<td></td>
+								<td></td>
+							</tr>
+
+						</thead>
+
+						<tbody>
+							<tr ng-repeat ="pesq in listaProfissao | filter: busca ">
+								<td>{{pesq.nome}}</td>
+								<td>{{pesq.dia > 0 ? pesq.dia+'/'+pesq.mesNome : 'Não Informado' }}</td>
+								<td></td>
+								<td><span><a href="" ng-click="atualizaProfissao(pesq.idProfissao)"
+									class="fa fa-edit  fa-2x" title="Alterar" style="color: blue"></a></span></td>
+								<td><span><a href="" ng-click="excluirProfissao(pesq.idProfissao)"
+									class="fa fa-times fa-2x" title="Excluir" style="color: red"></a></span></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+</div>
+</div>

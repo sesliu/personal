@@ -1,4 +1,4 @@
-<div ng-controller="treinoController">
+<div ng-controller="treinoController" ng-init="inicio()">
 <div growl></div>
 <div ng-show ="carregaSpinner">
 	<span style="margin-top: 15%"
@@ -19,23 +19,14 @@
 		</div>
 	</div>
 	<div class="text-center">
-		<h5><span style="color:red"><strong>Ajuda:  Cadastro/Atualização de treinos e vinculo dos alunos</strong></span></h5>
+		<h5><span style="color:red"><strong>Ajuda:  Cadastro/Atualização de treinos</strong></span></h5>
 	</div>
 <form name="formBusca">	
 	<div class="col-sm-12">
 		<hr>
-		<div class="col-sm-6">
-			<div class="input-group">
+		<div class="col-sm-4">
 				<input type="text" class="form-control" ng-model="busca" required autocomplete="on"
-					placeholder="Digite o nome do treino para busca"> <span
-					class="input-group-btn">
-					<button class="btn btn-search" type="submit" ng-click="buscarTreino(busca)"
-							ng-disabled="formBusca.$invalid">
-						<i class="fa fa-search fa-fw"></i> Busca
-					</button>
-				</span>
-			</div>
-
+					placeholder="Digite o nome do treino para busca"> 
 		</div>
 	</div>
 </form>	
@@ -48,17 +39,14 @@
 								<td><strong>Nome</strong></td>
 								<td></td>
 								<td></td>
-								<td></td>
 							</tr>
 
 						</thead>
 
 						<tbody>
-							<tr ng-repeat="pesq in listaTreino" >
+							<tr ng-repeat="pesq in listaTreino | filter: busca" >
 								<td>{{pesq.nome}}</td>
 								<td></td>
-								<td><button type="button" title="Vincular alunos no treino" class="btn btn-default" 
-									ng-click="exibirVinculo(pesq)">Vincular Aluno</button></td>
 								<td><span><a href="" ng-click="atualizaTreino(pesq.idTreino)"
 									class="fa fa-edit  fa-2x" title="Alterar" style="color: blue"></a></span></td>
 								<td><span><a href="" ng-click="excluirTreino(pesq.idTreino)"

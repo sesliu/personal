@@ -22,6 +22,44 @@ public class TreinoWS {
 
 	
 	
+	@RequestMapping(value = "/buscartreinoVinculado/{codigo}", method = RequestMethod.GET, produces = "application/json")
+	public List<Treino> buscaTreinoVinculado(@PathVariable("codigo") Integer codigo) {
+
+		List<Treino> lst  = new ArrayList<Treino>();
+		
+		TreinoDao treinoDao  = new TreinoDao();
+		
+		try {
+			lst = treinoDao.vincularTreinoVinculado(codigo);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return lst;
+	}
+	
+	
+	
+	@RequestMapping(value = "/buscartreinoAula/{codigo}", method = RequestMethod.GET, produces = "application/json")
+	public List<Treino> buscaTreino(@PathVariable("codigo") Integer codigo) {
+
+		List<Treino> lst  = new ArrayList<Treino>();
+		
+		TreinoDao treinoDao  = new TreinoDao();
+		
+		try {
+			lst = treinoDao.vincularAulaTreino(codigo);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return lst;
+	}
+	
+	
+	
 	@RequestMapping(value="/gravartreino", method = RequestMethod.POST, consumes = "application/json")
 	public void gravar(@RequestBody Treino treino) {
 	
@@ -63,14 +101,14 @@ public class TreinoWS {
 		
 	
 	}	
-	@RequestMapping(value = "/buscartreino/{nome}", method = RequestMethod.GET, produces = "application/json")
-	public List<Treino> busca(@PathVariable("nome") String nome) {
+	@RequestMapping(value = "/buscartreino", method = RequestMethod.GET, produces = "application/json")
+	public List<Treino> busca() {
 
 		TreinoDao treinoDao  = new TreinoDao();
 		
 		List<Treino> lst = new ArrayList<Treino>();
 		try {
-			lst = treinoDao.findByName(nome);
+			lst = treinoDao.findByName();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

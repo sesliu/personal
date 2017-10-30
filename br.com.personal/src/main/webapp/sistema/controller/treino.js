@@ -16,6 +16,24 @@ personal.controller('treinoController',
 			
 			
 			
+			$scope.inicio = function(){
+				
+				$scope.carregaSpinner = true;
+
+				webservices.buscarTreino().success(function(data, status) {
+
+					
+					$scope.listaTreino = data;
+					$scope.carregaSpinner = false;
+
+
+				});
+
+				
+			}
+			
+			
+			
 			$scope.cadastraTreino = function() {
 
 				$scope.exibeTela = false;
@@ -118,21 +136,7 @@ personal.controller('treinoController',
 			$scope.buscarTreino = function(nome) {
 
 				ultimabusca = nome;
-				$scope.carregaSpinner = true;
-
-				webservices.buscarTreino(nome).success(function(data, status) {
-
-					if(data == ''){
-						
-						growl.addErrorMessage(mensagemErroBuscar);
-					}
-					
-					$scope.listaTreino = data;
-					$scope.carregaSpinner = false;
-
-
-				});
-
+				
 			}
 
 			$scope.excluirTreino = function(codigo) {

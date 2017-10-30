@@ -96,6 +96,21 @@ button:focus {outline:0;!important;}
 	overflow: auto;
 }
 
+.scrollDash {
+	
+	height: 150px;
+	overflow: auto;
+}
+
+
+.dash{
+	
+	box-shadow: 10px 10px 10px gray;
+	border-radius: 12px 12px;
+	
+}
+
+
 
 .scrolltela {
     
@@ -104,10 +119,15 @@ button:focus {outline:0;!important;}
 	overflow: auto;
 }
 
-
-input {
+ul{
+	list-style-type: none;
 	
-	box-shadow: inset 10px 10px 10px gray;
+}
+
+.well {
+	
+	background: transparent;
+	
 }
 
 

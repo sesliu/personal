@@ -26,6 +26,7 @@ public class Aluno {
 	
 	
 	
+	
 	public String getPago() {
 		return pago;
 	}

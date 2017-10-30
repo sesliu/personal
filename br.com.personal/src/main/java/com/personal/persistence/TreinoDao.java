@@ -1,5 +1,6 @@
 package com.personal.persistence;
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -9,12 +10,15 @@ import com.personal.modelo.Treino;
 public class TreinoDao extends Dao {
 
 	private String procCadastraTreino = "call sp_cadastraTreino(?)";
-	private String procBuscaTreino = "call sp_buscaTreino(?)";
+	private String procBuscaTreino = "call sp_buscaTreino()";
 	private String procDeletaTreino = "call sp_excluiTreino(?)";
 	private String procBuscaTreinoID = "call sp_buscaTreinoId(?)";
 	private String procAtualizaTreino = "call sp_atualizaTreino(?,?)";
-	private String procReorganizaAlunoTreino = "call sp_reogarnizarAlunoTreino(?)";
+	private String procReorganizaAlunoTreino = "call sp_reogarnizarAulaTreino(?)";
 	private String procCadastrarAlunoTreino = "call sp_cadastrarAlunoTreino(?,?)";
+	private String procVinculaTreino = "call sp_verificaAulaTreino(?)";
+	private String procTreinoVinculado = "call sp_verificaAulaVinculada(?)";
+	private String procCadastrarAulaTreino = "call sp_cadastrarAulaTreino(?,?)";
 
 	public void create(Treino t)
 			throws SQLException, InstantiationException, IllegalAccessException, ClassNotFoundException {
@@ -29,8 +33,7 @@ public class TreinoDao extends Dao {
 		close();
 
 	}
-	
-	
+
 	public void update(Treino t)
 			throws SQLException, InstantiationException, IllegalAccessException, ClassNotFoundException {
 
@@ -46,7 +49,7 @@ public class TreinoDao extends Dao {
 
 	}
 
-	public List<Treino> findByName(String nome)
+	public List<Treino> findByName()
 			throws SQLException, InstantiationException, IllegalAccessException, ClassNotFoundException {
 
 		open();
@@ -54,7 +57,6 @@ public class TreinoDao extends Dao {
 		ArrayList<Treino> treinos = new ArrayList<Treino>();
 
 		stmt = con.prepareStatement(procBuscaTreino);
-		stmt.setString(1, nome);
 		rs = stmt.executeQuery();
 		while (rs.next()) {
 
@@ -74,7 +76,57 @@ public class TreinoDao extends Dao {
 		return treinos;
 
 	}
-	
+
+	public List<Treino> vincularTreinoVinculado(Integer codigo)
+			throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
+
+		open();
+		List<Treino> lst = new ArrayList<Treino>();
+		stmt = con.prepareStatement(procTreinoVinculado);
+		stmt.setInt(1, codigo);
+		ResultSet rs = stmt.executeQuery();
+		while (rs.next()) {
+
+			Treino t = new Treino();
+			t.setIdTreino(rs.getInt(1));
+			t.setNome(rs.getString(2));
+
+			lst.add(t);
+
+		}
+
+		stmt.close();
+		rs.close();
+		close();
+
+		return lst;
+	}
+
+	public List<Treino> vincularAulaTreino(Integer codigo)
+			throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
+
+		open();
+		List<Treino> lst = new ArrayList<Treino>();
+		stmt = con.prepareStatement(procVinculaTreino);
+		stmt.setInt(1, codigo);
+		ResultSet rs = stmt.executeQuery();
+		while (rs.next()) {
+
+			Treino t = new Treino();
+			t.setIdTreino(rs.getInt(1));
+			t.setNome(rs.getString(2));
+
+			lst.add(t);
+
+		}
+
+		stmt.close();
+		rs.close();
+		close();
+
+		return lst;
+	}
+
 	public Treino findById(Integer codigo)
 			throws SQLException, InstantiationException, IllegalAccessException, ClassNotFoundException {
 
@@ -86,12 +138,9 @@ public class TreinoDao extends Dao {
 		rs = stmt.executeQuery();
 		if (rs.next()) {
 
-			
-
 			t.setIdTreino(rs.getInt(1));
 			t.setNome(rs.getString(2));
 
-			
 		}
 
 		rs.close();
@@ -130,7 +179,7 @@ public class TreinoDao extends Dao {
 		return treino;
 
 	}
-	
+
 	public void delete(int codigo)
 			throws SQLException, InstantiationException, IllegalAccessException, ClassNotFoundException {
 
@@ -144,10 +193,10 @@ public class TreinoDao extends Dao {
 		close();
 
 	}
-	
-	
-	private void excluirAlunoTreino(int codigo) throws SQLException, InstantiationException, IllegalAccessException, ClassNotFoundException{
-		
+
+	private void excluirAulaTreino(int codigo)
+			throws SQLException, InstantiationException, IllegalAccessException, ClassNotFoundException {
+
 		open();
 
 		stmt = con.prepareStatement(procReorganizaAlunoTreino);
@@ -160,13 +209,14 @@ public class TreinoDao extends Dao {
 	}
 	
 	
+	
+	
+
 	public void vincularTreino(int codigo, List<Integer> lista)
 			throws SQLException, InstantiationException, IllegalAccessException, ClassNotFoundException {
 
-		
-		
 		try {
-			excluirAlunoTreino(codigo);
+			excluirAulaTreino(codigo);
 		} catch (InstantiationException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -178,26 +228,22 @@ public class TreinoDao extends Dao {
 			e.printStackTrace();
 		}
 		open();
-		
+
 		int idAluno = 0;
-		
-		for(Integer id: lista){
-			
-			
-			
-		if(id != null){
-			
-			stmt = con.prepareStatement(procCadastrarAlunoTreino);	
-			stmt.setInt(1, codigo);
-			stmt.setInt(2, id);
-			stmt.execute();
-			
-		}	
-			
-			
+
+		for (Integer id : lista) {
+
+			if (id != null) {
+
+				stmt = con.prepareStatement(procCadastrarAulaTreino);
+				stmt.setInt(1, codigo);
+				stmt.setInt(2, id);
+				stmt.execute();
+
+			}
+
 		}
-		
-		
+
 		stmt.close();
 		close();
 

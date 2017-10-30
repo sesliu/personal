@@ -13,10 +13,14 @@ personal.factory("webservicesAluno", function($http) {
 		return $http.post(url + '/atualizaraluno', aluno);
 	};
 
-	var _buscarAluno = function(aluno) {
-		return $http.get(url + '/buscaraluno/' + aluno);
+	var _buscarAluno = function() {
+		return $http.get(url + '/buscaraluno');
 	};
 
+	var _buscarAlunos = function() {
+		return $http.get(url + '/alunos');
+	};
+	
 	var _excluirAluno = function(aluno) {
 		return $http.delete(url + '/excluiraluno/' + aluno);
 	};
@@ -63,6 +67,20 @@ personal.factory("webservicesAluno", function($http) {
 		return $http.post(url + '/estornapagamento', aluno);
 	};
 	
+	var _buscaAniversario = function(mes) {
+		return $http.get(url + '/buscarAniversario/'+ mes);
+	};
+	
+	var _buscaProfissao = function(mes, dia) {
+		return $http.get(url + '/buscarProfissional/'+ mes+'/'+dia);
+	};
+	
+	var _calculaAula = function(codigo) {
+		return $http.get(url + '/calculaValor/'+codigo);
+	};
+	
+	
+	
 	
 	return {
 
@@ -79,7 +97,12 @@ personal.factory("webservicesAluno", function($http) {
 		atualizarValor: _atualizarValor,
 		buscaFinanceiro: _buscaFinanceiro,
 		pagarValor:_pagarValor,
-		estornaValor:_estornaValor
+		estornaValor:_estornaValor,
+		buscarAlunos:_buscarAlunos,
+		buscaAniversario:_buscaAniversario,
+		buscaProfissao:_buscaProfissao,
+		calculaAula:_calculaAula
+	
 	}
 
 });

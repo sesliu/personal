@@ -10,8 +10,8 @@ personal.factory("webservices", function($http) {
 		return $http.post(url + '/atualizartreino', treino);
 	};
 
-	var _buscarTreino = function(treino) {
-		return $http.get(url + '/buscartreino/' + treino);
+	var _buscarTreino = function() {
+		return $http.get(url + '/buscartreino');
 	};
 
 	var _excluirTreino = function(treino) {
@@ -26,7 +26,19 @@ personal.factory("webservices", function($http) {
 		return $http.get(url + '/vinculartreino/' + codigo+'/'+obj);
 	};
 
+	var _buscarTodosTreinos = function() {
+		return $http.get(url + '/treinos');
+	};
 
+	var _buscarTreinosAula = function(codigo) {
+		return $http.get(url + '/buscartreinoAula/'+ codigo);
+	};
+	
+	var _buscarTreinosVicunlados = function(codigo) {
+		return $http.get(url + '/buscartreinoVinculado/'+ codigo);
+	};
+	
+	
 	return {
 
 		gravarTreino : _gravarTreino,
@@ -34,7 +46,10 @@ personal.factory("webservices", function($http) {
 		excluirTreino:_excluirTreino,
 		buscarTreinoId: _buscarTreinoId,
 		atualizarTreino:_atualizarTreino,
-		vincularTreino: _vincularTreino
+		vincularTreino: _vincularTreino,
+		buscarTodosTreinos:_buscarTodosTreinos,
+		buscarTreinosAula:_buscarTreinosAula,
+		buscarTreinosVicunlados:_buscarTreinosVicunlados
 	}
 
 });

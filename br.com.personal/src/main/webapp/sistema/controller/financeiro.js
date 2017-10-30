@@ -1,13 +1,35 @@
-personal.controller('financeiroController',function($scope, $rootScope,$timeout, webservicesAluno, $interval, growl){
+personal.controller('financeiroController',function($scope, $rootScope,$timeout, webservicesAluno, $interval, growl, 
+		                                            webservicesAula){
 	
 	$scope.vigente ={};
 	$scope.listaFinancas={};
-	
+	$scope.listaDias =[];
 	$scope.carregaSpinner = true;
-	
 	var data = new Date();
 	var mes = data.getMonth();
 	var ano = data.getFullYear();
+	$scope.selecionado = {};
+	var listaResultado = [];
+	var resultado;
+	$scope.hora;
+	$scope.ajuste;
+	$scope.horaAula = "0.00"
+	$scope.ajuste = "0.00"
+	$scope.quantidadeDias = "0"	
+	$scope.total = "0.00"	
+	$scope.aluno ={};	
+	
+	function getDiasMes(month, year) {
+	     month++;
+
+	     var date = new Date(year, month, 1);
+	     var days = [];
+	     while (date.getMonth() === month) {
+	        days.push(date.getDate());
+	        date.setDate(date.getDate() + 1);
+	     }
+	     return days;
+	}
 	
 	webservicesAluno.buscaFinanceiro(mes, ano).success(function(data){
 		
@@ -20,7 +42,148 @@ personal.controller('financeiroController',function($scope, $rootScope,$timeout,
 	
 	$scope.vigente = {'mes':mes , 'ano':ano};
 	
+	$timeout(function(){
+		
+   
+	  var dias = getDiasMes($scope.vigente.mes-1, 	$scope.vigente.ano);
+		
+	  for(var i =0; i < dias.length; i++){
+		  
+			$scope.listaDias.push({
+				text : dias[i],
+				value : dias[i]
+			});
+	  }
+	
+	
+		
+	},200)
+	
+	
+	
+	$scope.inicio = function(){
+		webservicesAluno.buscarAlunos().success(function(data){
+			
+			$scope.listaAlunos = data;
+		
+					
+		});
+	};
+	
+	
+	$scope.valoresAluno = function(){
+		
+		webservicesAluno.calculaAula($scope.vigente.idAluno).success(function(data){
+			
+			var quantidade =  Object.keys($scope.selecionado.dataAula).length;
+			
+			$scope.horaAula = data.horaAula;
+			
+		
+			
+			if($scope.vigente.mes == 0){
+				
+				$scope.ajuste = data.ajuste;
+			}
+			else {
+				$scope.ajuste = '0.00';
+			}
+			
+			$scope.quantidadeDias =  Object.keys($scope.selecionado.dataAula).length;
+			$scope.total = ($scope.horaAula*quantidade)+($scope.horaAula*$scope.ajuste/100);
+			$scope.total = $scope.total.toFixed(2);
+			
+		});
+	};
+	
+	
+	$scope.carregaDias = function(){
+		$scope.carregaSpinner = true;
+		listaResultado = [];
+		$scope.selecionado ={};
+		$scope.horaAula = "0.00"
+		$scope.ajuste = "0.00"
+		$scope.quantidadeDias = "0"	
+		$scope.total = "0.00"	
+			
+		resultado ="";
+		webservicesAula.buscaDiasAula($scope.vigente.idAluno,$scope.vigente.mes,$scope.vigente.ano).success(function(data){
+			
+			$scope.carregaSpinner = false;
+			
+			
+			$timeout(function(){
+				
+				for (var i = 0; i < data.length; i++) {
+
+					resultado = data[i].dataAula *1 ;
+			
+					listaResultado.push(resultado);
+					
+
+				}
+				$scope.selecionado.dataAula = listaResultado;
+				
+			},200)
+			
+			
+		
+		});
+		
+		
+		
+		
+	};
+	
+	$scope.alteraDias = function(){
+		
+		$scope.listaDias = [];
+		
+		$scope.carregaSpinner = true;
+		$timeout(function(){
+			
+			   
+			  var dias = getDiasMes($scope.vigente.mes-1, 	$scope.vigente.ano);
+				
+			  for(var i =0; i < dias.length; i++){
+				  
+					$scope.listaDias.push({
+						text : dias[i],
+						value : dias[i]
+					});
+			  }
+				
+			},200)
+			
+			$scope.carregaSpinner = false;
+	}
+	
+	
+	$scope.registrarPagamento = function(){
+		
+		$scope.aluno.idAluno = $scope.vigente.idAluno;
+		$scope.aluno.horaAula = $scope.total;
+		$scope.aluno.mes = $scope.vigente.mes;
+		$scope.aluno.ano = $scope.vigente.ano;
+		
+		webservicesAluno.pagarValor($scope.aluno).success(function(status,data){
+			    $scope.horaAula = "0.00"
+				$scope.ajuste = "0.00"
+				$scope.quantidadeDias = "0"	
+				$scope.total = "0.00"	
+                $scope.vigente.idAluno = "";
+				growl.addSuccessMessage("Pagamento registrado com sucesso");	
+				$scope.selecionado = {};
+			    
+			
+			
+		});
+		
+	}
+	
+	
 	$interval(function(){
+		
 		
 		webservicesAluno.buscaFinanceiro($scope.vigente.mes, $scope.vigente.ano).success(function(data){
 			

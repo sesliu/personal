@@ -1,4 +1,4 @@
-<div ng-controller="atualizaAulaController">
+<div ng-controller="atualizaAulaController" ng-init="inicio()">
 <div growl></div>
 <div ng-show ="carregaSpinner">
 	<span style="margin-top: 15%"
@@ -24,31 +24,7 @@
 	</div>
 	<form name="formAula">
 		<hr>
-	<div class="col-sm-4" style = "margin-top:12px">
-	<div class="col-sm-6">
-			<label class="pull-left">Data da Aula</label>
-			<div class="input-group">
-				<input type="text" name="dataIni" class="form-control obrigatorio"
-					ng-model="data" show-button-bar="false"
-					uib-datepicker-popup="dd/MM/yyyy" is-open="openDatIni"
-					datepicker-options="options" alt-input-formats="!d/!M/yyyy"
-					maxlength="10" locate="pt-br" onkeyup="formatDate(this);"
-					size="15" placeholder="DD/MM/AAAA" /> <span
-					class="input-group-btn">
-	
-					<button type="button" class="btn btn-default"
-						ng-click="opened('dataIni')" uib-tooltip="Abrir Calendário">
-						<i class="glyphicon glyphicon-calendar"></i>
-					</button>
-	
-				</span>
-		
-		</div>
-		</div>
-	
-	
-	</div>
-	<div class="scrollTela">
+		<div class="scrollTela">
 			<div class="col-sm-4" style="margin-top: 12px">
 				<div class="col-sm-6">
 					<label class="pull-left">Data da Aula</label>
@@ -75,21 +51,21 @@
 			</div>
 			<div class="col-sm-12" style="margin-top: 12px">
 
+
 				<div class="col-sm-6">
 					<label class="pull-left">Nome do Aluno</label> <select
-						class="form-control obrigatorio" ng-model="aula.nomeAluno"
+						class="form-control obrigatorio" ng-model="aula.idAluno"
+						ng-options="status.nome for status in listaAlunos track by status.idAluno"
 						required="required">
 						<option value="">Selecione</option>
 					</select>
 				</div>
-
-
 			</div>
 
 			<div class="col-sm-12">
 				<hr>
 				<div class="col-sm-2">
-					<label class="pull-left">Tipo Aula</label> <select
+					<label class="pull-left">Tipo da Aula</label> <select
 						class="form-control obrigatorio" ng-model="aula.tipo" required>
 						<option value="">Selecione</option>
 						<option value="Extra">Extra</option>
@@ -167,38 +143,81 @@
 				</div>
 
 			</div>
-			<div class="col-xs-12" style="margin-top:12px">
-			<hr>
-				<div class="col-sm-2">
-					<label class="pull-left">Presença</label> <select
-						class="form-control" ng-model="aula.presenca">
-						<option value="">Selecione</option>
-						<option value="sim">Sim</option>
-						<option value="não">Não</option>
-					</select>
-				</div>
-				<div class="col-sm-2">
-					<label class="pull-left">Falta</label> <select
-						class="form-control" ng-model="aula.falta">
-						<option value="">Selecione</option>
-						<option value="sim">Sim</option>
-						<option value="não">Não</option>
-					</select>
-				</div>
-				<div class="col-sm-2">
-					<label class="pull-left">Falta Justificada</label> <select
-						class="form-control" ng-model="aula.faltaJistificada">
-						<option value="">Selecione</option>
-						<option value="sim">Sim</option>
-						<option value="não">Não</option>
-					</select>
-				</div>
-				<div class="col-sm-2">
-					<label class="pull-left">Motivo</label>
-					<input class="form-control" ng-model="aula.obsjustificada">
-				</div>
-
+			<div class="col-xs-12">
+				<hr>
 			</div>
+			<div class="col-xs-10 col-xs-offset-2">
+				<div class="col-xs-10" style="margin-bottom: 12px">
+					<dualmultiselect options="demoOptions"> </dualmultiselect>
+
+				</div>
+			
+			</div>
+			<div class="col-xs-12">
+				<hr>
+			</div>
+			<div class="col-xs-12" style="margin-bottom:20px">
+			<div class="col-xs-10">
+					<label class="pull-left">Observação</label> <textarea
+						class="form-control" ng-model="aula.observacao"
+						cols="100" rows="5" wrap="soft">
+					</textarea>
+				</div>
+			</div>
+			<div class="col-xs-12" style="margin-top:12px">
+				<hr>
+			</div>
+			<div class="col-xs-12 col-xs-offset-1" style="margin-bottom:20px">
+			<div class="col-sm-3">
+					<label class="pull-left">Presente</label> <select
+						class="form-control obrigatorio" ng-model="aula.presenca"
+						ng-disabled="aula.falta =='1' || aula.faltajusticada == '1'">
+						<option value="">Selecione</option>
+						<option value="0">Não</option>
+						<option value="1">Sim</option>
+					</select>
+				</div>
+				<div class="col-sm-3">
+					<label class="pull-left">Falta</label> <select
+						class="form-control obrigatorio" ng-model="aula.falta"
+						ng-disabled="aula.presenca=='1' || aula.faltajusticada == '1'">
+						<option value="">Selecione</option>
+						<option value="0">Não</option>
+						<option value="1">Sim</option>
+					</select>
+				</div>
+				<div class="col-sm-3">
+					<label class="pull-left">Falta Justificada</label> <select
+						class="form-control obrigatorio" ng-model="aula.faltajusticada"
+						ng-disabled="aula.presenca=='1' || aula.falta == '1'">
+						<option value="">Selecione</option>
+						<option value="0">Não</option>
+						<option value="1">Sim</option>
+					</select>
+				</div>
+		
+			</div>
+			<div ng-show="aula.faltajusticada == '1'">
+				<div class="col-xs-12" style="margin-bottom:30px">
+					<div class="col-xs-10">
+					<label class="pull-left">Motivo Falta</label> <textarea
+						class="form-control" ng-model="aula.obsjustificada"
+						cols="100" rows="5" wrap="soft">
+					</textarea>
+				</div>
+				</div>
+			</div>
+			<div class="col-xs-12">
+				<hr>
+			</div>
+			<div class="col-sm-6" style="margin-bottom:30px">
+					<label class="pull-left">Resultado do treino(PSE)</label> <select
+						class="form-control obrigatorio" ng-model="aula.resultado">
+						<option value="">Selecione</option>
+						<option value="0">ruim</option>
+					</select>
+				</div>
+			
 		</div>
-</form>	
+	</form>
 </div>

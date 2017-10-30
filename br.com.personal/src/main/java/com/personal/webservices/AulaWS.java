@@ -80,6 +80,24 @@ public class AulaWS {
 	}
 	
 	
+	@RequestMapping(value = "/listaaulasDia/{dia}", method = RequestMethod.GET, produces = "application/json")
+	public List<Aula> listaAulaDia(@PathVariable("dia") String dia) {
+
+		AulaDao aulaDao  = new AulaDao();
+		
+		List<Aula> lst = new ArrayList<Aula>();
+		try {
+			lst = aulaDao.findByAulaDia(dia);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return lst;
+	}
+	
+	
+	
 	@RequestMapping(value = "/buscaraulaId/{codigo}", method = RequestMethod.GET, produces = "application/json")
 	public Aula busca(@PathVariable("codigo") Integer codigo) {
 
@@ -96,15 +114,35 @@ public class AulaWS {
 		return aula;
 	}
 	
-	
-	@RequestMapping(value = "/vincularaula/{codigo}/{obj}", method = RequestMethod.GET, produces = "application/json")
-	public void buscaAula(@PathVariable("codigo")  Integer codigo, @PathVariable("obj") List<Integer> obj) {
+	@RequestMapping(value = "/buscarDadosAula/{codigo}", method = RequestMethod.GET, produces = "application/json")
+	public Aula buscaDadosAula(@PathVariable("codigo") Integer codigo) {
 
+		Aula aula  = new Aula();
+		AulaDao aulaDao  = new AulaDao();
+		
+		try {
+			aula = aulaDao.findByDadosAula(codigo);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return aula;
+	}
+	
+	
+	
+	
+	@RequestMapping(value = "/vincularaula/{obj}", method = RequestMethod.GET, produces = "application/json")
+	public void buscaAula(@PathVariable("obj") List<Integer> obj) {
+
+		
+		
 		
 		AulaDao aulaDao  = new AulaDao();
 		
 		try {
-			aulaDao.vincularAula(codigo, obj);
+			aulaDao.vincularTreino(obj);
 		} catch (InstantiationException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -118,7 +156,7 @@ public class AulaWS {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
+		
 	}
 	
 	
@@ -129,6 +167,39 @@ public class AulaWS {
 
 		try {
 			lst = new AulaDao().findAll();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return lst;
+	}
+	
+	@RequestMapping(value = "/aulasDias/{codigo}/{mes}/{ano}", method = RequestMethod.GET)
+	public List<Aula> listar2(@PathVariable("codigo") Integer codigo,@PathVariable("mes") String mes, 
+								@PathVariable("ano") String ano){
+
+		List<Aula> lst = new ArrayList<Aula>();
+
+		try {
+			lst = new AulaDao().findByDiasAula(codigo, mes, ano);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return lst;
+	}
+	
+	
+	
+	@RequestMapping(value = "/listaaulas", method = RequestMethod.GET)
+	public List<Aula> listarAula() {
+
+		List<Aula> lst = new ArrayList<Aula>();
+
+		try {
+			lst = new AulaDao().findAulas();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

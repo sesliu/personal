@@ -1,4 +1,4 @@
-<div ng-controller="aulaController">
+<div ng-controller="aulaController" ng-init="inicioBusca()">
 <div growl></div>
 <div ng-show ="carregaSpinner">
 	<span style="margin-top: 15%"
@@ -18,22 +18,16 @@
 		</div>
 	</div>
 	<div class="text-center">
-		<h5><span style="color:red"><strong>Ajuda: Cadastro/Atualização de Aulas e vinculo dos alunos</strong></span></h5>
+		<h5><span style="color:red"><strong>Ajuda: Cadastro/Atualização de Aulas</strong></span></h5>
 	</div>
 	<form name="formBusca">
 	<div class="col-sm-12">
 		<hr>
-		<div class="col-sm-6">
-			<div class="input-group">
-				<input type="text" class="form-control" ng-model = "busca"
-					placeholder="Digite o nome da aula para busca" required> <span
-					class="input-group-btn">
-					<button class="btn btn-search" type="submit" ng-click="buscarAula(busca)" 
-					 ng-disabled="formBusca.$invalid">
-						<i class="fa fa-search fa-fw"></i> Busca
-					</button>
-				</span>
-			</div>
+		<div class="col-sm-4">
+			
+			<input type="text" class="form-control" ng-model = "busca"
+					placeholder="Digite um nome para a busca" required> 
+			
 
 		</div>
 	</div>
@@ -49,6 +43,9 @@
 								<td><strong>Dia da Semana</strong></td>
 								<td><strong>Horário</strong></td>
 								<td><strong>Tipo da Aula</strong></td>
+								<td><strong>Presença</strong></td>
+								<td><strong>Falta</strong></td>
+								<td><strong>Falta Justificada</strong></td>
 								<td><strong>PSE</strong></td>
 								<td></td>
 								<td></td>
@@ -58,17 +55,18 @@
 						</thead>
 
 						<tbody>
-							<tr ng-repeat ="pesq in listaAula">
-								<td>{{pesq.nome}}</td>
-								<td>{{pesq.dataAula | formataData}}</td>
+							<tr ng-repeat ="pesq in listaAula | filter: busca ">
+								<td>{{pesq.nomeAluno}}</td>
+								<td>{{pesq.dataAula}}</td>
 								<td>{{pesq.diaSemana}}</td>
 								<td>{{pesq.horario}}</td>
 								<td>{{pesq.tipo}}</td>
+								<td>{{pesq.presenca == 0? "Não" :"Sim" }}</td>
+								<td>{{pesq.falta == 0? "Não":"Sim"}}</td>
+								<td>{{pesq.faltajusticada == 0 ? "Não" : "Sim"}}</td>
 								<td>{{pesq.resultado}}</td>
+								
 								<td></td>
-								<td><button type="button" title="Vincular alunos para aula" class="btn btn-default"
-								ng-click="exibirVinculo(pesq)"
-								>Vincular Aluno</button></td>
 								<td><span><a href="" ng-click="atualizaAula(pesq.idAula)"
 									class="fa fa-edit  fa-2x" title="Alterar" style="color: blue"></a></span></td>
 								<td><span><a href="" ng-click="excluirAula(pesq.idAula)"

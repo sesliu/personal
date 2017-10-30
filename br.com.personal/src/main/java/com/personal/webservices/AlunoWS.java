@@ -96,14 +96,14 @@ public class AlunoWS {
 		
 	
 	}	
-	@RequestMapping(value = "/buscaraluno/{nome}", method = RequestMethod.GET, produces = "application/json")
-	public List<Aluno> busca(@PathVariable("nome") String nome) {
+	@RequestMapping(value = "/buscaraluno", method = RequestMethod.GET, produces = "application/json")
+	public List<Aluno> busca() {
 
 		AlunoDao alunoDao  = new AlunoDao();
 		
 		List<Aluno> lst = new ArrayList<Aluno>();
 		try {
-			lst = alunoDao.findByName(nome);
+			lst = alunoDao.findByName();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -128,6 +128,59 @@ public class AlunoWS {
 
 		return lst;
 	}
+	
+	
+	@RequestMapping(value = "/buscarAniversario/{mes}", method = RequestMethod.GET, produces = "application/json")
+	public List<Aluno> buscaAniversario(@PathVariable("mes") String mes) {
+
+		AlunoDao alunoDao  = new AlunoDao();
+		
+		List<Aluno> lst = new ArrayList<Aluno>();
+		try {
+			lst = alunoDao.findByAniversario(mes);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return lst;
+	}
+	
+	
+	@RequestMapping(value = "/buscarProfissional/{mes}/{dia}", method = RequestMethod.GET, produces = "application/json")
+	public List<Aluno> buscaAniversario(@PathVariable("mes") String mes, @PathVariable("dia") String dia) {
+
+		AlunoDao alunoDao  = new AlunoDao();
+		
+		List<Aluno> lst = new ArrayList<Aluno>();
+		try {
+			lst = alunoDao.findByProfissional(mes, dia);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return lst;
+	}
+	
+	
+	@RequestMapping(value = "/calculaValor/{codigo}", method = RequestMethod.GET, produces = "application/json")
+	public Aluno calculaValor (@PathVariable("codigo") Integer codigo) {
+
+		Aluno aluno  = new Aluno();
+		AlunoDao alunoDao  = new AlunoDao();
+		
+		try {
+			aluno = alunoDao.findByCalculaAula(codigo);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return aluno;
+	}
+	
+	
 	
 	
 	@RequestMapping(value = "/buscaralunoId/{codigo}", method = RequestMethod.GET, produces = "application/json")

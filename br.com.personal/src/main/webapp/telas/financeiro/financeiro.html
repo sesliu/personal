@@ -1,4 +1,4 @@
-<div ng-controller="financeiroController">
+<div ng-controller="financeiroController" ng-init="inicio()">
 <div growl></div>
 <div ng-show ="carregaSpinner">
 	<span style="margin-top: 15%"
@@ -12,12 +12,12 @@
 			</div>
 		</div>
 	</div>
-<form name="formTreino">	
-	<div class="col-sm-12">
+<form name="formFinanceiro">	
+	<div class="col-sm-12" style="margin-bottom: 24px">
 	<hr>
 	    <div class="col-sm-2">
 	    <label class="pull-left">Ano Vigente</label>
-	    	<select class="form-control" ng-model="vigente.ano" >
+	    	<select class="form-control" ng-model="vigente.ano" ng-change= "alteraDias()">
 	    			<option value="" >Selecione</option>
 	    			<option value="2000" >2000</option>
 	    			<option value="2001" >2001</option>
@@ -78,7 +78,7 @@
 	    
 		<div class="col-sm-3">
 			<label class="pull-left">Mês Vigente</label>
-			<select  class="form-control" ng-model="vigente.mes">
+			<select  class="form-control" ng-model="vigente.mes" ng-change= "alteraDias()">
 				<option value="">Selecione</option>
 				<option value="0">Janeiro</option>
 				<option value="1">Fevereiro</option>
@@ -94,7 +94,44 @@
 				<option value="11">Dezembro</option>	
 			</select>
 		</div>
+		<div class="col-sm-3">
+			<label class="pull-left">Aluno</label>
+			<select  class="form-control obrigatorio" ng-model="vigente.idAluno" ng-change="carregaDias()" required>
+				<option value="">Selecione</option>
+				<option ng-repeat=" lista in listaAlunos" value="{{lista.idAluno}}">{{lista.nome}}</option>
+			</select>
+		</div>
+		
+		
 	</div>
+	<div class="col-sm-12">
+		
+			<label class="pull-left">Dias das Aulas</label>	
+			<div class="well scrollTabela" style="margin-top:12px; height: 90px; width: 100%;display:flex; ">
+				<ul ng-repeat="dias in listaDias" style="margin-left: -12px;float:left;clear: both">
+					<li><input type="checkbox" 
+					    data-checklist-model ="selecionado.dataAula" 
+			  			data-checklist-value="dias.value">{{dias.text}}</li>
+	    		</ul>
+	    	</div>	
+		
+	</div>
+	<div class="col-sm-4">
+		<button class="btn btn-success" ng-click="valoresAluno()"  ng-disabled="formFinanceiro.$invalid" >Calcular</button>
+	</div>
+	<div class="col-sm-12" align="center" style="margin-bottom:12px">
+	<hr>
+		<h5><span style="color:red"><strong>Hora Aula X Ajuste Anual X Quantidade Dias</strong></span></h5>
+		
+		<h3>{{horaAula}} X {{ajuste}} X {{quantidadeDias}} =  {{total}}</h3> 
+		
+	
+	</div>
+	<div class="col-sm-12" align="center">
+		<button class="btn btn-danger"  ng-click="registrarPagamento()" 
+		                                 ng-disabled="formFinanceiro.$invalid" >Registrar</button>
+	</div>
+	
 </form>
 <div class="col-md-12">
 	<hr>

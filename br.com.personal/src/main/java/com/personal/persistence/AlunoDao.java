@@ -5,13 +5,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.personal.modelo.Aluno;
+import com.personal.modelo.Aula;
 
 
 public class AlunoDao extends Dao{
 
 
 	private String procCadastraAluno = "call sp_cadastraAluno(?,?,?,?,?,?,?,?)";
-	private String procBuscaAluno = "call sp_buscaAluno(?)";
+	private String procBuscaAluno = "call sp_buscaAluno()";
 	private String procDeletaAluno = "call sp_excluiAluno(?)";
 	private String procBuscaAlunoID = "call sp_buscaAlunoId(?)";
 	private String procAtualizaAluno = "call sp_atualizaAluno(?,?,?,?,?,?,?,?,?)";
@@ -28,6 +29,44 @@ public class AlunoDao extends Dao{
 	
 	private String procEstornarPagamento = "call sp_estornarAlunoPagamento(?,?,?)";
 	
+	private String procDataAniversario = "call sp_buscaAniversariante(?)";
+	
+	private String procDiaProfissional = "call sp_buscaDiaProfissional(?,?)";
+	
+	private String procCalculaAula = "call sp_calculaFinanceiro(?)";
+	
+	
+	
+	public Aluno findByCalculaAula(Integer codigo)
+			throws SQLException, InstantiationException, IllegalAccessException, ClassNotFoundException {
+
+		open();
+
+		
+		Aluno a = new Aluno();
+		
+		stmt = con.prepareStatement(procCalculaAula);
+		stmt.setInt(1, codigo);
+		rs = stmt.executeQuery();
+		
+		if (rs.next()) {
+			
+			
+			a.setIdAluno(rs.getInt(1));
+			a.setHoraAula(rs.getString(2));
+			a.setAjuste(rs.getString(3));
+		
+			
+		}
+
+		rs.close();
+		stmt.close();
+
+		close();
+
+		return a;
+
+	}
 	
 	public void createFinanceiro(Aluno a)
 			throws SQLException, InstantiationException, IllegalAccessException, ClassNotFoundException {
@@ -66,6 +105,65 @@ public class AlunoDao extends Dao{
 		close();
 
 	}
+	
+	
+	public List<Aluno> findByAniversario(String mes)
+			throws SQLException, InstantiationException, IllegalAccessException, ClassNotFoundException {
+
+		open();
+
+		ArrayList<Aluno> alunos = new ArrayList<Aluno>();
+
+		stmt = con.prepareStatement(procDataAniversario);
+		stmt.setString(1, mes);
+		rs = stmt.executeQuery();
+		while (rs.next()) {
+
+			Aluno a = new Aluno();
+			a.setDataNascimento(rs.getString(1));
+			a.setNome(rs.getString(2));
+			alunos.add(a);
+		}
+
+		rs.close();
+		stmt.close();
+
+		close();
+
+		return alunos;
+
+	}
+	
+	
+	public List<Aluno> findByProfissional(String mes, String dia)
+			throws SQLException, InstantiationException, IllegalAccessException, ClassNotFoundException {
+
+		open();
+
+	
+		ArrayList<Aluno> alunos = new ArrayList<Aluno>();
+
+		stmt = con.prepareStatement(procDiaProfissional);
+		stmt.setString(1, mes);
+		stmt.setString(2, dia);
+		rs = stmt.executeQuery();
+		while (rs.next()) {
+
+			Aluno a = new Aluno();
+			a.setNome(rs.getString(1));
+			a.setProfissao(rs.getString(2));
+			alunos.add(a);
+		}
+
+		rs.close();
+		stmt.close();
+
+		close();
+
+		return alunos;
+
+	}
+	
 	
 	
 	
@@ -150,7 +248,7 @@ public class AlunoDao extends Dao{
 
 	}
 
-	public List<Aluno> findByName(String nome)
+	public List<Aluno> findByName()
 			throws SQLException, InstantiationException, IllegalAccessException, ClassNotFoundException {
 
 		open();
@@ -158,7 +256,6 @@ public class AlunoDao extends Dao{
 		ArrayList<Aluno> alunos = new ArrayList<Aluno>();
 
 		stmt = con.prepareStatement(procBuscaAluno);
-		stmt.setString(1, nome);
 		rs = stmt.executeQuery();
 		while (rs.next()) {
 
@@ -348,7 +445,8 @@ public class AlunoDao extends Dao{
 
 			a.setIdAluno(rs.getInt(1));
 			a.setNome(rs.getString(2));
-			
+			a.setHoraAula(rs.getString(8));
+			a.setAjuste(rs.getString(9));
 
 			alunos.add(a);
 		}

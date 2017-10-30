@@ -56,7 +56,7 @@
 
 .ngdialog.ngdialog-theme-default2 {
   padding-bottom: 160px;
-  padding-top: 10%;
+  padding-top: 1px;
 }
 
 .ngdialog.ngdialog-theme-default2.ngdialog-closing .ngdialog-content {
@@ -65,7 +65,7 @@
 }
 
 .ngdialog.ngdialog-theme-default2 .ngdialog-content {
-   -webkit-animation: ngdialog-flyin .5s;
+  -webkit-animation: ngdialog-flyin .5s;
   -webkit-overflow-scrolling: touch!important;
   animation: ngdialog-flyin .5s;
   background: #ffffff;
@@ -78,7 +78,8 @@
   max-width: 100%;
   padding: 1em;
   position: relative;
-  width: 780px;
+  width: 380px;
+
 }
 
 .ngdialog.ngdialog-theme-default2 .ngdialog-close {

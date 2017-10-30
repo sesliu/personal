@@ -1,4 +1,4 @@
-<div ng-controller="principalController">
+<div ng-controller="principalController" ng-init="inicio()">
 	<nav class="navbar navbar-inverse">
 		<div class="container-fluid">
 			<div class="navbar-header"></div>
@@ -13,25 +13,18 @@
 		<div class="menu-list">
 			<ul id="menu-content" class="menu-content collapsed out">
 			
-			    <li><a href=""><i class="fa fa-tachometer fa-lg"></i> Dashboard</a>
+			    <li  class="active"><a href=""  ng-click="dashboard()"><i class="fa fa-home fa-lg"></i> Home</a>
 				</li>	
 				<li data-toggle="collapse" data-target="#cadastros"
-					class="collapsed active"><a href=""><i
+					class="collapsed"><a href=""><i
 						class="fa fa-building fa-lg"></i> Cadastros <span class="arrow"></span></a>
 				</li>
 				<ul class="sub-menu collapse" id="cadastros">
-					<li class="active"><a href="" ng-click="buscarAula()">Aula</a></li>
+					<li><a href="" ng-click="buscarAluno()">Aluno</a></li>
+					<li><a href="" ng-click="buscarAula()">Aula</a></li>
+					<li><a href="" ng-click="buscarProfissao()">Profissão</a></li>
 					<li><a href="" ng-click="buscarTreino()">Treino</a></li>
 				</ul>
-				<li data-toggle="collapse" data-target="#alunos" class="collapsed">
-					<a href=""><i class="fa fa-users fa-lg"></i> Alunos <span
-						class="arrow"></span></a>
-				</li>
-				<ul class="sub-menu collapse" id="alunos">
-					<li><a href="" ng-click="buscarAluno()">Aluno</a></li>
-					<!-- <li><a href="" ng-click="buscarAlunoHora()">Aluno Hora/Aula</a></li> -->
-				</ul>
-
 				<li data-toggle="collapse" data-target="#financeiro" class="collapsed">
 					<a href="#"><i class="fa fa-money fa-lg"></i>Financeiro<span
 						class="arrow"></span></a>
@@ -48,11 +41,6 @@
 	<div class="container" id="main">
 		<div class="row">
 			<div class="col-md-12">
-				<div ng-show="exibeTela">
-					<div id="logo">
-						<h1>Personal GYM Manager</h1>
-					</div>
-				</div>
 				<div ui-view="paginas"></div>
 			</div>
 		</div>

@@ -4,7 +4,8 @@ public class Aula {
 
 	
 	private Integer idAula;
-    private Integer nomeAluno;
+	private Integer idAluno;
+    private String nomeAluno;
 	private String dataAula;
 	private String diaSemana;
 	private String tipo;
@@ -13,11 +14,27 @@ public class Aula {
     private String falta;
     private String faltajusticada;
     private String obsjustificada;
-    private String observação;
+    private String observacao;
     private String resultado;
+    private String listaTreino;
+    
+    
 	
 	
+    
 	
+	public String getListaTreino() {
+		return listaTreino;
+	}
+	public void setListaTreino(String listaTreino) {
+		this.listaTreino = listaTreino;
+	}
+	public Integer getIdAluno() {
+		return idAluno;
+	}
+	public void setIdAluno(Integer idAluno) {
+		this.idAluno = idAluno;
+	}
 	public String getHorario() {
 		return horario;
 	}
@@ -49,10 +66,10 @@ public class Aula {
 		this.diaSemana = diaSemana;
 	}
 	
-	public Integer getNomeAluno() {
+	public String getNomeAluno() {
 		return nomeAluno;
 	}
-	public void setNomeAluno(Integer nomeAluno) {
+	public void setNomeAluno(String nomeAluno) {
 		this.nomeAluno = nomeAluno;
 	}
 	public String getPresenca() {
@@ -79,11 +96,11 @@ public class Aula {
 	public void setObsjustificada(String obsjustificada) {
 		this.obsjustificada = obsjustificada;
 	}
-	public String getObservação() {
-		return observação;
+	public String getObservacao() {
+		return observacao;
 	}
-	public void setObservação(String observação) {
-		this.observação = observação;
+	public void setObservacao(String observacao) {
+		this.observacao = observacao;
 	}
 	public String getResultado() {
 		return resultado;

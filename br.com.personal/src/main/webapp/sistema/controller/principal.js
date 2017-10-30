@@ -1,7 +1,125 @@
-personal.controller('principalController',function($scope,$compile){
+personal.controller('dashController', function($scope, webservicesAluno, webservicesAula, ngDialog, $rootScope, $interval){
+	
+
+	$scope.listaAniversario = [];
+	$scope.listaProfissao = [];
+	$scope.listaAulas = [];
+	var data;
+	var mes;
+	var dia;
+	$interval( function(){
+		
+		data = new Date();
+		mes = data.getMonth();
+		dia = data.getDate();
+		$scope.dataFormatada  = ('00'+data.getDate()).slice(-2)+'/'+('00'+(data.getMonth()+1)).slice(-2)+'/'+data.getFullYear();
+		
+		var dia  = data.getFullYear()+'-'+('00'+(data.getMonth()+1)).slice(-2)+'-'+('00'+data.getDate()).slice(-2);
+		
+		webservicesAluno.buscaAniversario(mes).success(function(data){
+		
+			$scope.listaAniversario = data;
+			
+		})
+		
+		webservicesAluno.buscaProfissao(mes,dia).success(function(data){
+		
+			$scope.listaProfissao = data;
+			
+		})
+		
+		
+		
+			webservicesAula.buscaAulaDia(dia).success(function(data){
+		
+		    $scope.listaAulas = data;
+			
+		})
+		
+		
+		
+	},1000);
+	
+	
+	
+	
+	$scope.dadosAula = function(codigo){
+		
+		webservicesAula.buscaDadosDia(codigo).success(function(data){
+			
+		
+			$rootScope.dadosAula = data;
+					
+			ngDialog.open({
+						template : 'telas/dialogo/dialogoDadosAula.html',
+						className : 'ngdialog-theme-default2'
+					});
+					
+				
+		});
+		
+	}
+	
+	
+});
+
+
+personal.controller('dadosAulaController',function($scope, $rootScope){
+	
+	
+	$scope.dadosAula = $rootScope.dadosAula;
+	
+	
+	
+	
+});
+
+
+
+personal.controller('principalController',function($scope,$compile,$timeout){
 	
 	
 	$scope.exibeTela = true;
+	
+	
+	$scope.inicio = function(){
+		
+	$timeout(function(){
+		
+		$("#paginas").empty();
+		var compiledeHTML = $compile("<dashboard></dashboard>")
+		($scope);
+		$("#paginas").append(compiledeHTML);
+		
+	},1000);	
+		
+		
+		
+	}
+	
+	
+	
+
+	
+	$scope.buscarProfissao = function(){
+		
+		$("#paginas").empty();
+		var compiledeHTML = $compile("<profissao></profissao>")
+		($scope);
+		$("#paginas").append(compiledeHTML);
+		
+	}
+	
+	
+	
+	$scope.dashboard = function(){
+		
+		$("#paginas").empty();
+		var compiledeHTML = $compile("<dashboard></dashboard>")
+		($scope);
+		$("#paginas").append(compiledeHTML);
+		
+	}
 	
 	
 	$scope.buscarAluno = function(){

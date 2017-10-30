@@ -1,4 +1,5 @@
-personal.controller('aulaController',function($scope, $rootScope, $compile,webservicesAula, ngDialog , growl, $timeout){
+personal.controller('aulaController',function($scope, $rootScope, $compile,webservicesAula, ngDialog , growl, $timeout,
+												webservicesAluno, webservices){
 	
 
 	$scope.aula ={};
@@ -7,7 +8,14 @@ personal.controller('aulaController',function($scope, $rootScope, $compile,webse
 	var ultimabusca;
 	$rootScope.codigo;
 	var data = new Date;
+	var listaTreinos =[];
+	var listaTreinoSelecionado = [];
+	$scope.listaAlunos = [];
 	$scope.carregaSpinner = false;
+	var dadoAula = [];
+	var listaIdAula =[];
+	var objetoId = {};
+	var gravarLista = [];
 	
 	var mensagemErroGravar = "Erro ao gravar registro";
 	var mensagemErroBuscar = "Sem registros para busca";
@@ -81,6 +89,60 @@ personal.controller('aulaController',function($scope, $rootScope, $compile,webse
 		}
 		
 		
+		$scope.inicioBusca = function(){
+			
+			webservicesAula.listaAulas().success(function(data){
+				
+				$scope.listaAula = data;
+				
+								
+			});
+			
+		}
+		
+
+		$scope.inicio = function(){
+			
+			
+			webservices.buscarTodosTreinos().success(function(data){
+				
+				listaTreinos = data;
+				
+			});
+			
+			webservicesAluno.buscarAlunos().success(function(data){
+				
+				$scope.listaAlunos = data;
+				
+			});
+			
+			
+			
+			
+		}
+		
+		
+		
+
+		$timeout(function(){
+			
+			
+			
+			
+			$scope.demoOptions = {
+					title : 'Escolha os treinos da aula',
+					filterPlaceHolder : 'Buscar nome do treino abaixo',
+					labelAll : 'Não vinculados',
+					labelSelected : 'vinculados',
+					helpMessage : 'Clicar no nome do treino para transferir entre os campos',
+					orderProperty : 'nome',
+					items : listaTreinos,
+					selectedItems : listaTreinoSelecionado
+		};			
+
+			
+		},1000);		
+		
 /////////////exibe vinculo treino////////////////////
 		
 		$scope.exibirVinculo = function(aula) {
@@ -108,28 +170,59 @@ personal.controller('aulaController',function($scope, $rootScope, $compile,webse
 				controller : 'aulaController'
 			}).then(
 					function(success) {
+						
+						var listaIdTreino = []
+						
+						dadoAula = $scope.demoOptions.selectedItems;
+						
+						
+
+						for (var i = 0; i < dadoAula.length; i++) {
+
+							listaIdTreino.push(dadoAula[i].idTreino);
+						}
+
+						if(listaIdTreino.length == 0){
+							
+							listaIdTreino = 0;
+						}
+
+						console.log(listaIdTreino);
+						
 						$scope.carregaSpinner = true;
 						$scope.aula.dataAula = $scope.data.getFullYear()+'-'+('00'+($scope.data.getMonth()+1)).slice(-2)+'-'+('00'+$scope.data.getDate()).slice(-2);
 						
 						webservicesAula.gravarAula($scope.aula).success(
 								function(data, status) {
 
-									$timeout(function(){
-										growl.addSuccessMessage(mensagemOK);
-										$scope.carregaSpinner = false;
 										
-									},100)	
-										
-									
 									
 									if (status == 200) {
 
-										$scope.exibeTela = false;
-										$("#paginas").empty();
-										var compiledeHTML = $compile(
-												"<cadastraaula></cadastraaula>")(
-												$scope);
-										$("#paginas").append(compiledeHTML);
+										
+										webservicesAula.vincularAula(listaIdTreino).success(function(data, status){
+											
+											if(status == 200){
+												
+
+												$timeout(function(){
+													growl.addSuccessMessage(mensagemOK);
+													$scope.carregaSpinner = false;
+													
+												},100)	
+												
+												$scope.exibeTela = false;
+												$("#paginas").empty();
+												var compiledeHTML = $compile(
+														"<cadastraaula></cadastraaula>")(
+														$scope);
+												$("#paginas").append(compiledeHTML);
+												
+											}
+											
+										})
+										
+										
 
 									}
 
@@ -187,12 +280,13 @@ personal.controller('aulaController',function($scope, $rootScope, $compile,webse
 
 						webservicesAula.excluirAula(codigo).success(function(data, status) {
 							growl.addSuccessMessage(mensagemOKExcluir);
-							webservicesAula.buscarAula(ultimabusca).success(function(data, status) {
-
+							
+							
+							webservicesAula.listaAulas().success(function(data){
+								
 								$scope.listaAula = data;
 								$scope.carregaSpinner = false;
-
-
+												
 							}).error(function(){
 								growl.addErrorMessage(mensagemErroGravar);
 								$scope.carregaSpinner = false;
@@ -211,13 +305,66 @@ personal.controller('aulaController',function($scope, $rootScope, $compile,webse
 
 
 personal.controller('atualizaAulaController',
-		function($scope, $compile, $rootScope, webservicesAula, $timeout, $rootScope, ngDialog, growl){
+		function($scope, $compile, $rootScope, webservicesAula,webservicesAluno, $timeout, $rootScope, ngDialog, growl, webservices){
 	
 
 	var mensagemOK = "Registros atualizados com sucesso";
 	var mensagemErro = "Registros não atualizados";
 	$scope.carregaSpinner = false;
+	$scope.listaAlunos =[];
+	var listaTreinos = [];
+	var listaTreinoSelecionado = [];
 
+	
+	$scope.inicio = function(){
+		
+	
+		
+		webservicesAluno.buscarAlunos().success(function(data){
+			
+			$scope.listaAlunos = data;
+			
+		});
+		
+		
+		
+		webservices.buscarTreinosAula($rootScope.codigo).success(function(data){
+			
+		    listaTreinos = data;
+			
+		});
+		
+		webservices.buscarTreinosVicunlados($rootScope.codigo).success(function(data){
+			
+			listaTreinoSelecionado = data;
+			console.log(data);
+		})
+		
+		
+		
+		
+	}
+	
+	$timeout(function(){
+		
+		
+	
+		
+		
+		$scope.demoOptions = {
+				title : 'Escolha os treinos da aula',
+				filterPlaceHolder : 'Buscar nome do treino abaixo',
+				labelAll : 'Não vinculados',
+				labelSelected : 'vinculados',
+				helpMessage : 'Clicar no nome do treino para transferir entre os campos',
+				orderProperty : 'nome',
+				items : listaTreinos,
+				selectedItems : listaTreinoSelecionado
+	};			
+
+		
+	},1000);	
+	
 	
 	webservicesAula.buscarAulaId($rootScope.codigo).success(function(data, status) {
 
@@ -231,8 +378,27 @@ personal.controller('atualizaAulaController',
 		var mes = newdate.substring(4, 6);
 		var dia = newdate.substring(6,8);
 
-		console.log(mes)
+	
+		var idAluno = data.idAluno;
+
 		$scope.data = new Date(ano, mes-1, dia);
+		
+		
+		$timeout(function(){
+			for (var i = 0; i < $scope.listaAlunos.length; i++) {
+
+				if (idAluno == 	$scope.listaAlunos[i].idAluno) {
+
+					console.log($scope.listaAlunos[i])
+					
+					$scope.aula.idAluno = $scope.listaAlunos[i];
+
+				}
+
+			}
+			
+		},200)
+		
 		
 		});
 	
@@ -250,22 +416,47 @@ personal.controller('atualizaAulaController',
 				function(success) {
 					$scope.carregaSpinner = true;
 
+					$scope.aula.idAluno =   $scope.aula.idAluno.idAluno; 
+					var listaIdTreino = []
+					
+					dadoAula = $scope.demoOptions.selectedItems;
+					
+					
+
+					for (var i = 0; i < dadoAula.length; i++) {
+
+						listaIdTreino.push(dadoAula[i].idTreino);
+					}
+
+					if(listaIdTreino.length == 0){
+						
+						listaIdTreino = 0;
+					}
+					
 					webservicesAula.atualizarAula($scope.aula).success(
 							function(data, status) {
 								
-								$timeout(function(){
-									growl.addSuccessMessage(mensagemOK);
-									$scope.carregaSpinner = false;
+						
+								if (status == 200) {
+									
+									webservices.vincularTreino($rootScope.codigo,listaIdTreino).success(function(data,status){
+										
+										$timeout(function(){
+											growl.addSuccessMessage(mensagemOK);
+											$scope.carregaSpinner = false;
+
+											
+										},200)	
+										
+										$("#paginas").empty();
+										var compiledeHTML = $compile("<buscaaula></buscaaula>")(
+												$rootScope);
+										$("#paginas").append(compiledeHTML);
+										
+									});
+									
 
 									
-								},200)	
-
-								if (status == 200) {
-
-									$("#paginas").empty();
-									var compiledeHTML = $compile("<buscaaula></buscaaula>")(
-											$rootScope);
-									$("#paginas").append(compiledeHTML);
 
 								}
 
