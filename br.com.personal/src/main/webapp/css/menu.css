@@ -134,12 +134,24 @@
   #main {
   	width:calc(100% - 200px);
   	float: right;
-  	box-shadow: inset 10px 10px 10px lightgray;
+  
   }
 }
+body, html{
+	
+	  height: 100%;
+}
+
 
 body {
   margin: 0px;
   padding: 0px;
-  overflow-x: hidden;
+  overflow: hidden;
+ 	background-image: url('../imagens/fundo2.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 100%;
+    clear: both;	 
+
 }

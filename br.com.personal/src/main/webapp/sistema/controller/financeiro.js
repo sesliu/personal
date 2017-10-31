@@ -202,7 +202,7 @@ personal.controller('financeiroController',function($scope, $rootScope,$timeout,
 		$scope.aluno.ano = $scope.vigente.ano;
 		$scope.carregaSpinner = true;
 		
-		webservicesAluno.pagarValor($scope.aluno).success(function(data){
+		webservicesAluno.registrarPagamento($scope.aluno).success(function(data){
 			growl.addSuccessMessage("Pagamento realizado com sucesso");
 			$scope.listaFinancas = data;
 			$scope.carregaSpinner = false;

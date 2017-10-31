@@ -4,6 +4,7 @@ personal.controller('dashController', function($scope, webservicesAluno, webserv
 	$scope.listaAniversario = [];
 	$scope.listaProfissao = [];
 	$scope.listaAulas = [];
+	$scope.listaFinancas = [];
 	var data;
 	var mes;
 	var dia;
@@ -12,6 +13,7 @@ personal.controller('dashController', function($scope, webservicesAluno, webserv
 		data = new Date();
 		mes = data.getMonth();
 		dia = data.getDate();
+		ano = data.getFullYear();
 		$scope.dataFormatada  = ('00'+data.getDate()).slice(-2)+'/'+('00'+(data.getMonth()+1)).slice(-2)+'/'+data.getFullYear();
 		
 		var dia  = data.getFullYear()+'-'+('00'+(data.getMonth()+1)).slice(-2)+'-'+('00'+data.getDate()).slice(-2);
@@ -37,6 +39,15 @@ personal.controller('dashController', function($scope, webservicesAluno, webserv
 		})
 		
 		
+	
+		webservicesAluno.buscaFinanceiro(mes, ano).success(function(data){
+			
+			$scope.listaFinancas = data;
+		});
+		
+		
+	
+		
 		
 	},1000);
 	
@@ -57,6 +68,44 @@ personal.controller('dashController', function($scope, webservicesAluno, webserv
 					
 				
 		});
+		
+	}
+	
+	
+$scope.pagarValor =function(aluno){
+		
+		$scope.aluno = aluno;
+		
+		$scope.aluno.mes = mes;
+		$scope.aluno.ano = ano;
+		$scope.carregaSpinner = true;
+		
+		webservicesAluno.registrarPagamento($scope.aluno).success(function(data){
+			growl.addSuccessMessage("Pagamento realizado com sucesso");
+			$scope.listaFinancas = data;
+			$scope.carregaSpinner = false;
+		
+		});
+		
+		
+	}
+	
+	$scope.estornarValor =function(aluno){
+		
+		$scope.aluno = aluno;
+		
+		$scope.aluno.mes = mes;
+		$scope.aluno.ano = ano;
+		$scope.carregaSpinner = true;
+		
+		webservicesAluno.estornaValor($scope.aluno).success(function(data){
+			
+			growl.addSuccessMessage("Estorno realizado com sucesso");
+			$scope.listaFinancas = data;
+			$scope.carregaSpinner = false;
+		
+		});
+		
 		
 	}
 	

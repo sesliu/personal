@@ -1,18 +1,20 @@
 <div ng-controller="dashController">
 	<div align="center" style="margin-bottom: 22px">
-		<p><h1>Bem-vindo</h1><p>
+		<h3>Bem-vindo</h3> 
 		<h5><strong>{{dataFormatada}}</strong></h5>
 		<div class="container-fluid">
-			<div class="col-xs-12">
-				<hr>
+		<div class="scrolltela fundo">
+			<div class="col-xs-12" style="margin-top:30px">
+				
 				<div class="col-xs-4">
-					<div class="panel panel-success dash">
-						<div class="panel-heading" style="opacity: 0.4">
+					<i class="pin"></i>
+					<div class="note yellow dash">
+						
 							<div align="center">
 								<h4>Aniversariantes do mês</h4>
 							</div>
-						</div>
-						<div class="panel-body scrollDash">
+						
+						<div class="scrollDash">
 							<div class="pull-left">
 								<ul ng-repeat="pesq in listaAniversario">
 									<span><h5>{{pesq.dataNascimento}} - {{pesq.nome}}</h5></span>
@@ -23,13 +25,14 @@
 					</div>
 				</div>
 				<div class="col-xs-4">
-					<div class="panel panel-warning dash">
-						<div class="panel-heading" style="opacity: 0.4">
+				<i class="pin"></i>
+					<div class="note yellow dash">
+					
 							<div align="center">
 								<h4>Dia do profissional</h4>
 							</div>
-						</div>
-						<div class="panel-body scrollDash">
+						
+						<div class="scrollDash">
 							<div class="pull-left">
 								<ul ng-repeat="pesq in listaProfissao">
 									<span><h5>{{pesq.nome}} - {{pesq.profissao}}</h5></span>
@@ -41,28 +44,14 @@
 					</div>
 				</div>
 				<div class="col-xs-4">
-					<div class="panel panel-info dash">
-						<div class="panel-heading" style="opacity: 0.4">
-							<div align="center">
-								<h4>Mensalidades do mês</h4>
-							</div>
-						</div>
-						<div class="panel-body scrollDash">
-							<div class="pull-left"></div>
-						</div>
-
-					</div>
-				</div>
-			</div>
-			<div class="col-xs-12">
-			<div class="col-xs-3">
-					<div class="panel panel-danger dash">
-						<div class="panel-heading" style="opacity: 0.4">
+					<i class="pin"></i>
+					<div class="note yellow  dash">
+						
 							<div align="center">
 								<h4>Aulas do dia</h4>
 							</div>
-						</div>
-						<div class="panel-body scrollDash">
+						
+						<div class="scrollDash">
 							<div class="pull-left">
 								<ul ng-repeat="pesq in listaAulas">
 									<a href="" ng-click="dadosAula(pesq.idAula)"><h5> {{pesq.horario}} - {{pesq.nomeAluno}}</h5></a>
@@ -72,9 +61,57 @@
 						</div>
 
 					</div>
+			
+				</div>
 			</div>
+			<div class="col-xs-8 col-xs-offset-2" style="margin-top: 18px;margin-bottom:30px">
+			<i class="pin"></i>
+				<div class="noteLarge yellow dash">
+						
+							<div align="center">
+								<h4>Mensalidades do mês</h4>
+							</div>
+						
+						<div class="scrollDashPagamento">
+							<div class="pull-left"></div>
+								<div class="table-responsive scrollTabela"
+					style="margin-top: 16px; position: relative">
+					<table class="table table-hover" width="70%" style="boder:none">
+						<thead>
+							<tr>
+								<td><strong>Nome</strong></td>
+								<td><strong>valor devido</strong></td>
+								<td><strong>valor pago</strong></td>
+								<td><strong>Pagamento</strong></td>
+								<td></td>
+								<td></td>
+								<td></td>
+							</tr>
+
+						</thead>
+
+						<tbody>
+				
+							<tr ng-repeat ='pesq in listaFinancas' >
+								<td>{{pesq.nome}}</td>
+								<td>{{pesq.horaAula}}</td>
+								<td>{{pesq.valorPagamento}}</td>
+								<td>{{pesq.dataPagamento}} </td>
+								<td></td>
+								<td><button type="button" title="Pagar mensalidade" class="btn btn-success"
+										ng-click="pagarValor(pesq)" ng-disabled= "pesq.pago == 1" >Pagar</button></td>
+								<td><button type="button" title="Estornar mensalidade" class="btn btn-danger"
+										ng-click="estornarValor(pesq)" ng-disabled= "pesq.pago == 0">Estornar</button></td>		
+								
+							</tr>
+						</tbody>
+					</table>
+				</div>
+						</div>
+
+					</div>
 			</div>
 		</div>
-
+	</div>
 	</div>
 </div>

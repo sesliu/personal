@@ -80,6 +80,12 @@ personal.factory("webservicesAluno", function($http) {
 	};
 	
 	
+	var _registrarPagamento = function(aluno) {
+		console.log(aluno)
+		return $http.post(url + '/pagapagamento', aluno);
+	};
+	
+	
 	
 	
 	return {
@@ -101,7 +107,8 @@ personal.factory("webservicesAluno", function($http) {
 		buscarAlunos:_buscarAlunos,
 		buscaAniversario:_buscaAniversario,
 		buscaProfissao:_buscaProfissao,
-		calculaAula:_calculaAula
+		calculaAula:_calculaAula,
+		registrarPagamento:_registrarPagamento
 	
 	}
 

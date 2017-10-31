@@ -76,6 +76,26 @@ public class AlunoWS {
 	
 	}	
 	
+	@RequestMapping(value="/pagapagamento", method = RequestMethod.POST, consumes = "application/json")
+	public void pagapagamento(@RequestBody Aluno aluno) {
+	
+		AlunoDao alunoDao  = new AlunoDao();
+		
+		
+		try {
+			
+			alunoDao.pagarFinanceiro(aluno);
+		
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+		
+		}
+		
+		
+	
+	}	
+	
 	
 	@RequestMapping(value="/atualizaraluno", method = RequestMethod.POST, consumes = "application/json")
 	public void atualizar(@RequestBody Aluno aluno) {
