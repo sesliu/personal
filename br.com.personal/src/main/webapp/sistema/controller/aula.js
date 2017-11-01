@@ -1,5 +1,5 @@
 personal.controller('aulaController',function($scope, $rootScope, $compile,webservicesAula, ngDialog , growl, $timeout,
-												webservicesAluno, webservices){
+												webservicesAluno, webservices, $interval){
 	
 
 	$scope.aula ={};
@@ -35,6 +35,7 @@ personal.controller('aulaController',function($scope, $rootScope, $compile,webse
 		}
 	};
 
+	
 	/**
 	 * propriedades passadas para os datepicker's
 	 */
@@ -54,6 +55,43 @@ personal.controller('aulaController',function($scope, $rootScope, $compile,webse
 		}
 	}
 	;
+	
+	
+	$interval(function(){
+		
+		 if($scope.data.getDay() == 0){
+			 
+			 $scope.aula.diaSemana = 'domingo';
+			 
+		 }else if($scope.data.getDay() == 1){
+			
+			 $scope.aula.diaSemana = 'segunda';
+			 
+		 }else if($scope.data.getDay() == 2){
+			 
+			 $scope.aula.diaSemana = 'terça';
+			 
+		 }else if($scope.data.getDay() == 3){
+			 
+			 $scope.aula.diaSemana = 'quarta';
+			 
+		 }else if($scope.data.getDay() == 4){
+			 
+			 $scope.aula.diaSemana = 'quinta';
+			 
+		 }else if($scope.data.getDay() == 5){
+			 
+			 $scope.aula.diaSemana = 'sexta';
+			 
+		 }else if($scope.data.getDay() == 6){
+			 
+			 $scope.aula.diaSemana = 'sabado';
+		 }
+			 
+		
+		
+	},1000,false)
+	
 	
 		
 		$scope.cadastraAula = function(){
@@ -305,7 +343,8 @@ personal.controller('aulaController',function($scope, $rootScope, $compile,webse
 
 
 personal.controller('atualizaAulaController',
-		function($scope, $compile, $rootScope, webservicesAula,webservicesAluno, $timeout, $rootScope, ngDialog, growl, webservices){
+		function($scope, $compile, $rootScope, webservicesAula,webservicesAluno, $timeout, $rootScope, ngDialog, growl, 
+				webservices, $interval){
 	
 
 	var mensagemOK = "Registros atualizados com sucesso";
@@ -315,6 +354,41 @@ personal.controller('atualizaAulaController',
 	var listaTreinos = [];
 	var listaTreinoSelecionado = [];
 
+	
+	
+	$scope.openDatIni = false;
+
+	/**
+	 * método que verifica se o datepicker está aberto.
+	 */
+	$scope.opened = function(datepicker) {
+		if (datepicker == 'dataIni') {
+			$scope.openDatIni = true;
+		}
+	};
+
+	
+	/**
+	 * propriedades passadas para os datepicker's
+	 */
+	$scope.options = {
+		showWeeks : true,
+		showButtonBar : false,
+		autoclose : true,
+		language : "pt-BR",
+	};
+
+	function formatDate(component) {
+		var v = component.value;
+		if (v.match(/^\d{2}$/) !== null) {
+			component.value = v + '/';
+		} else if (v.match(/^\d{2}\/\d{2}$/) !== null) {
+			component.value = v + '/';
+		}
+	}
+	;
+	
+	
 	
 	$scope.inicio = function(){
 		
@@ -473,6 +547,42 @@ personal.controller('atualizaAulaController',
 				});
 
 	}
+
+	
+	$interval(function(){
+		
+		 if($scope.data.getDay() == 0){
+			 
+			 $scope.aula.diaSemana = 'domingo';
+			 
+		 }else if($scope.data.getDay() == 1){
+			
+			 $scope.aula.diaSemana = 'segunda';
+			 
+		 }else if($scope.data.getDay() == 2){
+			 
+			 $scope.aula.diaSemana = 'terça';
+			 
+		 }else if($scope.data.getDay() == 3){
+			 
+			 $scope.aula.diaSemana = 'quarta';
+			 
+		 }else if($scope.data.getDay() == 4){
+			 
+			 $scope.aula.diaSemana = 'quinta';
+			 
+		 }else if($scope.data.getDay() == 5){
+			 
+			 $scope.aula.diaSemana = 'sexta';
+			 
+		 }else if($scope.data.getDay() == 6){
+			 
+			 $scope.aula.diaSemana = 'sabado';
+		 }
+			 
+		
+		
+	},1000,false)
 	
 	
 });	

@@ -8,12 +8,15 @@ personal.controller('dashController', function($scope, webservicesAluno, webserv
 	var data;
 	var mes;
 	var dia;
+	var dias;
 	$interval( function(){
 		
 		data = new Date();
 		mes = data.getMonth();
-		dia = data.getDate();
+		dias = data.getDate();
 		ano = data.getFullYear();
+		
+		
 		$scope.dataFormatada  = ('00'+data.getDate()).slice(-2)+'/'+('00'+(data.getMonth()+1)).slice(-2)+'/'+data.getFullYear();
 		
 		var dia  = data.getFullYear()+'-'+('00'+(data.getMonth()+1)).slice(-2)+'-'+('00'+data.getDate()).slice(-2);
@@ -24,7 +27,7 @@ personal.controller('dashController', function($scope, webservicesAluno, webserv
 			
 		})
 		
-		webservicesAluno.buscaProfissao(mes,dia).success(function(data){
+		webservicesAluno.buscaProfissao(mes,dias).success(function(data){
 		
 			$scope.listaProfissao = data;
 			

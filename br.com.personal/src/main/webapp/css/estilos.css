@@ -1,6 +1,8 @@
 @CHARSET "UTF-8";
 
 
+@import url(http://fonts.googleapis.com/css?family=Satisfy);
+
  .navbar {
       margin-bottom: 0;
       border-radius: 0;
@@ -10,7 +12,15 @@
     .row.content {height: 505px}
     
     /* Set gray background color and 100% height */
-    
+  
+  
+ #teste:after {
+ 
+ 	content: "\1F603";
+  
+    font-size: 3em;
+
+ }    
     
    
     
@@ -89,6 +99,13 @@
 }
 
 button:focus {outline:0;!important;}
+
+#dias{
+	
+	margin: 0 auto;
+	padding: 0 auto;
+	
+}
 
 .scrollTabela {
 	
@@ -216,7 +233,7 @@ ul{
   margin: 0 auto;
   padding: 20px;
   font-family: Satisfy;
-  font-size: 30px;
+  font-size: 38px;
   box-shadow: 0 10px 10px 2px rgba(0,0,0,0.3);
 
 }
@@ -279,3 +296,51 @@ ul{
   -ms-transform-origin: 50% 100%;
   -o-transform-origin: 50% 100%;
 }
+
+.imagens input[type="radio"] {
+    visibility: hidden;
+}
+
+.imagens label {
+    display: block;
+    border: 2px solid #666;
+    width: 60px;
+    float: left;
+    border-radius: 2em;
+    background-color: #b3cabe;
+    box-shadow:  10px 10px 10px gray;
+}
+
+.imagens input[type="radio"]:checked+label {
+    border-color: white;
+    box-shadow:  5px 5px 5px gray;
+    transition:  0.9s; 
+     transform: scale(0.9,0.9);
+}
+
+
+@media (min-heigth: 800px) {
+  
+  
+.scrolltelaInterno {
+	
+
+	height: 560px;
+	padding: 0 0 2px;
+	margin: 0 auto;
+	max-height: 1500px;
+	overflow-y: auto;
+	overflow-x: hidden;
+	border: 1px solid #e4e4e4;
+	border-radius: 12px;
+	box-shadow:  10px 10px 10px gray;
+	background-color: white;
+	clear: both;
+	
+}
+  
+  
+}
+
+
+   

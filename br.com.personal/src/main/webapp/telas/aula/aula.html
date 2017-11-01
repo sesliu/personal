@@ -65,7 +65,19 @@
 								<td>{{pesq.presenca == 0? "Não" :"Sim" }}</td>
 								<td>{{pesq.falta == 0? "Não":"Sim"}}</td>
 								<td>{{pesq.faltajusticada == 0 ? "Não" : "Sim"}}</td>
-								<td>{{pesq.resultado}}</td>
+								<td><div ng-if = "pesq.resultado == ''"><i class="fa fa-frown-o" style="font-size: 2em; color:#000000"></i></div>
+									<div ng-if = "pesq.resultado == 0"><i class="fa fa-frown-o" style="font-size: 2em; color:#000000"></i></div>
+								    <div ng-if = "pesq.resultado == 1"><i class="fa fa-smile-o" style="font-size: 2em; color:#009999"></i></div>
+								    <div ng-if = "pesq.resultado == 2"><i class="fa fa-smile-o" style="font-size: 2em; color:#00CC00"></i></div>
+								    <div ng-if = "pesq.resultado == 3"><i class="fa fa-smile-o" style="font-size: 2em; color:#009900"></i></div>
+								    <div ng-if = "pesq.resultado == 4"><i class="fa fa-smile-o" style="font-size: 2em; color:#006600"></i></div>
+									<div ng-if = "pesq.resultado == 5"><i class="fa fa-smile-o" style="font-size: 2em; color:#003300"></i></div>
+									<div ng-if = "pesq.resultado == 6"><i class="fa fa-smile-o" style="font-size: 2em; color:#FFFF99"></i></div>
+									<div ng-if = "pesq.resultado == 7"><i class="fa fa-smile-o" style="font-size: 2em; color:#FFCC00"></i></div>
+									<div ng-if = "pesq.resultado == 8"><i class="fa fa-smile-o" style="font-size: 2em; color:#FF6600"></i></div>
+									<div ng-if = "pesq.resultado == 9"><i class="fa fa-smile-o" style="font-size: 2em; color:#FF0033"></i></div>
+									<div ng-if = "pesq.resultado == 10"><i class="fa fa-smile-o" style="font-size: 2em; color:#FF0000"></i></div>
+								</td>
 								
 								<td></td>
 								<td><span><a href="" ng-click="atualizaAula(pesq.idAula)"

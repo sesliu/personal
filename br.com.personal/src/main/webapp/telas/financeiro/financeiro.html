@@ -14,7 +14,7 @@
 	</div>
 <div class="scrolltelaInterno">	
 <form name="formFinanceiro">	
-	<div class="col-sm-12" style="margin-top: 34px">
+	<div class="col-sm-12" style="margin-top: 34px; margin-bottom: 34px">
 
 	
 	    <div class="col-sm-2">
@@ -103,20 +103,23 @@
 				<option ng-repeat=" lista in listaAlunos" value="{{lista.idAluno}}">{{lista.nome}}</option>
 			</select>
 		</div>
-		
-		
 	</div>
 	<div class="col-sm-12">
-		
+		<hr>
+		<span ></span>
+	</div>
+	<div class="col-sm-12 col-sm-offset-2">
+		<div class="col-sm-8">
 			<label class="pull-left">Dias das Aulas</label>	
-			<div class="well scrollTabela" style="margin-top:12px; height: 90px; width: 100%;display:flex; ">
-				<ul ng-repeat="dias in listaDias" style="margin-left: -12px;float:left;clear: both">
-					<li><input type="checkbox" 
+			<div class="well scrollTabela" 
+			     style="height: 90px; width: 100%; display: flex ;float:left;clear: left;" >
+				<div ng-repeat="dias in listaDias">
+					<span id="dias"><input type="checkbox" 
 					    data-checklist-model ="selecionado.dataAula" 
-			  			data-checklist-value="dias.value">{{dias.text}}</li>
-	    		</ul>
+			  			data-checklist-value="dias.value">{{dias.text}}</span>
+	    		</div>
 	    	</div>	
-		
+		</div>
 	</div>
 	<div class="col-sm-4">
 		<button class="btn btn-success" ng-click="valoresAluno()"  ng-disabled="formFinanceiro.$invalid" >Calcular</button>
