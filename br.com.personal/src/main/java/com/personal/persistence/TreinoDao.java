@@ -19,6 +19,8 @@ public class TreinoDao extends Dao {
 	private String procVinculaTreino = "call sp_verificaAulaTreino(?)";
 	private String procTreinoVinculado = "call sp_verificaAulaVinculada(?)";
 	private String procCadastrarAulaTreino = "call sp_cadastrarAulaTreino(?,?)";
+	
+	
 
 	public void create(Treino t)
 			throws SQLException, InstantiationException, IllegalAccessException, ClassNotFoundException {

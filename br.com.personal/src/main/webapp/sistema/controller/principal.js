@@ -34,7 +34,7 @@ personal.controller('dashController', function($scope, webservicesAluno, webserv
 		})
 		
 		
-		
+	
 			webservicesAula.buscaAulaDia(dia).success(function(data){
 		
 		    $scope.listaAulas = data;
@@ -48,7 +48,7 @@ personal.controller('dashController', function($scope, webservicesAluno, webserv
 			$scope.listaFinancas = data;
 		});
 		
-		
+
 	
 		
 		
