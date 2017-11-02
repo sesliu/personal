@@ -16,10 +16,10 @@ public class Dao {
 	
 	public void open() throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException{
 		// thh2lzgakldp794r.cbetxkdyhwsb.us-east-1.rds.amazonaws.com:3306/fcpqky1zldibdigg
-		String url = "jdbc:mysql://localhost:3306/personal";
-		String user =  "root";                 
-		String password =  "root";               
-
+		String url = "jdbc:mysql://thh2lzgakldp794r.cbetxkdyhwsb.us-east-1.rds.amazonaws.com:3306/fcpqky1zldibdigg";
+		String user =  "yoekozx8o4n7yzad";                 
+		String password =  "itqcwcn3qrb8l6em";  
+		
 		Class.forName("com.mysql.jdbc.Driver");
 		 con = DriverManager.getConnection(url, user, password);
 
