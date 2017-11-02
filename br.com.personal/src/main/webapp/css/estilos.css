@@ -156,7 +156,7 @@ button:focus {outline:0;!important;}
 
 .fundo {
 	
-		background-image: url('../imagens/cork-texture.jpg');
+		background-image: url('../imagens/cork-texture_fundo.jpg');
 	    background-size: cover;
 	    background-position: center;
 	    background-repeat: no-repeat;
@@ -307,8 +307,8 @@ ul{
     width: 60px;
     float: left;
     border-radius: 2em;
-    background-color: #b3cabe;
-    box-shadow:  10px 10px 10px gray;
+    background-color: #d2d2d2;
+    box-shadow:  10px 10px 10px #494949;
 }
 
 .imagens input[type="radio"]:checked+label {
@@ -317,6 +317,18 @@ ul{
     transition:  0.9s; 
      transform: scale(0.9,0.9);
 }
+
+
+.carinha label {
+    display: block;
+    border: 2px solid #666;
+    width: 30px;
+    float: left;
+    border-radius: 1em;
+    background-color: #d2d2d2;
+  
+}
+
 
 
 @media (min-heigth: 800px) {

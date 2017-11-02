@@ -9,7 +9,7 @@ personal.controller('alunoController',function($scope, $compile, $rootScope,webs
 	var data = new Date;
 	$scope.carregaSpinner = false;
 	
-	$scope.aluno = { ajuste:'0.00' , horaAula:'0.00'  }
+	$scope.aluno = { ajuste:'10.00' , horaAula:'0.00'  }
 	
 	var mensagemErroGravar = "Erro ao gravar registro";
 	var mensagemErroBuscar = "Sem registros para busca";
