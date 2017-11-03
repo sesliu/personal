@@ -9,11 +9,14 @@ import org.springframework.context.annotation.ImportResource;
 
 @SpringBootApplication
 
-public class Main {
+public class Main extends SpringBootServletInitializer{
 		
 	
 
-  
+    @Override
+    protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
+        return application.sources(Main.class);
+    }
 	
 		public static void main(String[] args) throws Exception{
 			SpringApplication.run(Main.class, args);
