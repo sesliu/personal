@@ -1,42 +1,42 @@
 package com.personal.persistence;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.net.URL;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Properties;
 
 public class Dao {
 
-	
 	public Connection con = null;
 	public ResultSet rs = null;
 	public PreparedStatement stmt = null;
+
 	
-	
-	public void open() throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException{
+	public void open() throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException {
 		// thh2lzgakldp794r.cbetxkdyhwsb.us-east-1.rds.amazonaws.com:3306/fcpqky1zldibdigg
+
+		// "jdbc:mysql://personalgym.mysql.uhserver.com:3306/personalgym";
+
 		
-		
-		
+
 		String url = "jdbc:mysql://personalgym.mysql.uhserver.com:3306/personalgym";
-		String user =  "personalgym";                 
-		String password =  "Personal@Gym@22";               
-
-	//	String url = "jdbc:mysql://localhost:3306/personal";
-	//	String user =  "root";                 
-	//	String password =  "root";               
-
+		String user = "personalgym";
+		String password = "Personal@Gym@22";
+		
 		
 		Class.forName("com.mysql.jdbc.Driver");
-		 con = DriverManager.getConnection(url, user, password);
+		con = DriverManager.getConnection(url,user,password);
 
-		
 	}
-	
-	
-	public void close(){
-		
+
+	public void close() {
+
 		try {
 			con.close();
 		} catch (SQLException e) {
@@ -44,5 +44,5 @@ public class Dao {
 			e.printStackTrace();
 		}
 	}
-	
+
 }
