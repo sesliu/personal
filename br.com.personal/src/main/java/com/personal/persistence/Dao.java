@@ -25,9 +25,9 @@ public class Dao {
 
 		
 
-		String url = "jdbc:mysql://personalgym.mysql.uhserver.com:3306/personalgym";
-		String user = "personalgym";
-		String password = "Personal@Gym@22";
+		String url = "jdbc:mysql://br-cdbr-azure-south-b.cloudapp.net:3306/personal";
+		String user = "b8acf746965ef8";
+		String password = "4260704f";
 		
 		
 		Class.forName("com.mysql.jdbc.Driver");
