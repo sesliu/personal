@@ -150,6 +150,23 @@ public class AlunoWS {
 	}
 	
 	
+	@RequestMapping(value = "/buscarMontante/{mes}/{ano}", method = RequestMethod.GET, produces = "application/json")
+	public Aluno buscaMontante(@PathVariable("mes") String mes, @PathVariable("ano") String ano) {
+
+		AlunoDao alunoDao  = new AlunoDao();
+		Aluno aluno = new Aluno();
+	
+		try {
+			aluno = alunoDao.buscarMontante(mes, ano);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return aluno;
+	}
+	
+	
 	@RequestMapping(value = "/buscarAniversario/{mes}", method = RequestMethod.GET, produces = "application/json")
 	public List<Aluno> buscaAniversario(@PathVariable("mes") String mes) {
 

@@ -4,6 +4,8 @@ personal.controller('financeiroController',function($scope, $rootScope,$timeout,
 	$scope.vigente ={};
 	$scope.listaFinancas={};
 	$scope.listaDias =[];
+	$scope.listaDiasAula =[];
+	$scope.listaDiasAulaAnterior = [];
 	$scope.carregaSpinner = true;
 	var data = new Date();
 	var mes = data.getMonth();
@@ -18,6 +20,7 @@ personal.controller('financeiroController',function($scope, $rootScope,$timeout,
 	$scope.quantidadeDias = "0"	
 	$scope.total = "0.00"	
 	$scope.aluno ={};	
+	$scope.abatimento = "0";
 	
 	function getDiasMes(month, year) {
 	     month++;
@@ -76,6 +79,7 @@ personal.controller('financeiroController',function($scope, $rootScope,$timeout,
 		webservicesAluno.calculaAula($scope.vigente.idAluno).success(function(data){
 			
 			var quantidade =  Object.keys($scope.selecionado.dataAula).length;
+			quantidade = quantidade - $scope.abatimento; 
 			
 			$scope.horaAula = data.horaAula;
 			
@@ -130,7 +134,22 @@ personal.controller('financeiroController',function($scope, $rootScope,$timeout,
 		
 		});
 		
+		webservicesAula.buscaAulasAluno($scope.vigente.idAluno,$scope.vigente.mes,$scope.vigente.ano).success(function(data){
 		
+			$timeout(function(){
+			$scope.listaDiasAula = data;
+			
+			},200);
+		});
+		
+		webservicesAula.buscaAulasAlunoAnterior($scope.vigente.idAluno,$scope.vigente.mes,$scope.vigente.ano).success(function(data){
+			
+			$timeout(function(){
+				
+			$scope.listaDiasAulaAnterior = data;
+			
+			},200);
+		});
 		
 		
 	};
@@ -174,7 +193,9 @@ personal.controller('financeiroController',function($scope, $rootScope,$timeout,
                 $scope.vigente.idAluno = "";
 				growl.addSuccessMessage("Pagamento registrado com sucesso");	
 				$scope.selecionado = {};
-			    
+				$scope.listaDiasAula = [] 
+				$scope.listaDiasAulaAnterior = [];
+				$scope.abatimento = "0";
 			
 			
 		});

@@ -129,3 +129,20 @@ personal.directive("dashboard", function() {
 });
 
 
+
+
+//////////////////////Celebração//////////////////////////
+
+personal.directive("aniversariante", function() {
+	return {
+		templateUrl : 'telas/celebracao/aniversariante.html'
+	};
+});
+
+personal.directive("profissional", function() {
+	return {
+		templateUrl : 'telas/celebracao/profissional.html'
+	};
+});
+
+

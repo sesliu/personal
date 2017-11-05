@@ -18,6 +18,10 @@ public class AulaDao extends Dao {
 	private String procAtualizaAula = "call sp_atualizaAula(?,?,?,?,?,?,?,?,?,?,?,?)";
 	private String procReorganizaAlunoAula = "call sp_reogarnizarAlunoAula(?)";
 	private String procCadastrarAulaTreino = "call sp_cadastrarAulaTreino(?,?)";
+	private String procCadastrarAulaAluno = "call sp_cadastrarAlunoAula(?,?)";
+	
+	private String proclistaAulaAluno = "call sp_verificaDiasAula(?,?,?)";
+	private String proclistaAulaAlunoAnterior = "call sp_verificaDiasAulaAnterior(?,?,?)";
 	
 	private String procListaAulaDia = "call sp_buscaAulaDia(?)";
 	
@@ -25,10 +29,14 @@ public class AulaDao extends Dao {
 	
 	private String procDiaAula = "call sp_buscaDiaAlunoId(?,?,?)";
 	
+	
+	
 	private static Integer idAlula;
 
 
 
+	
+	
 	
 	public void create(Aula a)
 			throws SQLException, InstantiationException, IllegalAccessException, ClassNotFoundException {
@@ -37,7 +45,7 @@ public class AulaDao extends Dao {
 		
 				
 		stmt = con.prepareStatement(procCadastraAula );
-		stmt.setInt(1, a.getIdAluno());
+		stmt.setInt(1, 0);
 		stmt.setString(2, a.getDiaSemana());
 		stmt.setString(3, a.getDataAula());
 		stmt.setString(4, a.getTipo());
@@ -66,7 +74,7 @@ public class AulaDao extends Dao {
 
 		stmt = con.prepareStatement(procAtualizaAula);
 		
-		stmt.setInt(1, a.getIdAluno());
+		stmt.setInt(1, 0);
 		stmt.setString(2, a.getDiaSemana());
 		stmt.setString(3, a.getDataAula());
 		stmt.setString(4, a.getTipo());
@@ -118,6 +126,70 @@ public class AulaDao extends Dao {
 
 	}
 
+	public List<Aula> findByDiasAulaAluno(Integer codigo, String mes, String ano)
+			throws SQLException, InstantiationException, IllegalAccessException, ClassNotFoundException {
+
+		open();
+
+		ArrayList<Aula> aulas = new ArrayList<Aula>();
+		
+		stmt = con.prepareStatement(proclistaAulaAluno);
+		stmt.setInt(1, codigo);
+		stmt.setString(2, mes);
+		stmt.setString(3, ano);
+		rs = stmt.executeQuery();
+		
+		while (rs.next()) {
+			Aula a = new Aula();
+			
+			a.setTexto(rs.getString(1));
+			a.setDias(rs.getString(2));
+			
+			
+			aulas.add(a);
+		}
+
+		rs.close();
+		stmt.close();
+
+		close();
+
+		return aulas;
+
+	}
+
+	
+	public List<Aula> findByDiasAulaAlunoAnterior(Integer codigo, String mes, String ano)
+			throws SQLException, InstantiationException, IllegalAccessException, ClassNotFoundException {
+
+		open();
+
+		ArrayList<Aula> aulas = new ArrayList<Aula>();
+		
+		stmt = con.prepareStatement(proclistaAulaAlunoAnterior);
+		stmt.setInt(1, codigo);
+		stmt.setString(2, mes);
+		stmt.setString(3, ano);
+		rs = stmt.executeQuery();
+		
+		while (rs.next()) {
+			Aula a = new Aula();
+			
+			a.setTexto(rs.getString(1));
+			a.setDias(rs.getString(2));
+			
+			
+			aulas.add(a);
+		}
+
+		rs.close();
+		stmt.close();
+
+		close();
+
+		return aulas;
+
+	}
 	
 	
 	
@@ -368,4 +440,67 @@ private void excluirAlunoAula(int codigo) throws SQLException, InstantiationExce
 	}
 
 
+	public void vincularAluno(List<Integer> lista)
+			throws SQLException, InstantiationException, IllegalAccessException, ClassNotFoundException {
+		
+		open();
+		
+		for(Integer id: lista){
+			
+		if(id != null){
+			
+		
+			stmt = con.prepareStatement(procCadastrarAulaAluno);	
+			stmt.setInt(1, idAlula);
+			stmt.setInt(2, id);
+			stmt.execute();
+			
+		}	
+			
+		
+		}
+		
+		
+		stmt.close();
+		close();
+
+	}
+
+	public void vincularAula(int codigo, List<Integer> lista)
+			throws SQLException, InstantiationException, IllegalAccessException, ClassNotFoundException {
+
+		try {
+			excluirAlunoAula(codigo);
+		} catch (InstantiationException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IllegalAccessException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		open();
+
+	
+		for (Integer id : lista) {
+
+			if (id != null) {
+
+				stmt = con.prepareStatement(procCadastrarAulaAluno);
+				stmt.setInt(1, codigo);
+				stmt.setInt(2, id);
+				stmt.execute();
+
+			}
+
+		}
+
+		stmt.close();
+		close();
+
+	}
+	
+	
 }

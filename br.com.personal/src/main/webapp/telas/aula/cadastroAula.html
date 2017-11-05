@@ -26,11 +26,14 @@
 			</div>
 		</div>
 	</div>
-	
-	<div class="scrolltelaInterno">	
-	<form name="formAula">
-		
-		
+	<div class="text-center ajuda">
+		<span><strong>Ajuda: Campos em vermelho são
+				obrigatórios</strong></span>
+	</div>
+	<div class="scrolltelaInterno">
+		<form name="formAula">
+
+
 			<div class="col-sm-4" style="margin-top: 34px">
 				<div class="col-sm-6">
 					<label class="pull-left">Data da Aula</label>
@@ -57,14 +60,17 @@
 			</div>
 			<div class="col-sm-12" style="margin-top: 12px">
 
-				<div class="col-sm-6">
-					<label class="pull-left">Nome do Aluno</label> <select
-						class="form-control obrigatorio" ng-model="aula.idAluno"
-						required="required">
-						<option value="">Selecione</option>
-						<option ng-repeat=" lista in listaAlunos" value="{{lista.idAluno}}">{{lista.nome}}</option>
-					</select>
+				<div class="col-xs-12">
+					<hr>
 				</div>
+				<div class="col-xs-10 well col-xs-offset-1">
+					<div class="col-xs-10" style="margin-bottom: 12px">
+						<dualmultiselect options="alunoOptions"> </dualmultiselect>
+
+					</div>
+
+				</div>
+
 			</div>
 
 			<div class="col-sm-12">
@@ -156,15 +162,15 @@
 					<dualmultiselect options="demoOptions"> </dualmultiselect>
 
 				</div>
-			
+
 			</div>
 			<div class="col-xs-12">
 				<hr>
 			</div>
-			<div class="col-xs-12" style="margin-bottom:20px">
-			<div class="col-sm-12">
-					<label class="pull-left">Observação</label> <textarea
-						class="form-control" ng-model="aula.observacao"
+			<div class="col-xs-12" style="margin-bottom: 20px">
+				<div class="col-sm-12">
+					<label class="pull-left">Observação</label>
+					<textarea class="form-control" ng-model="aula.observacao"
 						cols="100" rows="5" wrap="soft">
 					</textarea>
 				</div>
@@ -172,8 +178,8 @@
 			<div class="col-xs-12">
 				<hr>
 			</div>
-			
-	
-	</form>
-</div>	
+
+
+		</form>
+	</div>
 </div>

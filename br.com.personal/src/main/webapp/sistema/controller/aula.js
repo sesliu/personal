@@ -10,12 +10,16 @@ personal.controller('aulaController',function($scope, $rootScope, $compile,webse
 	var data = new Date;
 	var listaTreinos =[];
 	var listaTreinoSelecionado = [];
+	var listaAluno =[];
+	var listaAlunoSelecionado = [];
 	$scope.listaAlunos = [];
 	$scope.carregaSpinner = false;
 	var dadoAula = [];
 	var listaIdAula =[];
 	var objetoId = {};
 	var gravarLista = [];
+	var dadoAluno = [];
+	
 	
 	var mensagemErroGravar = "Erro ao gravar registro";
 	var mensagemErroBuscar = "Sem registros para busca";
@@ -129,9 +133,11 @@ personal.controller('aulaController',function($scope, $rootScope, $compile,webse
 		
 		$scope.inicioBusca = function(){
 			
+			$scope.carregaSpinner = true;
 			webservicesAula.listaAulas().success(function(data){
 				
 				$scope.listaAula = data;
+				$scope.carregaSpinner = false;
 				
 								
 			});
@@ -148,9 +154,13 @@ personal.controller('aulaController',function($scope, $rootScope, $compile,webse
 				
 			});
 			
+			
+			
+			
+			
 			webservicesAluno.buscarAlunos().success(function(data){
 				
-				$scope.listaAlunos = data;
+				listaAluno = data;
 				
 			});
 			
@@ -178,6 +188,20 @@ personal.controller('aulaController',function($scope, $rootScope, $compile,webse
 					selectedItems : listaTreinoSelecionado
 		};			
 
+			
+			$scope.alunoOptions = {
+					title : 'Escolha os alunos',
+					filterPlaceHolder : 'Buscar nome do aluno abaixo',
+					labelAll : 'Não vinculados',
+					labelSelected : 'vinculados',
+					helpMessage : 'Clicar no nome do aluno para transferir entre os campos',
+					orderProperty : 'nome',
+					items : listaAluno,
+					selectedItems : listaAlunoSelecionado
+		};			
+	
+			
+			
 			
 		},1000);		
 		
@@ -210,22 +234,35 @@ personal.controller('aulaController',function($scope, $rootScope, $compile,webse
 					function(success) {
 						
 						var listaIdTreino = []
+						var listaIdAluno = []
 						
 						dadoAula = $scope.demoOptions.selectedItems;
-						
+						dadoAluno = $scope.alunoOptions.selectedItems; 
 						
 
 						for (var i = 0; i < dadoAula.length; i++) {
 
 							listaIdTreino.push(dadoAula[i].idTreino);
 						}
+						
+						for (var i = 0; i < dadoAluno.length; i++) {
+
+							listaIdAluno.push(dadoAluno[i].idAluno);
+						}
+
+						
 
 						if(listaIdTreino.length == 0){
 							
 							listaIdTreino = 0;
 						}
+						
+						if(listaIdAluno.length == 0){
+							
+							listaIdAluno = 0;
+						}
 
-						console.log(listaIdTreino);
+						console.log(listaIdAluno)
 						
 						$scope.carregaSpinner = true;
 						$scope.aula.dataAula = $scope.data.getFullYear()+'-'+('00'+($scope.data.getMonth()+1)).slice(-2)+'-'+('00'+$scope.data.getDate()).slice(-2);
@@ -233,8 +270,11 @@ personal.controller('aulaController',function($scope, $rootScope, $compile,webse
 						webservicesAula.gravarAula($scope.aula).success(
 								function(data, status) {
 
-										
-									
+								 if (status == 200){	
+									 
+									 webservicesAula.vincularAulaAluno(listaIdAluno).success(function(data, status){ 
+									 
+										 
 									if (status == 200) {
 
 										
@@ -263,7 +303,9 @@ personal.controller('aulaController',function($scope, $rootScope, $compile,webse
 										
 
 									}
-
+									
+								 });	
+								 }
 								}).error(function(){
 									growl.addErrorMessage(mensagemErroGravar);
 									$scope.carregaSpinner = false;
@@ -353,6 +395,10 @@ personal.controller('atualizaAulaController',
 	$scope.listaAlunos =[];
 	var listaTreinos = [];
 	var listaTreinoSelecionado = [];
+	var listaAluno =[];
+	var listaAlunoSelecionado = [];
+	var dadoAluno;
+	var dadoAula;
 
 	
 	
@@ -414,7 +460,20 @@ personal.controller('atualizaAulaController',
 			console.log(data);
 		})
 		
+	webservicesAluno.buscarAlunoIdAula($rootScope.codigo).success(function(data){
+			
+		 listaAluno = data;
+			
 		
+			
+		});
+		
+	 webservicesAluno.buscarAlunoIdAulaVinculada($rootScope.codigo).success(function(data){
+			
+		 listaAlunoSelecionado = data;
+			
+			
+		});
 		
 		
 	}
@@ -436,6 +495,16 @@ personal.controller('atualizaAulaController',
 				selectedItems : listaTreinoSelecionado
 	};			
 
+		$scope.alunoOptions = {
+				title : 'Escolha os alunos',
+				filterPlaceHolder : 'Buscar nome do aluno abaixo',
+				labelAll : 'Não vinculados',
+				labelSelected : 'vinculados',
+				helpMessage : 'Clicar no nome do aluno para transferir entre os campos',
+				orderProperty : 'nome',
+				items : listaAluno,
+				selectedItems : listaAlunoSelecionado
+		}		
 		
 	},1000);	
 	
@@ -490,28 +559,46 @@ personal.controller('atualizaAulaController',
 				function(success) {
 					$scope.carregaSpinner = true;
 
-					$scope.aula.idAluno =   $scope.aula.idAluno.idAluno; 
-					var listaIdTreino = []
+					var listaIdTreino = [];
+					var listaIdAluno = [];
 					
 					dadoAula = $scope.demoOptions.selectedItems;
+					dadoAluno = $scope.alunoOptions.selectedItems; 
 					
-					
-
 					for (var i = 0; i < dadoAula.length; i++) {
 
 						listaIdTreino.push(dadoAula[i].idTreino);
 					}
+
+
+					for (var i = 0; i < dadoAluno.length; i++) {
+
+						listaIdAluno.push(dadoAluno[i].idAluno);
+					}
+
+					
 
 					if(listaIdTreino.length == 0){
 						
 						listaIdTreino = 0;
 					}
 					
+					if(listaIdAluno.length == 0){
+						
+						listaIdAluno = 0;
+					}
+
+					
+					
 					webservicesAula.atualizarAula($scope.aula).success(
 							function(data, status) {
 								
 						
 								if (status == 200) {
+						
+									webservicesAula.vincularAulaAlunoTreino($rootScope.codigo,listaIdAluno).success(function(data,status){
+										
+									 if(status == 200){
 									
 									webservices.vincularTreino($rootScope.codigo,listaIdTreino).success(function(data,status){
 										
@@ -529,8 +616,8 @@ personal.controller('atualizaAulaController',
 										
 									});
 									
-
-									
+									}
+									});	
 
 								}
 

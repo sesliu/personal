@@ -1,14 +1,19 @@
-personal.controller('dashController', function($scope, webservicesAluno, webservicesAula, ngDialog, $rootScope, $interval){
+personal.controller('dashController', function($scope, webservicesAluno, webservicesAula, ngDialog, $rootScope, $interval, 
+		$timeout, growl){
 	
 
 	$scope.listaAniversario = [];
 	$scope.listaProfissao = [];
 	$scope.listaAulas = [];
 	$scope.listaFinancas = [];
+	$scope.listaMontante = [];
+	$scope.montante = '0.00';
 	var data;
 	var mes;
 	var dia;
 	var dias;
+	$scope.vigente = {};
+	
 	$interval( function(){
 		
 		data = new Date();
@@ -17,42 +22,99 @@ personal.controller('dashController', function($scope, webservicesAluno, webserv
 		ano = data.getFullYear();
 		
 		
+		
 		$scope.dataFormatada  = ('00'+data.getDate()).slice(-2)+'/'+('00'+(data.getMonth()+1)).slice(-2)+'/'+data.getFullYear();
 		
-		var dia  = data.getFullYear()+'-'+('00'+(data.getMonth()+1)).slice(-2)+'-'+('00'+data.getDate()).slice(-2);
-		
-		webservicesAluno.buscaAniversario(mes).success(function(data){
-		
-			$scope.listaAniversario = data;
-			
-		})
-		
-		webservicesAluno.buscaProfissao(mes,dias).success(function(data){
-		
-			$scope.listaProfissao = data;
-			
-		})
-		
-		
+		 dia  = data.getFullYear()+'-'+('00'+(data.getMonth()+1)).slice(-2)+'-'+('00'+data.getDate()).slice(-2);
 	
-			webservicesAula.buscaAulaDia(dia).success(function(data){
-		
-		    $scope.listaAulas = data;
-			
-		})
-		
-		
-	
-		webservicesAluno.buscaFinanceiro(mes, ano).success(function(data){
-			
-			$scope.listaFinancas = data;
-		});
-		
-
-	
-		
-		
 	},1000);
+	
+	
+	$scope.inicio = function(){
+		
+		let data = new Date();
+		let mes = data.getMonth();
+		let ano = data.getFullYear();
+		
+		mes = JSON.stringify(mes);
+		ano = JSON.stringify(ano);
+		
+			$scope.vigente = { 'mes' : mes, 'ano' : ano } 
+		
+			webservicesAluno.buscaMontante($scope.vigente.mes, $scope.vigente.ano).success(function(data){
+				
+				$scope.montante = data.valorTotal;
+				
+				if($scope.montante == null){
+					
+					$scope.montante = '0.00';
+				}
+				
+			});
+		
+	}
+	
+
+	$scope.alteraDias = function(){
+		
+		webservicesAluno.buscaMontante($scope.vigente.mes, $scope.vigente.ano).success(function(data){
+			
+			$scope.montante = data.valorTotal;
+			
+			if($scope.montante == null){
+				
+				$scope.montante = '0.00';
+			}
+			
+		});
+	}
+	
+	
+	$interval( function(){
+		
+		
+		
+		$timeout(function(){
+			
+			webservicesAula.buscaAulaDia(dia).success(function(data){
+				
+			    $scope.listaAulas = data;
+				
+			})
+			
+		},2000)
+		
+	
+		
+		$timeout(function(){
+			
+			webservicesAluno.buscaFinanceiro(mes, ano).success(function(data){
+				
+				$scope.listaFinancas = data;
+			});
+			
+		},2000)
+	
+		
+		$timeout(function(){
+			
+			
+			webservicesAluno.buscaMontante($scope.vigente.mes, $scope.vigente.ano).success(function(data){
+				
+				$scope.montante = data.valorTotal;
+				
+				if($scope.montante == null){
+					
+					$scope.montante = '0.00';
+				}
+				
+			});
+			
+		},2000)
+	
+		
+		
+	},1500,false);
 	
 	
 	
@@ -177,13 +239,34 @@ personal.controller('principalController',function($scope,$compile,$timeout){
 	$scope.buscarAluno = function(){
 		
 		$scope.exibeTela = false;
-		console.log('teste');
 		$("#paginas").empty();
 		var compiledeHTML = $compile("<buscaaluno></buscaaluno>")
 		($scope);
 		$("#paginas").append(compiledeHTML);
 		
 	}
+	
+	$scope.buscarAniversariante = function(){
+		
+		$scope.exibeTela = false;
+		$("#paginas").empty();
+		var compiledeHTML = $compile("<aniversariante></aniversariante>")
+		($scope);
+		$("#paginas").append(compiledeHTML);
+		
+	}
+	
+	$scope.buscarProfissional = function(){
+		
+		$scope.exibeTela = false;
+		$("#paginas").empty();
+		var compiledeHTML = $compile("<profissional></profissional>")
+		($scope);
+		$("#paginas").append(compiledeHTML);
+		
+	}
+	
+	
 	
 	$scope.buscarAlunoHora = function(){
 		
@@ -200,7 +283,6 @@ personal.controller('principalController',function($scope,$compile,$timeout){
 	$scope.buscarTreino = function(){
 		
 		$scope.exibeTela = false;
-		console.log('teste');
 		$("#paginas").empty();
 		var compiledeHTML = $compile("<buscatreino></buscatreino>")
 		($scope);
@@ -211,7 +293,6 @@ personal.controller('principalController',function($scope,$compile,$timeout){
 	$scope.buscarAula = function(){
 		
 		$scope.exibeTela = false;
-		console.log('teste');
 		$("#paginas").empty();
 		var compiledeHTML = $compile("<buscaaula></buscaaula>")
 		($scope);

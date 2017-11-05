@@ -57,6 +57,12 @@ personal.factory("webservicesAluno", function($http) {
 		return $http.get(url + '/buscarFinanceiro/'+ mes +'/'+ ano);
 	};
 	
+	var _buscaMontante = function(mes, ano) {
+		return $http.get(url + '/buscarMontante/'+ mes +'/'+ ano);
+	};
+	
+	
+	
 	var _pagarValor = function(aluno) {
 		console.log(aluno)
 		return $http.post(url + '/gravarpagamento', aluno);
@@ -108,7 +114,8 @@ personal.factory("webservicesAluno", function($http) {
 		buscaAniversario:_buscaAniversario,
 		buscaProfissao:_buscaProfissao,
 		calculaAula:_calculaAula,
-		registrarPagamento:_registrarPagamento
+		registrarPagamento:_registrarPagamento,
+		buscaMontante: _buscaMontante
 	
 	}
 

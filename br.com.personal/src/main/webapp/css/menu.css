@@ -140,6 +140,7 @@
 body, html{
 	
 	  height: 100%;
+	  font-family: sans-serif;
 }
 
 
@@ -147,7 +148,7 @@ body {
   margin: 0px;
   padding: 0px;
   overflow: hidden;
- 	background-image: url('../imagens/fundo2.jpg');
+ 	background-image: url('../imagens/fundo2-min.jpg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;

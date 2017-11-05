@@ -26,6 +26,11 @@ personal.factory("webservicesAula", function($http) {
 	var _vincularAula = function(obj) {
 		return $http.get(url + '/vincularaula/'+obj);
 	};
+	
+	var _vincularAulaAluno = function(obj) {
+		return $http.get(url + '/vincularaulaaluno/'+obj);
+	};
+
 
 	var _listaAulas = function() {
 		return $http.get(url + '/listaaulas');
@@ -43,6 +48,20 @@ personal.factory("webservicesAula", function($http) {
 		return $http.get(url + '/aulasDias/'+codigo+'/'+ mes+'/'+ano);
 	};
 	
+	var _buscaAulasAluno = function(codigo, mes, ano) {
+		return $http.get(url + '/aulasAluno/'+codigo+'/'+ mes+'/'+ano);
+	};
+	
+	
+	var _buscaAulasAlunoAnterior = function(codigo, mes, ano) {
+		return $http.get(url + '/aulasAlunoAnterior/'+codigo+'/'+ mes+'/'+ano);
+	};
+	
+	
+	
+	var _vincularAulaAlunoTreino = function(codigo,obj) {
+		return $http.get(url + '/vincularaulaalunotreino/' + codigo+'/'+obj);
+	};
 	
 	return {
 
@@ -55,7 +74,11 @@ personal.factory("webservicesAula", function($http) {
 		listaAulas:_listaAulas,
 		buscaAulaDia:_buscaAulaDia,
 		buscaDadosDia:_buscaDadosDia,
-		buscaDiasAula:_buscaDiasAula
+		buscaDiasAula:_buscaDiasAula,
+		vincularAulaAluno:_vincularAulaAluno,
+		vincularAulaAlunoTreino:_vincularAulaAlunoTreino,
+		buscaAulasAluno:_buscaAulasAluno,
+		buscaAulasAlunoAnterior:_buscaAulasAlunoAnterior
 	}
 
 });

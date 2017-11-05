@@ -37,6 +37,37 @@ public class AlunoDao extends Dao{
 	
 	private String procPagAlunoPagamento = "call sp_pagarAlunoPagamento(?,?,?)";
 	
+	private String procMontanteAula = "call sp_buscaMontanteFinanceiro(?,?)";
+	
+	
+	
+	
+	public Aluno buscarMontante  (String mes, String ano)
+			throws SQLException, InstantiationException, IllegalAccessException, ClassNotFoundException {
+
+		open();
+
+		Aluno a = new Aluno();
+		
+		stmt = con.prepareStatement(procMontanteAula);
+		stmt.setString(1, mes);
+		stmt.setString(2, ano);
+		rs = stmt.executeQuery();
+		
+		if (rs.next()) {
+			
+			a.setValorTotal(rs.getString(1));
+		}
+
+		rs.close();
+		stmt.close();
+
+		close();
+
+		return a;
+
+	}
+	
 	
 	
 	public Aluno findByCalculaAula(Integer codigo)

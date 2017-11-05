@@ -17,12 +17,29 @@ public class Aula {
     private String observacao;
     private String resultado;
     private String listaTreino;
+    private String texto;
+    private String dias;
+    
+    
+    
     
     
 	
 	
     
 	
+	public String getDias() {
+		return dias;
+	}
+	public void setDias(String dias) {
+		this.dias = dias;
+	}
+	public String getTexto() {
+		return texto;
+	}
+	public void setTexto(String texto) {
+		this.texto = texto;
+	}
 	public String getListaTreino() {
 		return listaTreino;
 	}
