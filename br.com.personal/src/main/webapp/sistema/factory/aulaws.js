@@ -74,6 +74,11 @@ personal.factory("webservicesAula", function($http) {
 		return $http.get(url + '/relatorioTreino/'+ mes+'/'+ano+'/'+lista);
 	};
 	
+	var _gerarRelatorioTreinoAnterior = function(mes,ano,lista) {
+		
+		return $http.get(url + '/relatorioTreinoAnterior/'+ mes+'/'+ano+'/'+lista);
+	};
+	
 	
 	return {
 
@@ -92,7 +97,8 @@ personal.factory("webservicesAula", function($http) {
 		buscaAulasAluno:_buscaAulasAluno,
 		buscaAulasAlunoAnterior:_buscaAulasAlunoAnterior,
 		atualizarAulaDoDia:_atualizarAulaDoDia,
-		gerarRelatorioTreino: _gerarRelatorioTreino
+		gerarRelatorioTreino: _gerarRelatorioTreino,
+		gerarRelatorioTreinoAnterior:_gerarRelatorioTreinoAnterior
 	}
 
 });

@@ -33,6 +33,8 @@ public class AulaDao extends Dao {
 	
 	private String procRelTreino = "call sp_rl_geraTreino(?,?,?)";
 	
+	private String procRelTreinoAnterior = "call sp_rl_geraTreinoResultado(?,?,?)";
+	
 	private static Integer idAlula;
 
 
@@ -66,6 +68,47 @@ public class AulaDao extends Dao {
 		return aulas;
 
 	}
+	
+	
+	public List<Aula> geraRelatorioTreinoAnterior(String mes, String ano, String lista)
+			throws SQLException, InstantiationException, IllegalAccessException, ClassNotFoundException {
+
+		open();
+
+		ArrayList<Aula> aulas = new ArrayList<Aula>();
+		
+		stmt = con.prepareStatement(procRelTreinoAnterior);
+		stmt.setString(1, mes);
+		stmt.setString(2, ano);
+		stmt.setString(3, lista);
+		rs = stmt.executeQuery();
+		
+		// presenca, falta, faltajusticada, obsjustificada, observacao, resultado, tr.nome 
+		
+		while (rs.next()) {
+			Aula a = new Aula();
+			a.setNomeAluno(rs.getString(1));
+			a.setDataAula(rs.getString(2));
+			a.setPresenca(rs.getString(3));
+			a.setFalta(rs.getString(4));
+			a.setFaltajusticada(rs.getString(5));
+			a.setObsjustificada(rs.getString(6));
+			a.setObservacao(rs.getString(7));
+			a.setResultado(rs.getString(8));
+			a.setListaTreino(rs.getString(9));
+			
+			aulas.add(a);
+		}
+
+		rs.close();
+		stmt.close();
+
+		close();
+
+		return aulas;
+
+	}
+	
 	
 	
 	

@@ -169,12 +169,15 @@ body {
 }
 
 
-.folha { background-color: #ffffff; padding: 0.5em; }
-.a4_vertical { width: 793px; height: 1122px; }
-.a4_horizontal { width: 1122px; height: 793px; }
-
-#header {
-	
-	font-family: sans-serif;
-	 
+@media print {
+    .PageBreak {
+        page-break-before: always;
+    }
+}
+@media screen { 
+    .PageBreak { 
+        border-bottom: 1px dashed black; 
+        width: 100%;
+        margin-bottom: 12px; 
+    }
 }
