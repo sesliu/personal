@@ -72,7 +72,7 @@ personal.controller('treinoController',
 				$rootScope.treino = treino;
 					ngDialog.open({
 						template : 'telas/dialogo/dialogoVinculaTreino.html',
-						className : 'ngdialog-theme-default'
+						className : 'ngdialog-theme-default2'
 						
 						
 					});
@@ -89,7 +89,7 @@ personal.controller('treinoController',
 				
 				ngDialog.openConfirm({
 					template : 'telas/dialogo/dialogoAdiciona.html',
-					className : 'ngdialog-theme-default',
+					className : 'ngdialog-theme-default2',
 					controller : 'treinoController'
 				}).then(
 						function(success) {
@@ -144,7 +144,7 @@ personal.controller('treinoController',
 				
 				ngDialog.openConfirm({
 					template : 'telas/dialogo/dialogoExcluir.html',
-					className : 'ngdialog-theme-default',
+					className : 'ngdialog-theme-default2',
 					controller : 'treinoController'
 				}).then(
 						function(success) {
@@ -200,7 +200,7 @@ personal.controller('atualizaTreinoController',
 
 		ngDialog.openConfirm({
 			template : 'telas/dialogo/dialogoAltera.html',
-			className : 'ngdialog-theme-default',
+			className : 'ngdialog-theme-default2',
 			controller : 'treinoController'
 		}).then(
 				function(success) {

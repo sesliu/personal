@@ -157,3 +157,24 @@ body {
 
 }
 
+#pagina {
+    counter-increment: page;
+    content: counter(page);
+}
+
+@page{
+	
+	size: A4 landscape;
+	
+}
+
+
+.folha { background-color: #ffffff; padding: 0.5em; }
+.a4_vertical { width: 793px; height: 1122px; }
+.a4_horizontal { width: 1122px; height: 793px; }
+
+#header {
+	
+	font-family: sans-serif;
+	 
+}

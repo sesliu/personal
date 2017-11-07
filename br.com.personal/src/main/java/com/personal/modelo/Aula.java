@@ -19,6 +19,7 @@ public class Aula {
     private String listaTreino;
     private String texto;
     private String dias;
+    private Integer diasAula; 
     
     
     
@@ -28,6 +29,12 @@ public class Aula {
 	
     
 	
+	public Integer getDiasAula() {
+		return diasAula;
+	}
+	public void setDiasAula(Integer diasAula) {
+		this.diasAula = diasAula;
+	}
 	public String getDias() {
 		return dias;
 	}

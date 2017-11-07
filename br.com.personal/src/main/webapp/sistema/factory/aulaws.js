@@ -63,6 +63,18 @@ personal.factory("webservicesAula", function($http) {
 		return $http.get(url + '/vincularaulaalunotreino/' + codigo+'/'+obj);
 	};
 	
+	var _atualizarAulaDoDia = function(aula) {
+		
+		return $http.post(url + '/atualizarauladodia', aula );
+	};
+	
+	
+	var _gerarRelatorioTreino = function(mes,ano,lista) {
+		
+		return $http.get(url + '/relatorioTreino/'+ mes+'/'+ano+'/'+lista);
+	};
+	
+	
 	return {
 
 		gravarAula : _gravarAula,
@@ -78,7 +90,9 @@ personal.factory("webservicesAula", function($http) {
 		vincularAulaAluno:_vincularAulaAluno,
 		vincularAulaAlunoTreino:_vincularAulaAlunoTreino,
 		buscaAulasAluno:_buscaAulasAluno,
-		buscaAulasAlunoAnterior:_buscaAulasAlunoAnterior
+		buscaAulasAlunoAnterior:_buscaAulasAlunoAnterior,
+		atualizarAulaDoDia:_atualizarAulaDoDia,
+		gerarRelatorioTreino: _gerarRelatorioTreino
 	}
 
 });

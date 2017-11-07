@@ -35,6 +35,7 @@ personal.controller('dashController', function($scope, webservicesAluno, webserv
 		let data = new Date();
 		let mes = data.getMonth();
 		let ano = data.getFullYear();
+		let dia = data.getFullYear()+'-'+('00'+(data.getMonth()+1)).slice(-2)+'-'+('00'+data.getDate()).slice(-2);
 		
 		mes = JSON.stringify(mes);
 		ano = JSON.stringify(ano);
@@ -51,6 +52,17 @@ personal.controller('dashController', function($scope, webservicesAluno, webserv
 				}
 				
 			});
+			
+
+				
+				webservicesAula.buscaAulaDia(dia).success(function(data){
+					
+				    $scope.listaAulas = data;
+					
+				})
+				
+		
+			
 		
 	}
 	
@@ -73,16 +85,6 @@ personal.controller('dashController', function($scope, webservicesAluno, webserv
 	$interval( function(){
 		
 		
-		
-		$timeout(function(){
-			
-			webservicesAula.buscaAulaDia(dia).success(function(data){
-				
-			    $scope.listaAulas = data;
-				
-			})
-			
-		},2000)
 		
 	
 		
@@ -128,7 +130,7 @@ personal.controller('dashController', function($scope, webservicesAluno, webserv
 					
 			ngDialog.open({
 						template : 'telas/dialogo/dialogoDadosAula.html',
-						className : 'ngdialog-theme-default2'
+						className : 'ngdialog-theme-default'
 					});
 					
 				
@@ -178,12 +180,29 @@ $scope.pagarValor =function(aluno){
 });
 
 
-personal.controller('dadosAulaController',function($scope, $rootScope){
+personal.controller('dadosAulaController',function($scope, $rootScope, webservicesAula, growl){
 	
+	
+	$scope.aula ={};
 	
 	$scope.dadosAula = $rootScope.dadosAula;
 	
 	
+	$scope.atualizarAula = function(){
+		
+		$scope.aula = $scope.dadosAula;
+		
+		webservicesAula.atualizarAulaDoDia($scope.aula).success(function(data,status){
+			
+			if(status == 200){
+				
+				growl.addSuccessMessage("Aula atualizada com sucesso");
+				
+			}
+			
+		});
+		
+	}
 	
 	
 });
@@ -210,10 +229,6 @@ personal.controller('principalController',function($scope,$compile,$timeout){
 		
 		
 	}
-	
-	
-	
-
 	
 	$scope.buscarProfissao = function(){
 		
@@ -299,6 +314,18 @@ personal.controller('principalController',function($scope,$compile,$timeout){
 		$("#paginas").append(compiledeHTML);
 		
 	}
+	
+	$scope.buscarRelatorioTreino = function(){
+		
+		$scope.exibeTela = false;
+		
+		$("#paginas").empty();
+		var compiledeHTML = $compile("<relatoriotreino></relatoriotreino>")
+		($scope);
+		$("#paginas").append(compiledeHTML);
+		
+	}
+	
 	
 	$scope.buscarHistorico = function(){
 		

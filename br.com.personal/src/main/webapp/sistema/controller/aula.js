@@ -228,7 +228,7 @@ personal.controller('aulaController',function($scope, $rootScope, $compile,webse
 			
 			ngDialog.openConfirm({
 				template : 'telas/dialogo/dialogoAdiciona.html',
-				className : 'ngdialog-theme-default',
+				className : 'ngdialog-theme-default2',
 				controller : 'aulaController'
 			}).then(
 					function(success) {
@@ -262,7 +262,6 @@ personal.controller('aulaController',function($scope, $rootScope, $compile,webse
 							listaIdAluno = 0;
 						}
 
-						console.log(listaIdAluno)
 						
 						$scope.carregaSpinner = true;
 						$scope.aula.dataAula = $scope.data.getFullYear()+'-'+('00'+($scope.data.getMonth()+1)).slice(-2)+'-'+('00'+$scope.data.getDate()).slice(-2);
@@ -352,7 +351,7 @@ personal.controller('aulaController',function($scope, $rootScope, $compile,webse
 			
 			ngDialog.openConfirm({
 				template : 'telas/dialogo/dialogoExcluir.html',
-				className : 'ngdialog-theme-default',
+				className : 'ngdialog-theme-default2',
 				controller : 'aulaController'
 			}).then(
 					function(success) {
@@ -553,7 +552,7 @@ personal.controller('atualizaAulaController',
 		
 		ngDialog.openConfirm({
 			template : 'telas/dialogo/dialogoAltera.html',
-			className : 'ngdialog-theme-default',
+			className : 'ngdialog-theme-default2',
 			controller : 'atualizaAulaController'
 		}).then(
 				function(success) {

@@ -128,6 +128,8 @@ personal.controller('financeiroController',function($scope, $rootScope,$timeout,
 				}
 				$scope.selecionado.dataAula = listaResultado;
 				
+				console.log($scope.selecionado.dataAula)
+				
 			},200)
 			
 			

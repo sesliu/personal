@@ -113,7 +113,7 @@ personal.controller('alunoController',function($scope, $compile, $rootScope,webs
 		
 		ngDialog.openConfirm({
 			template : 'telas/dialogo/dialogoAdiciona.html',
-			className : 'ngdialog-theme-default',
+			className : 'ngdialog-theme-default2',
 			controller : 'alunoController'
 		}).then(
 				function(success) {
@@ -185,7 +185,7 @@ personal.controller('alunoController',function($scope, $compile, $rootScope,webs
 		
 		ngDialog.openConfirm({
 			template : 'telas/dialogo/dialogoExcluir.html',
-			className : 'ngdialog-theme-default',
+			className : 'ngdialog-theme-default2',
 			controller : 'alunoController'
 		}).then(
 				function(success) {
@@ -260,7 +260,7 @@ personal.controller('atualizaAlunoController',
 		
 		ngDialog.openConfirm({
 			template : 'telas/dialogo/dialogoAltera.html',
-			className : 'ngdialog-theme-default',
+			className : 'ngdialog-theme-default2',
 			controller : 'atualizaAlunoController'
 		}).then(
 				function(success) {

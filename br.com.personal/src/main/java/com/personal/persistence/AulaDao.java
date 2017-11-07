@@ -29,12 +29,43 @@ public class AulaDao extends Dao {
 	
 	private String procDiaAula = "call sp_buscaDiaAlunoId(?,?,?)";
 	
+	private String procAtualizaDiaAula = "call sp_atualizaAuladoDia(?,?,?,?,?,?,?)";
 	
+	private String procRelTreino = "call sp_rl_geraTreino(?,?,?)";
 	
 	private static Integer idAlula;
 
 
 
+	public List<Aula> geraRelatorioTreino(String mes, String ano, String lista)
+			throws SQLException, InstantiationException, IllegalAccessException, ClassNotFoundException {
+
+		open();
+
+		ArrayList<Aula> aulas = new ArrayList<Aula>();
+		
+		stmt = con.prepareStatement(procRelTreino);
+		stmt.setString(1, mes);
+		stmt.setString(2, ano);
+		stmt.setString(3, lista);
+		rs = stmt.executeQuery();
+		
+		while (rs.next()) {
+			Aula a = new Aula();
+			a.setNomeAluno(rs.getString(1));
+			a.setDataAula(rs.getString(2));
+			
+			aulas.add(a);
+		}
+
+		rs.close();
+		stmt.close();
+
+		close();
+
+		return aulas;
+
+	}
 	
 	
 	
@@ -65,6 +96,30 @@ public class AulaDao extends Dao {
 		close();
 
 	}
+	
+	public void updateAulaDia(Aula a)
+			throws SQLException, InstantiationException, IllegalAccessException, ClassNotFoundException {
+
+		open();
+
+		stmt = con.prepareStatement(procAtualizaDiaAula);
+		
+		stmt.setString(1, a.getObservacao());
+		stmt.setString(2, a.getPresenca());
+		stmt.setString(3, a.getFalta());
+		stmt.setString(4, a.getFaltajusticada());
+		stmt.setString(5, a.getObsjustificada());
+		stmt.setString(6, a.getResultado());
+		stmt.setInt(7, a.getIdAula());
+		
+		stmt.execute();
+		stmt.close();
+
+		close();
+
+	}
+	
+	
 	
 	
 	public void update(Aula a)
@@ -208,6 +263,12 @@ public class AulaDao extends Dao {
 			a.setNomeAluno(rs.getString(2));
 			a.setListaTreino(rs.getString(3));
 			a.setObservacao(rs.getString(4));
+			a.setPresenca(rs.getString(5));
+			a.setFalta(rs.getString(6));
+			a.setFaltajusticada(rs.getString(7));
+			a.setObsjustificada(rs.getString(8));
+			a.setResultado(rs.getString(9));
+			a.setIdAula(rs.getInt(10));
 		}
 
 		rs.close();

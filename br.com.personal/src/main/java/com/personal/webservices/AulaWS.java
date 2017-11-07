@@ -62,7 +62,47 @@ public class AulaWS {
 		
 		
 	
+	}
+	
+	@RequestMapping(value="/atualizarauladodia", method = RequestMethod.POST, consumes = "application/json")
+	public void atualizarAulaDia(@RequestBody Aula aula) {
+	
+		AulaDao aulaDao  = new AulaDao();
+		
+		try {
+			
+			aulaDao.updateAulaDia(aula);
+		
+			
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+		
+		}
+		
+		
+	
 	}	
+	
+	
+	
+	@RequestMapping(value = "/relatorioTreino/{mes}/{ano}/{lista}", method = RequestMethod.GET, produces = "application/json")
+	public List<Aula> geraRelatorio(@PathVariable("mes") String mes, @PathVariable ("ano") String ano, 
+			                        @PathVariable("lista") String lista ) {
+
+		AulaDao aulaDao  = new AulaDao();
+		
+		List<Aula> lst = new ArrayList<Aula>();
+		try {
+			lst = aulaDao.geraRelatorioTreino(mes, ano, lista);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return lst;
+	}
+	
+	
 	@RequestMapping(value = "/buscaraula/{nome}", method = RequestMethod.GET, produces = "application/json")
 	public List<Aula> busca(@PathVariable("nome") String nome) {
 

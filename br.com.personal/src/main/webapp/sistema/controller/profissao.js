@@ -47,7 +47,7 @@ personal.controller('profissaoController',function($scope,ngDialog, webservicesP
 		
 		ngDialog.openConfirm({
 			template : 'telas/dialogo/dialogoAdiciona.html',
-			className : 'ngdialog-theme-default',
+			className : 'ngdialog-theme-default2',
 			controller : 'profissaoController'
 		}).then(
 				function(success) {
@@ -114,7 +114,7 @@ personal.controller('profissaoController',function($scope,ngDialog, webservicesP
 		
 		ngDialog.openConfirm({
 			template : 'telas/dialogo/dialogoExcluir.html',
-			className : 'ngdialog-theme-default',
+			className : 'ngdialog-theme-default2',
 			controller : 'profissaoController'
 		}).then(
 				function(success) {
@@ -187,7 +187,7 @@ personal.controller('atualizaProfissaoController',
 
 		ngDialog.openConfirm({
 			template : 'telas/dialogo/dialogoAltera.html',
-			className : 'ngdialog-theme-default',
+			className : 'ngdialog-theme-default2',
 			controller : 'atualizaProfissaoController'
 		}).then(
 				function(success) {

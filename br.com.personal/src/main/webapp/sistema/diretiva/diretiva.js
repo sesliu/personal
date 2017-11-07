@@ -146,3 +146,14 @@ personal.directive("profissional", function() {
 });
 
 
+
+//////////////////////Relatórios//////////////////////////
+
+
+personal.directive("relatoriotreino", function() {
+	return {
+		templateUrl : 'telas/relatorios/resultadoTreino.html'
+	};
+});
+
+
