@@ -10,6 +10,7 @@ var personal = angular.module('personal',
                              'ngLoadingSpinner',
                              'ngMask',
                              'angular-growl',
+                             'htmlToPdfSave',
                              'ngAnimate']
                               
   );

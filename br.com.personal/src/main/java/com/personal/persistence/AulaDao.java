@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.personal.modelo.Aula;
+import com.personal.modelo.RelatorioSaida;
 
 
 public class AulaDao extends Dao {
@@ -53,9 +54,11 @@ public class AulaDao extends Dao {
 		rs = stmt.executeQuery();
 		
 		while (rs.next()) {
-			Aula a = new Aula();
+			RelatorioSaida a = new RelatorioSaida();
 			a.setNomeAluno(rs.getString(1));
 			a.setDataAula(rs.getString(2));
+			a.setValores(rs.getString(3));
+			
 			
 			aulas.add(a);
 		}
@@ -503,7 +506,8 @@ public class AulaDao extends Dao {
 		close();
 
 	}
-private void excluirAlunoAula(int codigo) throws SQLException, InstantiationException, IllegalAccessException, ClassNotFoundException{
+	private void excluirAlunoAula(int codigo) throws SQLException, InstantiationException, 
+	                                                 IllegalAccessException, ClassNotFoundException{
 		
 		open();
 
