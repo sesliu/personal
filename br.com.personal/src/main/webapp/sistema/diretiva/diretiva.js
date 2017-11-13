@@ -157,3 +157,15 @@ personal.directive("relatoriotreino", function() {
 });
 
 
+
+//////////////////////Personal//////////////////////////
+
+
+personal.directive("personal", function() {
+	return {
+		templateUrl : 'telas/personal/personal.html'
+	};
+});
+
+
+

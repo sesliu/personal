@@ -766,15 +766,168 @@ $scope.gravar = function(){
 	
 	
 	
-	
-	
-	
-	
-	
 }
 
+});
+
+personal.controller('personalController', function($scope, $compile, webservicesAula, ngDialog,growl, $timeout, $interval){
+	
+	
+	$scope.personal = {};
+	$scope.nomeBotao = "Gravar"
+	$scope.exibeBotao = false;
+	$scope.altera = false;	
+		
+	$interval(function(){
+		
+		
+		if($scope.altera == false){
+			
+			$scope.nomeBotao = "Gravar"
+			$scope.exibeBotao = false;
+		}else{
+			
+			$scope.nomeBotao = "Alterar"
+			$scope.exibeBotao = true;	
+		}
+		
+		
+		
+	},1000)	
+		
+		
+	$scope.inicio = function(){
+		
+		$scope.altera = false;	
+		$scope.carregaSpinner = true;
+		webservicesAula.buscaPersonal().success(function(data) {
+			
+			$scope.personal = data;
+			
+			console.log(data);
+			
+			if(data.nome != null){
+				
+				$scope.altera = true;
+			}else{
+				
+				$scope.altera = false;
+			}
+				$scope.carregaSpinner = false;
+		});
+		
+		
+		
+		
+	}	
+		
+		
+	$scope.limparCampos = function() {
+
+		$scope.exibeTela = false;
+		$("#paginas").empty();
+		var compiledeHTML = $compile(
+			"<personal></personal>")($scope);
+		$("#paginas").append(compiledeHTML);
+
+	}
+	
+	$scope.gravarPersonal = function() {
+
+	
+		if($scope.nomeBotao == 'Gravar'){
+			
+		ngDialog.openConfirm({
+			template : 'telas/dialogo/dialogoAdiciona.html',
+			className : 'ngdialog-theme-default2',
+			controller : 'personalController'
+		}).then(
+				function(success) {
+					$scope.carregaSpinner = true;
+
+					webservicesAula.gravarPersonal($scope.personal).success(function(data) {
+						
+						
+						growl.addSuccessMessage("Registro Gravado com sucesso");
+						$scope.altera = true;
+						
+						$scope.carregaSpinner = false;
+						},
+				function(error) {
+					
+				});
+				});
+
+		}else{
+			
+			ngDialog.openConfirm({
+				template : 'telas/dialogo/dialogoAltera.html',
+				className : 'ngdialog-theme-default2',
+				controller : 'personalController'
+			}).then(
+					function(success) {
+						$scope.carregaSpinner = true;
+
+					
+						webservicesAula.atualizarPersonal($scope.personal).success(function(data) {
+							
+							
+							growl.addSuccessMessage("Registro Atualizado com sucesso");
+							
+							$scope.altera = true;
+							$scope.carregaSpinner = false;
+							},
+					function(error) {
+						
+					});
+					});
+			
+			
+		}
+
+	}
+
+	$scope.excluirPersonal = function(codigo) {
+
+		
+		ngDialog.openConfirm({
+			template : 'telas/dialogo/dialogoExcluir.html',
+			className : 'ngdialog-theme-default2',
+			controller : 'treinoController'
+		}).then(
+				function(success) {
+					
+					$scope.carregaSpinner = true;
+
+					webservicesAula.excluirPersonal().success(function(data)  {
+
+						growl.addSuccessMessage('Registro excluído com sucesso');
+						$scope.altera = false;
+						
+						$scope.exibeTela = false;
+						$("#paginas").empty();
+						var compiledeHTML = $compile(
+							"<personal></personal>")($scope);
+						$("#paginas").append(compiledeHTML);
+					
+						
+					}).error(function(){
+						growl.addErrorMessage("Erro ao excluir o registro");
+						$scope.carregaSpinner = false;
+						$scope.altera = true;
+
+					});
+				
+				},
+				function(error) {
+					
+				});
+
+		
+		
+		}
 
 
 
-
-});	
+		
+});

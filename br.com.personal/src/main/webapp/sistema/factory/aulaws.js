@@ -79,6 +79,32 @@ personal.factory("webservicesAula", function($http) {
 		return $http.get(url + '/relatorioTreinoAnterior/'+ mes+'/'+ano+'/'+lista);
 	};
 	
+	var _gravarPersonal = function(personal) {
+		return $http.post(url + '/gravarpersonal', personal);
+	};
+	
+	var _atualizarPersonal = function(personal) {
+		return $http.post(url + '/atualizarpersonal', personal);
+	};
+	var _excluirPersonal = function() {
+		return $http.delete(url + '/excluirpersonal');
+	};
+	
+	var _buscaPersonal = function() {
+		return $http.get(url + '/personal');
+	};
+	
+	
+	var _verificarAulaAluno = function(mes,ano,idAluno,dias) {
+		return $http.get(url + '/verificarAulaAluno/'+mes+'/'+ano+'/'+idAluno+'/'+dias);
+	};
+	
+	var _cadastrarNovaAula = function(idAluno, tipAula, horario, databanco,diaSemana) {
+		return $http.get(url + '/cadastrarNovaAula/'+idAluno+'/'+tipAula+'/'+horario+'/'+databanco+'/'+diaSemana);
+	};
+	
+	
+	
 	
 	return {
 
@@ -98,7 +124,13 @@ personal.factory("webservicesAula", function($http) {
 		buscaAulasAlunoAnterior:_buscaAulasAlunoAnterior,
 		atualizarAulaDoDia:_atualizarAulaDoDia,
 		gerarRelatorioTreino: _gerarRelatorioTreino,
-		gerarRelatorioTreinoAnterior:_gerarRelatorioTreinoAnterior
+		gerarRelatorioTreinoAnterior:_gerarRelatorioTreinoAnterior,
+		gravarPersonal:_gravarPersonal,
+		atualizarPersonal:_atualizarPersonal,
+		excluirPersonal:_excluirPersonal,
+		buscaPersonal:_buscaPersonal,
+		verificarAulaAluno:_verificarAulaAluno,
+		cadastrarNovaAula:_cadastrarNovaAula
 	}
 
 });

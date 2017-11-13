@@ -141,6 +141,7 @@ body, html{
 	
 	  height: 100%;
 	  font-family: sans-serif;
+	  zoom:99.8%;
 }
 
 
@@ -154,8 +155,21 @@ body {
     background-repeat: no-repeat;
     height: 100%;
     clear: both;	 
+    
 
 }
+
+
+#fundoHaltere{
+	
+	background-image: url('../imagens/haltere.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 100%;
+	
+}
+
 
 #pagina {
     counter-increment: page;
@@ -168,16 +182,18 @@ body {
 	
 }
 
-
-@media print {
-    .PageBreak {
-        page-break-before: always;
-    }
+#relatorio {
+	
+	font-family: sans-serif;
+	
+	width: 545px;
+	height: 842px;
+	
+	margin: 0 auto;
+	
 }
-@media screen { 
-    .PageBreak { 
-        border-bottom: 1px dashed black; 
-        width: 100%;
-        margin-bottom: 12px; 
-    }
+
+
+.page-break { 
+page-break-before: always; 
 }

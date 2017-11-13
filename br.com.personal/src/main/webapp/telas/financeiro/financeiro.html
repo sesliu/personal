@@ -12,6 +12,10 @@
 			</div>
 		</div>
 	</div>
+	<div class="text-center ajuda">
+		<span><strong>Ajuda: Calcular os gastos financeiros
+				dos alunos</strong></span>
+	</div>
 	<div class="scrolltelaInterno">
 		<form name="formFinanceiro">
 			<div class="col-sm-12" style="margin-top: 34px; margin-bottom: 24px">
@@ -107,6 +111,9 @@
 							value="{{lista.idAluno}}">{{lista.nome}}</option>
 					</select>
 				</div>
+
+				
+
 			</div>
 			<div class="col-sm-12">
 				<hr>
@@ -114,28 +121,30 @@
 			</div>
 			<div class="col-sm-12">
 				<div class="col-sm-6">
-				<label>Dias das Aulas Realizadas do Mês Anterior</label>
+					<label>Dias das Aulas Realizadas do Mês Anterior</label>
 					<div class="well scrollDiasAula">
 						<div class="pull-left">
-								<ul ng-repeat="pesq in listaDiasAulaAnterior">
-								<li>{{pesq.texto}}  <span style="color:red">{{pesq.dias == null ? 0: pesq.dias}}</span></li>
+							<ul ng-repeat="pesq in listaDiasAulaAnterior">
+								<li>{{pesq.texto}} <span style="color: red">{{pesq.dias
+										== null ? 0: pesq.dias}}</span></li>
 							</ul>
 						</div>
 					</div>
-				
-				
+
+
 				</div>
 				<div class="col-sm-6">
 					<label>Dias das Aulas Realizadas do Mês Vigente</label>
 					<div class="well scrollDiasAula">
 						<div class="pull-left">
 							<ul ng-repeat="pesq in listaDiasAula">
-								<li>{{pesq.texto}}  <span style="color:red">{{pesq.dias == null ? 0: pesq.dias}}</span></li>
+								<li>{{pesq.texto}} <span style="color: red">{{pesq.dias
+										== null ? 0: pesq.dias}}</span></li>
 							</ul>
 						</div>
 					</div>
 				</div>
-			
+
 			</div>
 			<div class="col-sm-12">
 				<hr>
@@ -144,12 +153,15 @@
 
 			<div class="col-sm-12 col-sm-offset-2">
 				<div class="col-sm-8">
-					<label class="pull-left">Dias de Todas as Aulas Realizadas e Agendadas</label>
+					<label class="pull-left">Dias de Todas as Aulas Realizadas
+						e Agendadas</label>
 					<div class="well scrollTabela"
 						style="height: 90px; width: 100%; display: flex; float: left; clear: left;">
 						<div ng-repeat="dias in listaDias">
 							<span id="dias"><input type="checkbox"
-								data-checklist-model="selecionado.dataAula"
+							    ng-click="cadastrarAula(vigente.idAluno,dias.text)"
+						        data-checklist-model="selecionado.dataAula"
+					          
 								data-checklist-value="dias.value">{{dias.text}}</span>
 						</div>
 					</div>

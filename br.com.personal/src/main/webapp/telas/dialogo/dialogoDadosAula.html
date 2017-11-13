@@ -1,5 +1,9 @@
-<div ng-controller="dadosAulaController">
+<div ng-controller="dadosAulaController" ng-init="inicio()">
 <div growl></div>
+	<div ng-show="carregaSpinner">
+		<span style="margin-top: 15%"
+			us-spinner="{radius:25,width:8,length:16}" spinner-on="showSpinner"></span>
+	</div>
 	<div class="container-fluid">
 
 		<div class="panel panel-info"
@@ -38,16 +42,19 @@
 							style="white-space: pre-wrap; color: red">{{dadosAula.horario}}</span>
 					</h4>
 					</p>
-					<p>
-					<h4>
-						<strong>Treino: </strong><span
-							style="white-space: pre-wrap; color: red">{{dadosAula.listaTreino}}</span>
-					</h4>
-					</p>
+					
 				</div>	
 					<div class="col-xs-12">
 						<hr>
 					</div>
+						<div class="col-xs-12 well">
+					<div class="col-xs-10" style="margin-bottom: 12px">
+						<dualmultiselect options="demoOptions"> </dualmultiselect>
+
+					</div>
+
+				  </div>
+					
 					<div class="col-xs-12" style="margin-bottom: 20px">
 						<div class="col-sm-12">
 							<label class="pull-left">Observação</label>

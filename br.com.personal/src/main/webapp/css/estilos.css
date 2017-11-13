@@ -180,6 +180,13 @@ button:focus {outline:0;!important;}
 	overflow: auto;
 }
 
+.scrollDashFinanceiro {
+	
+	height: 90px;
+	overflow: auto;
+}
+
+
 .scrollDiasAula {
 	
 	height: 100px;
@@ -208,14 +215,21 @@ button:focus {outline:0;!important;}
 }
 
 
+.dashzoom {
+	
+	zoom: 95%;
+	margin-left: 95%;
+	
+}
+
+
 
 .scrolltela {
     
     display: block;	
-	height: 490px;
+	height: 690px;
 	padding: 0 0 2px;
 	margin: 0 auto;
-	
 	overflow-y: auto;
 	overflow-x: hidden;
 	border: 1px solid #e4e4e4;
@@ -302,7 +316,7 @@ ul{
   position: absolute;
   left: 50%;
   top: -16px;
-  z-index: 999;
+
 }
 
 .pin:after {
@@ -357,6 +371,14 @@ ul{
     background-color: #d2d2d2;
     box-shadow:  10px 10px 10px #494949;
 }
+
+
+.imagens label: hover {
+   
+    background-color: #eaeaea;
+ 
+}
+
 
 .imagens input[type="radio"]:checked+label {
     border-color: white;

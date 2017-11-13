@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.personal.modelo.Aula;
+import com.personal.modelo.Personal;
+import com.personal.modelo.RetornaPDF;
 import com.personal.modelo.Treino;
 import com.personal.persistence.AulaDao;
 import com.personal.persistence.TreinoDao;
@@ -21,7 +23,23 @@ import com.personal.persistence.TreinoDao;
 
 public class AulaWS {
 
+// '/cadastrarNovaAula/'+idAluno+'/'+tipAula+'/'+horario+'/'+databanco+'/'+diaSemana)
+	
+	@RequestMapping(value = "/cadastrarNovaAula/{idAluno}/{tiAula}/{horario}/{databanco}/{diaSemana}", method = RequestMethod.GET)
+	public void cadastrarNovaAula(@PathVariable("idAluno") Integer idAluno,@PathVariable("tiAula") String tipAula, 
+								@PathVariable("horario") String horario, @PathVariable("databanco") String databanco, 
+								@PathVariable("diaSemana") String diaSemana){
 
+
+		try {
+			new AulaDao().cadastrarNovaAula(idAluno, tipAula, horario, diaSemana,databanco);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
+	
 	
 	@RequestMapping(value="/gravaraula", method = RequestMethod.POST, consumes = "application/json")
 	public void gravar(@RequestBody Aula aula) {
@@ -39,11 +57,62 @@ public class AulaWS {
 		
 		}
 		
+	}
+		@RequestMapping(value="/gravarpersonal", method = RequestMethod.POST, consumes = "application/json")
+		public void gravarPersonal(@RequestBody Personal personal) {
 		
-	
+			AulaDao aulaDao  = new AulaDao();
+			
+			
+			try {
+				
+				aulaDao.createPersonal(personal);
+			
+				
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+			
+			}
+		
 	}	
 	
-	
+		
+		@RequestMapping(value="/atualizarpersonal", method = RequestMethod.POST, consumes = "application/json")
+		public void atualizarPersonal(@RequestBody Personal personal) {
+		
+			AulaDao aulaDao  = new AulaDao();
+			
+			
+			try {
+				
+				aulaDao.updatePersonal(personal);
+			
+				
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+			
+			}
+		
+	}	
+		
+		
+		@RequestMapping(value="/excluirpersonal", method = RequestMethod.DELETE)
+		public void excluirrPersonal() {
+		
+			AulaDao aulaDao  = new AulaDao();
+			
+			
+			try {
+				
+				aulaDao.excluirPersonal();
+			
+				
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+			
+			}
+		
+	}	
 	
 	@RequestMapping(value="/atualizaraula", method = RequestMethod.POST, consumes = "application/json")
 	public void atualizar(@RequestBody Aula aula) {
@@ -63,6 +132,23 @@ public class AulaWS {
 		
 	
 	}
+	
+	
+	@RequestMapping(value = "/personal", method = RequestMethod.GET)
+	public Personal listarPersonal() {
+
+		Personal p = new Personal();
+
+		try {
+			  p = new AulaDao().findPersonal();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return p;
+	}
+	
 	
 	@RequestMapping(value="/atualizarauladodia", method = RequestMethod.POST, consumes = "application/json")
 	public void atualizarAulaDia(@RequestBody Aula aula) {
@@ -84,22 +170,40 @@ public class AulaWS {
 	}	
 	
 	
-	
-	@RequestMapping(value = "/relatorioTreino/{mes}/{ano}/{lista}", method = RequestMethod.GET, produces = "application/json")
-	public List<Aula> geraRelatorio(@PathVariable("mes") String mes, @PathVariable ("ano") String ano, 
-			                        @PathVariable("lista") String lista ) {
+	@RequestMapping(value = "/verificarAulaAluno/{mes}/{ano}/{idAluno}/{dias}", method = RequestMethod.GET, produces = "application/json")
+	public Aula verficarDiasAluno(@PathVariable("mes") String mes, @PathVariable ("ano") String ano, 
+			                        @PathVariable("idAluno") Integer idAluno, @PathVariable("dias") String dias) {
 
 		AulaDao aulaDao  = new AulaDao();
-		
-		List<Aula> lst = new ArrayList<Aula>();
+		Aula a = new Aula();
 		try {
-			lst = aulaDao.geraRelatorioTreino(mes, ano, lista);
+			 a = aulaDao.verificarAlunoAula(mes, ano, dias, idAluno);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
-		return lst;
+		 return a;
+	}
+	
+	
+	
+	
+	@RequestMapping(value = "/relatorioTreino/{mes}/{ano}/{lista}", method = RequestMethod.GET, produces = "application/json")
+	public RetornaPDF geraRelatorio(@PathVariable("mes") String mes, @PathVariable ("ano") String ano, 
+			                        @PathVariable("lista") String lista ) {
+
+		AulaDao aulaDao  = new AulaDao();
+		RetornaPDF relatorio = new RetornaPDF();
+		List<Aula> lst = new ArrayList<Aula>();
+		try {
+			 relatorio = aulaDao.geraRelatorioTreino(mes, ano, lista);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		 return relatorio;
 	}
 	
 	@RequestMapping(value = "/relatorioTreinoAnterior/{mes}/{ano}/{lista}", method = RequestMethod.GET, produces = "application/json")

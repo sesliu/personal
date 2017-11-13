@@ -8,11 +8,13 @@ personal.controller('dashController', function($scope, webservicesAluno, webserv
 	$scope.listaFinancas = [];
 	$scope.listaMontante = [];
 	$scope.montante = '0.00';
+	$scope.nomePersonal;
 	var data;
 	var mes;
 	var dia;
 	var dias;
 	$scope.vigente = {};
+	
 	
 	$interval( function(){
 		
@@ -26,6 +28,58 @@ personal.controller('dashController', function($scope, webservicesAluno, webserv
 		$scope.dataFormatada  = ('00'+data.getDate()).slice(-2)+'/'+('00'+(data.getMonth()+1)).slice(-2)+'/'+data.getFullYear();
 		
 		 dia  = data.getFullYear()+'-'+('00'+(data.getMonth()+1)).slice(-2)+'-'+('00'+data.getDate()).slice(-2);
+		 
+		 if(mes == "0"){
+			 
+			 $scope.mesvigente =  'Janeiro';
+		 }else 
+			 if(mes == "1"){
+				 
+			 $scope.mesvigente =  'Fevereiro';
+		 }else	
+		 if(mes == "2"){
+			 
+			 $scope.mesvigente =  'março';
+		 }else
+		 if(mes == "3"){
+			 
+			 $scope.mesvigente =  'Abril';
+		 }else	 
+		 if(mes == "4"){
+			 
+			 $scope.mesvigente =  'Maio';
+		 }else
+		 if(mes == "5"){
+			 
+			 $scope.mesvigente =  'Junho';
+		 }else
+		 if(mes == "6"){
+			 
+			 $scope.mesvigente =  'Julho';
+		 }else
+		 
+		 if(mes == "7"){
+			 
+			 $scope.mesvigente =  'Agosto';
+		 }else
+		 if(mes == "8"){
+			 
+			 $scope.mesvigente =  'Setembro';
+		 }else
+		if(mes == "9"){
+		 
+			$scope.mesvigente =  'Outubro';
+	 	}else
+		if(mes == "10"){
+	 
+			$scope.mesvigente =  'Novembro';
+		}else
+		if(mes == "11"){
+			 
+			$scope.mesvigente =  'Dezembro';
+		}
+		
+		
 	
 	},1000);
 	
@@ -62,7 +116,21 @@ personal.controller('dashController', function($scope, webservicesAluno, webserv
 				})
 				
 		
-			
+				webservicesAula.buscaPersonal().success(function(data) {
+					
+						
+					if(data.nome != null){
+						
+						$scope.nomePersonal = "Bem-vindo "+ data.nome;
+						
+					}else{
+						
+						$scope.nomePersonal ="";
+					}
+						
+				});
+				
+				
 		
 	}
 	
@@ -180,24 +248,89 @@ $scope.pagarValor =function(aluno){
 });
 
 
-personal.controller('dadosAulaController',function($scope, $rootScope, webservicesAula, growl){
+personal.controller('dadosAulaController',function($scope, $rootScope, webservicesAula, growl, webservices, $timeout){
 	
 	
 	$scope.aula ={};
 	
 	$scope.dadosAula = $rootScope.dadosAula;
 	
+	var listaTreinos =[];
+	var listaTreinoSelecionado = [];
+	$scope.carregaSpinner = false;
+	
+
+	
+	$scope.inicio = function(){
+		
+		webservices.buscarTreinosAula($rootScope.dadosAula.idAula).success(function(data){
+			
+		    listaTreinos = data;
+			
+		});
+		
+		webservices.buscarTreinosVicunlados($rootScope.dadosAula.idAula).success(function(data){
+			
+			listaTreinoSelecionado = data;
+		
+		})
+		
+			
+		
+		
+		
+		$timeout(function(){	
+			$scope.demoOptions = {
+				title : 'Escolha os treinos da aula',
+				filterPlaceHolder : 'Buscar nome do treino abaixo',
+				labelAll : 'Não vinculados',
+				labelSelected : 'vinculados',
+				helpMessage : 'Clicar no nome do treino para transferir entre os campos',
+				orderProperty : 'nome',
+				items : listaTreinos,
+				selectedItems : listaTreinoSelecionado
+			};			
+
+		},1000);
+	}
+	
+	
 	
 	$scope.atualizarAula = function(){
 		
+		var listaIdTreino = [];
+		
 		$scope.aula = $scope.dadosAula;
+		
+		var dadoTreino = $scope.demoOptions.selectedItems;
+		
+		for (var i = 0; i < dadoTreino.length; i++) {
+
+			listaIdTreino.push(dadoTreino[i].idTreino);
+		}
+
+
+		if(listaIdTreino.length == 0){
+			
+			listaIdTreino = 0;
+		}
+		
 		
 		webservicesAula.atualizarAulaDoDia($scope.aula).success(function(data,status){
 			
+			$scope.carregaSpinner = true;
 			if(status == 200){
+			webservices.vincularTreino($rootScope.dadosAula.idAula,listaIdTreino).success(function(data,status){
 				
-				growl.addSuccessMessage("Aula atualizada com sucesso");
+				if(status == 200){
+					
+					$scope.carregaSpinner = false;
+					growl.addSuccessMessage("Aula atualizada com sucesso");
+					
+				}
 				
+			});
+			
 			}
 			
 		});
@@ -348,6 +481,19 @@ personal.controller('principalController',function($scope,$compile,$timeout){
 		$("#paginas").append(compiledeHTML);
 		
 	}
+	
+	
+	$scope.personal = function(){
+		
+		$scope.exibeTela = false;
+		
+		$("#paginas").empty();
+		var compiledeHTML = $compile("<personal></personal>")
+		($scope);
+		$("#paginas").append(compiledeHTML);
+		
+	}
+	
 	
 	
 });
