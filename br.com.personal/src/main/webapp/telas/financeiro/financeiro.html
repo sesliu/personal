@@ -159,7 +159,7 @@
 						style="height: 90px; width: 100%; display: flex; float: left; clear: left;">
 						<div ng-repeat="dias in listaDias">
 							<span id="dias"><input type="checkbox"
-							    ng-click="cadastrarAula(vigente.idAluno,dias.text)"
+							    ng-click="cadastrarAula(vigente.idAluno,dias.text,selecionado.dataAula)"
 						        data-checklist-model="selecionado.dataAula"
 					          
 								data-checklist-value="dias.value">{{dias.text}}</span>

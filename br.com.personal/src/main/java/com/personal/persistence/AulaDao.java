@@ -51,8 +51,29 @@ public class AulaDao extends Dao {
 	private String procVerificarAulaAluno = "call sp_verificarAulaDias(?,?,?,?)";
 	
 	private String procCadastrarAulaNova = "call sp_cadastraAulaFinaceiro(?,?,?,?,?)";
+	
+	private String procExcluirAula  =  "call sp_excluirAulaFinaceiro(?,?,?)";
 
 	private static Integer idAlula;
+	
+	
+	
+	public void excluirAula(Integer idAluno, String diaSemana,String dataAula)
+			throws SQLException, InstantiationException, IllegalAccessException, ClassNotFoundException {
+
+		open();
+		
+		
+		stmt = con.prepareStatement(procExcluirAula);
+		stmt.setInt(1, idAluno);
+		stmt.setString(2, diaSemana);
+		stmt.setString(3, dataAula);
+		stmt.execute();
+
+		stmt.close();
+		close();
+
+	}
 	
 	
 
@@ -575,14 +596,13 @@ public class AulaDao extends Dao {
 
 			a.setHorario(rs.getString(1));
 			a.setNomeAluno(rs.getString(2));
-			a.setListaTreino(rs.getString(3));
-			a.setObservacao(rs.getString(4));
-			a.setPresenca(rs.getString(5));
-			a.setFalta(rs.getString(6));
-			a.setFaltajusticada(rs.getString(7));
-			a.setObsjustificada(rs.getString(8));
-			a.setResultado(rs.getString(9));
-			a.setIdAula(rs.getInt(10));
+			a.setObservacao(rs.getString(3));
+			a.setPresenca(rs.getString(4));
+			a.setFalta(rs.getString(5));
+			a.setFaltajusticada(rs.getString(6));
+			a.setObsjustificada(rs.getString(7));
+			a.setResultado(rs.getString(8));
+			a.setIdAula(rs.getInt(9));
 		}
 
 		rs.close();

@@ -49,6 +49,7 @@ personal.controller('financeiroController',function($scope, $rootScope,$timeout,
 	$scope.abatimento = "0";
 	$scope.diasSelecionado;
 	$scope.dataFormatada;
+	var recarregarLista = false;
 	
 	
 	
@@ -139,6 +140,7 @@ personal.controller('financeiroController',function($scope, $rootScope,$timeout,
 		$scope.ajuste = "0.00"
 		$scope.quantidadeDias = "0"	
 		$scope.total = "0.00"	
+		var verificarDia = false;	
 			
 		resultado ="";
 		webservicesAula.buscaDiasAula($scope.vigente.idAluno,$scope.vigente.mes,$scope.vigente.ano).success(function(data){
@@ -192,7 +194,24 @@ personal.controller('financeiroController',function($scope, $rootScope,$timeout,
 	
 
 	
-	$scope.cadastrarAula = function(idAluno,dias){
+	$scope.cadastrarAula = function(idAluno,dias,arrayDias){
+		
+		var verificarDia = false;
+	
+		 for(var i = 0; i < arrayDias.length; i++){
+			 
+			 if(dias == arrayDias[i]){
+				 
+				 verificarDia = true;
+				 
+			 }
+			 else{
+				 
+				 verificarDia = false;
+			 }
+			 
+		 }
+		
 		
 		 $scope.dataFormatada  = ('00'+dias).slice(-2)+'/'+('00'+((mes*1)+1)).slice(-2)+'/'+ano;
 		 $rootScope.dataAula =  ano+'-'+('00'+((mes*1)+1)).slice(-2)+'-'+('00'+dias).slice(-2);
@@ -242,7 +261,7 @@ personal.controller('financeiroController',function($scope, $rootScope,$timeout,
 		 $rootScope.databanco =databanco; 
 	
 	 webservicesAula.verificarAulaAluno(mes,ano,idAluno,dias).success(function(data){
-		 if(data.quantidadeDia == 0){
+		 if(data.quantidadeDia == 0  && verificarDia == true ){
 			 
 				ngDialog.openConfirm({
 					template : 'telas/dialogo/dialogoAdicionaAula.html',
@@ -253,12 +272,9 @@ personal.controller('financeiroController',function($scope, $rootScope,$timeout,
 							
 						$timeout(function(){
 							
-							
-					
-							
 						ngDialog.openConfirm({
 							template : 'telas/dialogo/dialogoCadastrarAula.html',
-							className : 'ngdialog-theme-default',
+							className : 'ngdialog-theme-default3',
 							controller : 'financeiroController'
 						}).then(
 								function(success) {
@@ -269,12 +285,43 @@ personal.controller('financeiroController',function($scope, $rootScope,$timeout,
 						
 						
 						},200)	
-				});
+				}),
+				 function (cancel) {
+				
+					recarregarLista = true;
+				
+				};
+		 }
+		 else if(data.quantidadeDia > 0  && verificarDia == false){
+			 
+			 ngDialog.openConfirm({
+					template : 'telas/dialogo/dialogoExcluirAula.html',
+					className : 'ngdialog-theme-default2',
+					controller : 'financeiroController'
+				}).then(
+						function(success) {
+							
+							 webservicesAula.excluirAula(idAluno, $rootScope.dataAula,$rootScope.diaSemana  ).success(function(data){
+								   
+								   $scope.carregaSpinner = false;
+								   growl.addSuccessMessage("Aula excluída com sucesso");
+								 
+								   
+							   });
+							   	
+					
+				}), function (cancel) {
+					
+					
+				};
+			 
+			 
 		 }
 			
 	  });
 		
 	};
+	
 	
 	
 
@@ -335,6 +382,10 @@ personal.controller('financeiroController',function($scope, $rootScope,$timeout,
 			
 			$scope.listaFinancas = data;
 		});
+		
+	
+				
+				
 		
 		
 	},1000, false)

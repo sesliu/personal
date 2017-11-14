@@ -23,7 +23,7 @@ personal.config(function(growlProvider,ngDialogProvider, $httpProvider) {
 	
 	ngDialogProvider.setDefaults({
 
-		showClose : true,
+		showClose : false,
 		closeByDocument : false,
 		closeByEscape : false
 

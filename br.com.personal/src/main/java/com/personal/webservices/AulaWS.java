@@ -40,6 +40,20 @@ public class AulaWS {
 
 	}
 	
+	@RequestMapping(value = "/excluirAula/{idAluno}/{databanco}/{diaSemana}", method = RequestMethod.GET)
+	public void cadastrarNovaAula(@PathVariable("idAluno") Integer idAluno,@PathVariable("databanco") String databanco, 
+								@PathVariable("diaSemana") String diaSemana){
+
+
+		try {
+			new AulaDao().excluirAula(idAluno,diaSemana,databanco);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+	}
+	
 	
 	@RequestMapping(value="/gravaraula", method = RequestMethod.POST, consumes = "application/json")
 	public void gravar(@RequestBody Aula aula) {
