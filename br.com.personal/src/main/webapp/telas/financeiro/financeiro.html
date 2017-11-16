@@ -158,7 +158,7 @@
 					<div class="well scrollTabela"
 						style="height: 90px; width: 100%; display: flex; float: left; clear: left;">
 						<div ng-repeat="dias in listaDias">
-							<span id="dias"><input type="checkbox"
+							<span id="dias"><input type="checkbox" ng-disabled="formFinanceiro.$invalid"
 							    ng-click="cadastrarAula(vigente.idAluno,dias.text,selecionado.dataAula)"
 						        data-checklist-model="selecionado.dataAula"
 					          
@@ -171,11 +171,83 @@
 				<hr>
 				<span></span>
 			</div>
+			<div class="col-sm-12 col-sm-offset-2">
+				<div class="col-sm-2">
+					<label class="pull-left">Criar Novas Aulas</label>
+				</div>
+			
+				<div class="col-sm-2" style="margin-top:8px;float: left;clear: left ">
+					<label class="pull-left">Horário</label>
+					<select	class="form-control" ng-model="vigente.horario" ng-disabled="formFinanceiro.$invalid" >
+						<option value="">Selecione</option>
+						<option value="00:00">00:00</option>
+						<option value="00:30">00:30</option>
+						<option value="01:00">01:00</option>
+						<option value="01:30">01:30</option>
+						<option value="02:00">02:00</option>
+						<option value="02:30">02:30</option>
+						<option value="03:00">03:00</option>
+						<option value="03:30">03:30</option>
+						<option value="04:00">04:00</option>
+						<option value="04:30">04:30</option>
+						<option value="05:00">05:00</option>
+						<option value="05:30">05:30</option>
+						<option value="06:00">06:00</option>
+						<option value="06:30">06:30</option>
+						<option value="07:00">07:00</option>
+						<option value="07:30">07:30</option>
+						<option value="08:00">08:00</option>
+						<option value="08:30">08:30</option>
+						<option value="09:00">09:00</option>
+						<option value="09:30">09:30</option>
+						<option value="10:00">10:00</option>
+						<option value="10:30">10:30</option>
+						<option value="11:00">11:00</option>
+						<option value="11:30">11:30</option>
+						<option value="12:00">12:00</option>
+						<option value="12:30">12:30</option>
+						<option value="13:00">13:00</option>
+						<option value="13:30">13:30</option>
+						<option value="14:00">14:00</option>
+						<option value="14:30">14:30</option>
+						<option value="15:00">15:00</option>
+						<option value="15:30">15:30</option>
+						<option value="16:00">16:00</option>
+						<option value="16:30">16:30</option>
+						<option value="17:00">17:00</option>
+						<option value="17:30">17:30</option>
+						<option value="18:00">18:00</option>
+						<option value="18:30">18:30</option>
+						<option value="19:00">19:00</option>
+						<option value="19:30">19:30</option>
+						<option value="20:00">20:00</option>
+						<option value="20:30">20:30</option>
+						<option value="21:00">21:00</option>
+						<option value="21:30">21:30</option>
+						<option value="22:00">22:00</option>
+						<option value="22:30">22:30</option>
+						<option value="23:00">23:00</option>
+						<option value="23:30">23:30</option>
+					</select>
+				</div>
+				<div class="col-sm-2" style="margin-top:32px;float: left; clear:right;">
+					<button type="button" class="btn btn-success btnTamanho"
+						       ng-click="gravarAula()"  ng-disabled="formFinanceiro.$invalid"
+						       required title="Criar novas aulas">Criar</button>
+				</div>
+			
+			</div>
+			<div class="col-sm-12">
+				<hr>
+				<span></span>
+			</div>
+			
 			<div class="col-sm-12">
 				<div class="col-sm-2 col-sm-offset-2"
 					style="margin-bottom: 34px; margin-left: 189px">
 					<label class="pull-left">Abatimento de Aulas</label> <input
 						class="form-control" ng-model="abatimento" type="text"
+						ng-disabled="formFinanceiro.$invalid"
 						mask="9?9?9">
 				</div>
 			</div>
@@ -184,7 +256,7 @@
 				<span></span>
 			</div>
 			<div class="col-sm-12" align="center">
-				<button class="btn btn-success" ng-click="valoresAluno()"
+				<button class="btn btn-success btnTamanho" ng-click="valoresAluno()"
 					ng-disabled="formFinanceiro.$invalid">Calcular</button>
 			</div>
 			<div class="col-sm-12" align="center" style="margin-bottom: 12px">
@@ -200,7 +272,7 @@
 
 			</div>
 			<div class="col-sm-12" align="center">
-				<button class="btn btn-danger" ng-click="registrarPagamento()"
+				<button class="btn btn-danger btnTamanho" ng-click="registrarPagamento()"
 					ng-disabled="formFinanceiro.$invalid">Registrar</button>
 			</div>
 

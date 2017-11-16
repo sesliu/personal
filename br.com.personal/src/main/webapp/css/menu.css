@@ -156,8 +156,10 @@ body {
     height: 100%;
     clear: both;	 
     
-
+   
 }
+
+
 
 
 #fundoHaltere{
@@ -197,3 +199,28 @@ body {
 .page-break { 
 page-break-before: always; 
 }
+
+
+.container::-webkit-scrollbar-track {
+    background-color: #d6d6d6;
+}
+.container::-webkit-scrollbar {
+    width: 6px;
+    background: #F4F4F4;
+}
+.container::-webkit-scrollbar-thumb {
+    background: #dad7d7;
+}
+
+button:active {
+outline: none;
+border: none;
+}
+
+button:{
+	
+	
+-webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+
+button:focus {outline:0;}

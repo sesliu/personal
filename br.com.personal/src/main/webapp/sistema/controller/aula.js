@@ -65,31 +65,31 @@ personal.controller('aulaController',function($scope, $rootScope, $compile,webse
 		
 		 if($scope.data.getDay() == 0){
 			 
-			 $scope.aula.diaSemana = 'domingo';
+			 $scope.aula.diaSemana = 'Domingo';
 			 
 		 }else if($scope.data.getDay() == 1){
 			
-			 $scope.aula.diaSemana = 'segunda';
+			 $scope.aula.diaSemana = 'Segunda';
 			 
 		 }else if($scope.data.getDay() == 2){
 			 
-			 $scope.aula.diaSemana = 'terça';
+			 $scope.aula.diaSemana = 'Terça';
 			 
 		 }else if($scope.data.getDay() == 3){
 			 
-			 $scope.aula.diaSemana = 'quarta';
+			 $scope.aula.diaSemana = 'Quarta';
 			 
 		 }else if($scope.data.getDay() == 4){
 			 
-			 $scope.aula.diaSemana = 'quinta';
+			 $scope.aula.diaSemana = 'Quinta';
 			 
 		 }else if($scope.data.getDay() == 5){
 			 
-			 $scope.aula.diaSemana = 'sexta';
+			 $scope.aula.diaSemana = 'Sexta';
 			 
 		 }else if($scope.data.getDay() == 6){
 			 
-			 $scope.aula.diaSemana = 'sabado';
+			 $scope.aula.diaSemana = 'Sábado';
 		 }
 			 
 		
@@ -639,31 +639,31 @@ personal.controller('atualizaAulaController',
 		
 		 if($scope.data.getDay() == 0){
 			 
-			 $scope.aula.diaSemana = 'domingo';
+			 $scope.aula.diaSemana = 'Domingo';
 			 
 		 }else if($scope.data.getDay() == 1){
 			
-			 $scope.aula.diaSemana = 'segunda';
+			 $scope.aula.diaSemana = 'Segunda';
 			 
 		 }else if($scope.data.getDay() == 2){
 			 
-			 $scope.aula.diaSemana = 'terça';
+			 $scope.aula.diaSemana = 'Terça';
 			 
 		 }else if($scope.data.getDay() == 3){
 			 
-			 $scope.aula.diaSemana = 'quarta';
+			 $scope.aula.diaSemana = 'Quarta';
 			 
 		 }else if($scope.data.getDay() == 4){
 			 
-			 $scope.aula.diaSemana = 'quinta';
+			 $scope.aula.diaSemana = 'Quinta';
 			 
 		 }else if($scope.data.getDay() == 5){
 			 
-			 $scope.aula.diaSemana = 'sexta';
+			 $scope.aula.diaSemana = 'Sexta';
 			 
 		 }else if($scope.data.getDay() == 6){
 			 
-			 $scope.aula.diaSemana = 'sabado';
+			 $scope.aula.diaSemana = 'Sábado';
 		 }
 			 
 		

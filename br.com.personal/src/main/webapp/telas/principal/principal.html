@@ -1,13 +1,19 @@
 <div ng-controller="principalController" ng-init="inicio()">
 	<nav class="navbar navbar-inverse">
 		<div class="container-fluid">
-			<div class="navbar-header"></div>
+			<div class="navbar-header">
+				
+			</div>
 
 		</div>
+		<div class="pull-right" style="padding-right:12px;padding-top:8px">
+			<button class="btn btn-danger" ng-click="sair()">Sair</button>
+		</div>
+		
 	</nav>
 
 	<div class="nav-side-menu">
-		<div class="brand">Personal GYM Manager</div>
+		<div class="brand">Personal <span style="color:yellow">GYM</span> Manager</div>
 		<i class="fa fa-bars fa-2x toggle-btn" data-toggle="collapse"
 			data-target="#menu-content"></i>
 		<div class="menu-list">

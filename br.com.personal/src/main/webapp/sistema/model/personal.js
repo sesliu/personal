@@ -49,7 +49,7 @@ personal.config(function($stateProvider, $urlRouterProvider) {
 	
 
 
-	$urlRouterProvider.otherwise('/personal');
+	$urlRouterProvider.otherwise('/');
 
 	$stateProvider
 
@@ -70,6 +70,19 @@ personal.config(function($stateProvider, $urlRouterProvider) {
 
 		
 	})
+	.state('login', {
+
+		url : '/',
+		
+		views : {
+			'' : {
+					templateUrl : 'telas/login/login.html',
+				},
+			}
+
+		
+	})
+	
 	.state('mobile', {
 
 		url : '/mobile',

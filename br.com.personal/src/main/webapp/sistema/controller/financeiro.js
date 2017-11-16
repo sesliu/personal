@@ -25,7 +25,7 @@ Array.prototype.equals = function (array, strict) {
 
 
 personal.controller('financeiroController',function($scope, $rootScope,$timeout, webservicesAluno, $interval, growl, 
-		                                            webservicesAula, ngDialog){
+		                                            webservicesAula, ngDialog,$compile){
 	
 	$scope.vigente ={};
 	$scope.listaFinancas={};
@@ -50,6 +50,7 @@ personal.controller('financeiroController',function($scope, $rootScope,$timeout,
 	$scope.diasSelecionado;
 	$scope.dataFormatada;
 	var recarregarLista = false;
+	var listaDias = []; 
 	
 	
 	
@@ -143,10 +144,13 @@ personal.controller('financeiroController',function($scope, $rootScope,$timeout,
 		var verificarDia = false;	
 			
 		resultado ="";
-		webservicesAula.buscaDiasAula($scope.vigente.idAluno,$scope.vigente.mes,$scope.vigente.ano).success(function(data){
+		console.log($scope.vigente.idAluno)
+		
+		if($scope.vigente.idAluno != undefined){
+		
+			webservicesAula.buscaDiasAula($scope.vigente.idAluno,$scope.vigente.mes,$scope.vigente.ano).success(function(data){
 			
-			$scope.carregaSpinner = false;
-			
+		
 			
 			$timeout(function(){
 				
@@ -164,7 +168,7 @@ personal.controller('financeiroController',function($scope, $rootScope,$timeout,
 				
 			},200)
 			
-			
+			$scope.carregaSpinner = false;
 		
 		});
 	
@@ -188,6 +192,14 @@ personal.controller('financeiroController',function($scope, $rootScope,$timeout,
 			},200);
 		});
 		
+		}else{
+			
+			$("#paginas").empty();
+			var compiledeHTML = $compile("<historicofinanceiro></historicofinanceiro>")
+			($scope);
+			$("#paginas").append(compiledeHTML);
+			
+		}	
 		
 	};
 	
@@ -197,8 +209,12 @@ personal.controller('financeiroController',function($scope, $rootScope,$timeout,
 	$scope.cadastrarAula = function(idAluno,dias,arrayDias){
 		
 		var verificarDia = false;
+		listaDias = [];
+		
 	
 		 for(var i = 0; i < arrayDias.length; i++){
+			 
+			 listaDias.push( arrayDias[i]);
 			 
 			 if(dias == arrayDias[i]){
 				 
@@ -212,7 +228,7 @@ personal.controller('financeiroController',function($scope, $rootScope,$timeout,
 			 
 		 }
 		
-		
+		 var index;
 		 $scope.dataFormatada  = ('00'+dias).slice(-2)+'/'+('00'+((mes*1)+1)).slice(-2)+'/'+ano;
 		 $rootScope.dataAula =  ano+'-'+('00'+((mes*1)+1)).slice(-2)+'-'+('00'+dias).slice(-2);
 		 var databanco =  ano+'-'+('00'+((mes*1)+1)).slice(-2)+'-'+('00'+((dias*1)+1)).slice(-2);
@@ -261,38 +277,7 @@ personal.controller('financeiroController',function($scope, $rootScope,$timeout,
 		 $rootScope.databanco =databanco; 
 	
 	 webservicesAula.verificarAulaAluno(mes,ano,idAluno,dias).success(function(data){
-		 if(data.quantidadeDia == 0  && verificarDia == true ){
-			 
-				ngDialog.openConfirm({
-					template : 'telas/dialogo/dialogoAdicionaAula.html',
-					className : 'ngdialog-theme-default2',
-					controller : 'financeiroController'
-				}).then(
-						function(success) {
-							
-						$timeout(function(){
-							
-						ngDialog.openConfirm({
-							template : 'telas/dialogo/dialogoCadastrarAula.html',
-							className : 'ngdialog-theme-default3',
-							controller : 'financeiroController'
-						}).then(
-								function(success) {
-									
-								
-						
-						});
-						
-						
-						},200)	
-				}),
-				 function (cancel) {
-				
-					recarregarLista = true;
-				
-				};
-		 }
-		 else if(data.quantidadeDia > 0  && verificarDia == false){
+		 if(data.quantidadeDia > 0  && verificarDia == false){
 			 
 			 ngDialog.openConfirm({
 					template : 'telas/dialogo/dialogoExcluirAula.html',
@@ -317,12 +302,43 @@ personal.controller('financeiroController',function($scope, $rootScope,$timeout,
 			 
 			 
 		 }
-			
+		 
+	
+		 
 	  });
 		
 	};
 	
 	
+	
+	$scope.gravarAula = function(){
+		
+		
+		if($scope.vigente.horario == undefined){
+			
+			 growl.addErrorMessage("Escolha o horário da nova aula");
+			 return;
+		}
+		if(listaDias.length == 0){
+			
+			 growl.addErrorMessage("Escolha novas aulas");
+			 return;
+		}
+		
+		
+		  webservicesAula.cadastrarNovaAula($rootScope.idAluno,
+				                            $scope.vigente.horario,
+				                            ($rootScope.mes*1)+1, 
+				                            $rootScope.ano,
+				                            listaDias).success(function(data){
+			   
+			   $scope.carregaSpinner = false;
+			   growl.addSuccessMessage("Novas aulas criadas com sucesso");
+			   $scope.closeThisDialog();
+			   
+		   });
+		
+	}
 	
 
 	

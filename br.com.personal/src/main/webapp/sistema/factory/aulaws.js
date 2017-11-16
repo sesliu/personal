@@ -99,8 +99,10 @@ personal.factory("webservicesAula", function($http) {
 		return $http.get(url + '/verificarAulaAluno/'+mes+'/'+ano+'/'+idAluno+'/'+dias);
 	};
 	
-	var _cadastrarNovaAula = function(idAluno, tipAula, horario, databanco,diaSemana) {
-		return $http.get(url + '/cadastrarNovaAula/'+idAluno+'/'+tipAula+'/'+horario+'/'+databanco+'/'+diaSemana);
+
+	
+	var _cadastrarNovaAula = function(idAluno,horario, mes, ano, listaDias) {
+		return $http.get(url + '/cadastrarNovaAula/'+idAluno+'/'+horario+'/'+mes+'/'+ano+'/'+listaDias);
 	};
 	
 	var _excluirAula = function(idAluno, databanco,diaSemana) {

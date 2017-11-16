@@ -61,7 +61,7 @@
 								<td>{{pesq.dataAula}}</td>
 								<td>{{pesq.diaSemana}}</td>
 								<td>{{pesq.horario}}</td>
-								<td>{{pesq.tipo}}</td>
+								<td>{{pesq.tipo == null? "Não Informado": pesq.tipo}}</td>
 								<td>{{pesq.presenca == 0? "Não" :"Sim" }}</td>
 								<td>{{pesq.falta == 0? "Não":"Sim"}}</td>
 								<td>{{pesq.faltajusticada == 0 ? "Não" : "Sim"}}</td>

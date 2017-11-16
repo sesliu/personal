@@ -23,16 +23,16 @@ import com.personal.persistence.TreinoDao;
 
 public class AulaWS {
 
-// '/cadastrarNovaAula/'+idAluno+'/'+tipAula+'/'+horario+'/'+databanco+'/'+diaSemana)
+	// idAluno,horario, mes, ano, listaDias
 	
-	@RequestMapping(value = "/cadastrarNovaAula/{idAluno}/{tiAula}/{horario}/{databanco}/{diaSemana}", method = RequestMethod.GET)
-	public void cadastrarNovaAula(@PathVariable("idAluno") Integer idAluno,@PathVariable("tiAula") String tipAula, 
-								@PathVariable("horario") String horario, @PathVariable("databanco") String databanco, 
-								@PathVariable("diaSemana") String diaSemana){
+	@RequestMapping(value = "/cadastrarNovaAula/{idAluno}/{horario}/{mes}/{ano}/{listaDias}", method = RequestMethod.GET)
+	public void cadastrarNovaAula(@PathVariable("idAluno") Integer idAluno,@PathVariable("horario") String horario, 
+								@PathVariable("mes") String mes, @PathVariable("ano") String ano, 
+								@PathVariable("listaDias") List<String> listaDias){
 
 
 		try {
-			new AulaDao().cadastrarNovaAula(idAluno, tipAula, horario, diaSemana,databanco);
+			new AulaDao().cadastrarNovaAula(idAluno, horario, mes, ano, listaDias);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

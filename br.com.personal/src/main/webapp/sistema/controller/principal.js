@@ -1,7 +1,50 @@
+personal.controller('loginController', function($scope, $state, $rootScope, growl){
+
+	
+	$scope.login ={};
+	$rootScope.acesso = false;
+	$scope.mostraMensagem = false;
+	$scope.carregaSpinner = false;
+	
+	
+	
+	$scope.acessar = function(){
+		
+		$scope.carregaSpinner = true;
+		
+		
+		if($scope.login.nome == 'anderson' && $scope.login.senha == '123'){
+			
+			
+			$state.go('personal');
+			$rootScope.acesso = true;
+			
+		}else{
+			
+			$rootScope.acesso = false;
+			$scope.mostraMensagem = true;
+			growl.addErrorMessage("Login ou senha inválidos");
+			
+		}
+		
+		$scope.carregaSpinner = false;
+		
+		
+	}
+	
+
+	
+	
+});
+
+
+
 personal.controller('dashController', function($scope, webservicesAluno, webservicesAula, ngDialog, $rootScope, $interval, 
 		$timeout, growl){
 	
-
+	
+	
+	
 	$scope.listaAniversario = [];
 	$scope.listaProfissao = [];
 	$scope.listaAulas = [];
@@ -342,10 +385,40 @@ personal.controller('dadosAulaController',function($scope, $rootScope, webservic
 
 
 
-personal.controller('principalController',function($scope,$compile,$timeout){
+personal.controller('principalController',function($scope,$compile,$timeout, $state,$rootScope, ngDialog){
 	
 	
 	$scope.exibeTela = true;
+	
+	
+	if ($rootScope.acesso == undefined || $rootScope.acesso == false){
+		
+		$state.go('login')
+		
+		return;
+	}
+	
+	
+	$scope.sair = function(){
+		
+		ngDialog.openConfirm({
+			template : 'telas/dialogo/dialogoSair.html',
+			className : 'ngdialog-theme-default2',
+			controller : 'treinoController'
+		}).then(
+				function(success) {
+					
+					$state.go('login');
+
+				
+				},
+				function(error) {
+					
+				});
+		
+		
+	};
+	
 	
 	
 	$scope.inicio = function(){

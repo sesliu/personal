@@ -34,7 +34,7 @@ public class AulaDao extends Dao {
 
 	private String procDiaAula = "call sp_buscaDiaAlunoId(?,?,?)";
 
-	private String procAtualizaDiaAula = "call sp_atualizaAuladoDia(?,?,?,?,?,?,?)";
+	private String procAtualizaDiaAula = "call sp_atualizaAuladoDia(?,?,?,?,?,?,?,?)";
 
 	private String procRelTreino = "call sp_rl_geraTreino(?,?,?)";
 
@@ -75,24 +75,27 @@ public class AulaDao extends Dao {
 
 	}
 	
-	
 
-	public void cadastrarNovaAula(Integer idAluno, String tipAula,String horario, String diaSemana,String dataAula)
+	// idAluno,horario, mes, ano, listaDias
+
+	public void cadastrarNovaAula(Integer idAluno, String horario ,String mes, String ano,List<String> listaDias)
 			throws SQLException, InstantiationException, IllegalAccessException, ClassNotFoundException {
 
 		open();
 		
-		System.out.println(idAluno);
 		
+		for(String s: listaDias){
+			
+			stmt = con.prepareStatement(procCadastrarAulaNova);
+			stmt.setInt(1, idAluno);
+			stmt.setString(2, horario);
+			stmt.setString(3, mes);
+			stmt.setString(4, ano);
+			stmt.setString(5, s);
+			stmt.execute();
 	
-		stmt = con.prepareStatement(procCadastrarAulaNova);
-		stmt.setInt(1, idAluno);
-		stmt.setString(2, diaSemana);
-		stmt.setString(3, dataAula);
-		stmt.setString(4, tipAula);
-		stmt.setString(5, horario);
-		stmt.execute();
-
+		}
+	
 		stmt.close();
 		close();
 
@@ -455,6 +458,7 @@ public class AulaDao extends Dao {
 		stmt.setString(5, a.getObsjustificada());
 		stmt.setString(6, a.getResultado());
 		stmt.setInt(7, a.getIdAula());
+		stmt.setString(8, a.getTipo());
 
 		stmt.execute();
 		stmt.close();
@@ -603,6 +607,7 @@ public class AulaDao extends Dao {
 			a.setObsjustificada(rs.getString(7));
 			a.setResultado(rs.getString(8));
 			a.setIdAula(rs.getInt(9));
+			a.setTipo(rs.getString(10));
 		}
 
 		rs.close();
