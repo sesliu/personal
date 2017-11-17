@@ -42,9 +42,9 @@ public class AulaDao extends Dao {
 
 	private String procRelTreinoHeader = "call sp_rl_geraTreinoHeader(?,?,?)";
 
-	private String procCadastraPersonal = "call sp_cadastraPersonal(?,?,?)";
+	private String procCadastraPersonal = "call sp_cadastraPersonal(?,?,?,?,?)";
 
-	private String procUpdatePersonal = "call sp_atualizaPersonal(?,?,?)";
+	private String procUpdatePersonal = "call sp_atualizaPersonal(?,?,?,?,?)";
 
 	private String procExcluirPersonal = "call sp_excluirPersonal()";
 
@@ -347,6 +347,8 @@ public class AulaDao extends Dao {
 		stmt.setString(1, p.getNome());
 		stmt.setString(2, p.getEmail());
 		stmt.setString(3, p.getTelefone());
+		stmt.setString(4, p.getLogin());
+		stmt.setString(5, p.getSenha());
 		stmt.execute();
 
 		stmt.close();
@@ -362,6 +364,8 @@ public class AulaDao extends Dao {
 			stmt.setString(1, p.getNome());
 			stmt.setString(2, p.getEmail());
 			stmt.setString(3, p.getTelefone());
+			stmt.setString(4, p.getLogin());
+			stmt.setString(5, p.getSenha());
 			stmt.executeUpdate();
 			stmt.close();
 		} catch (SQLException e) {
@@ -408,6 +412,8 @@ public class AulaDao extends Dao {
 			p.setNome(rs.getString(1));
 			p.setEmail(rs.getString(2));
 			p.setTelefone(rs.getString(3));
+			p.setLogin(rs.getString(4));
+			p.setSenha(rs.getString(5));
 		}
 
 		rs.close();

@@ -808,6 +808,8 @@ personal.controller('personalController', function($scope, $compile, webservices
 			
 			$scope.personal = data;
 			
+			$scope.confirmar = $scope.personal.senha;
+			
 			console.log(data);
 			
 			if(data.nome != null){
@@ -857,7 +859,12 @@ personal.controller('personalController', function($scope, $compile, webservices
 			return;
 		}
 	
+        
+		$scope.personal.senha = md5.createHash($scope.personal.senha);
+		$scope.confirmar = md5.createHash($scope.confirmar);
+		
 		if($scope.nomeBotao == 'Gravar'){
+			
 			
 		ngDialog.openConfirm({
 			template : 'telas/dialogo/dialogoAdiciona.html',
@@ -867,7 +874,7 @@ personal.controller('personalController', function($scope, $compile, webservices
 				function(success) {
 					$scope.carregaSpinner = true;
 					
-					$scope.personal.senha = md5.createHash($scope.confirmar);
+				
 
 					webservicesAula.gravarPersonal($scope.personal).success(function(data) {
 						
