@@ -10,6 +10,7 @@ var personal = angular.module('personal',
                              'ngLoadingSpinner',
                              'ngMask',
                              'angular-growl',
+                             'angular-md5',
                              'ngAnimate']
                               
   );

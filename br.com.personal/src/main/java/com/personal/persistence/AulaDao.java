@@ -635,6 +635,9 @@ public class AulaDao extends Dao {
 
 			a.setIdAula(rs.getInt(1));
 			a.setHorario(rs.getString(2));
+			a.setPresenca(rs.getString(3));
+			a.setFalta(rs.getString(4));
+			a.setFaltajusticada(rs.getString(5));
 			aulas.add(a);
 		}
 

@@ -286,7 +286,7 @@ personal.controller('financeiroController',function($scope, $rootScope,$timeout,
 				}).then(
 						function(success) {
 							
-							 webservicesAula.excluirAula(idAluno, $rootScope.dataAula,$rootScope.diaSemana  ).success(function(data){
+							 webservicesAula.excluirAulaFinanceiro(idAluno, $rootScope.dataAula,$rootScope.diaSemana  ).success(function(data){
 								   
 								   $scope.carregaSpinner = false;
 								   growl.addSuccessMessage("Aula excluída com sucesso");
@@ -313,6 +313,7 @@ personal.controller('financeiroController',function($scope, $rootScope,$timeout,
 	
 	$scope.gravarAula = function(){
 		
+		$scope.carregaSpinner = true;
 		
 		if($scope.vigente.horario == undefined){
 			
@@ -328,13 +329,14 @@ personal.controller('financeiroController',function($scope, $rootScope,$timeout,
 		
 		  webservicesAula.cadastrarNovaAula($rootScope.idAluno,
 				                            $scope.vigente.horario,
-				                            ($rootScope.mes*1)+1, 
-				                            $rootScope.ano,
+				                            $scope.vigente.mes,
+				                            $scope.vigente.ano,
 				                            listaDias).success(function(data){
 			   
 			   $scope.carregaSpinner = false;
 			   growl.addSuccessMessage("Novas aulas criadas com sucesso");
-			   $scope.closeThisDialog();
+		
+			   $scope.carregaSpinner = false;
 			   
 		   });
 		

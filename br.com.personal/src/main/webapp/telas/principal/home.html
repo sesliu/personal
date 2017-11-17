@@ -138,8 +138,16 @@
 						<div class="scrollDashFinanceiro">
 							<div style="margin-left: -20px">
 								<ul ng-repeat="pesq in listaAulas">
-									<a href="" ng-click="dadosAula(pesq.idAula)"><h4>
-												{{pesq.horario}} - {{pesq.nomeAluno}}</h4></a></li>
+								<li><div ng-if = "pesq.presenca == 1" ><a style="color:green" href="" ng-click="dadosAula(pesq.idAula)"><h4>
+												{{pesq.horario}} - {{pesq.nomeAluno}}</h4></a></div>
+									 <div ng-if = "pesq.falta == 1" ><a style= "color:red" href="" ng-click="dadosAula(pesq.idAula)"><h4>
+												{{pesq.horario}} - {{pesq.nomeAluno}}</h4></a></div>	
+									 <div ng-if = "pesq.faltajusticada == 1" ><a style="color:red" href="" ng-click="dadosAula(pesq.idAula)"><h4>
+												  {{pesq.horario}} - {{pesq.nomeAluno}}</h4></a></div>	
+									 <div ng-if = "pesq.faltajusticada == 0 && pesq.falta == 0  && pesq.presenca == 0" ><a style="color:blue" href="" ng-click="dadosAula(pesq.idAula)"><h4>
+												  {{pesq.horario}} - {{pesq.nomeAluno}}</h4></a></div>			  		
+												
+								</li>
 								</ul>
 
 							</div>

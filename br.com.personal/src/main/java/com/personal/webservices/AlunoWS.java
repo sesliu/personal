@@ -1,5 +1,6 @@
 package com.personal.webservices;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -60,15 +61,16 @@ public class AlunoWS {
 	public void estornapagamento(@RequestBody Aluno aluno) {
 	
 		AlunoDao alunoDao  = new AlunoDao();
-		
+		String mensagem;
 		
 		try {
 			
 			alunoDao.deleteFinanceiro(aluno);
 		
 			
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
+		} catch (SQLException | InstantiationException | IllegalAccessException | ClassNotFoundException e) {
+			
+			mensagem = e.getMessage();
 		
 		}
 		
@@ -302,7 +304,8 @@ public class AlunoWS {
 			lst = alunoDao.findByIdAulaVinculado(codigo);
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+				e.printStackTrace();
+			
 		}
 
 		return lst;
@@ -340,13 +343,21 @@ public class AlunoWS {
 		return lst;
 	}
 	
-	@RequestMapping(value = "/excluiraluno/{codigo}", method = RequestMethod.DELETE, produces = "application/json")
-	public void atualiza(@PathVariable Integer codigo) throws Exception {
+	@RequestMapping(value = "/excluiraluno/{codigo}", method = RequestMethod.DELETE, produces = "text/plain")
+	public String atualiza(@PathVariable Integer codigo) throws Exception {
 
 		AlunoDao alunoDao  = new AlunoDao();
+		String mensagem = null;
+		
+		try{
 		
 		alunoDao.delete(codigo);
-
+		}catch(SQLException e){
+			
+		   mensagem = e.getMessage();
+		}
+		
+		return mensagem;
 	}
 	
 	@RequestMapping(value="/alteravalor", method = RequestMethod.POST, consumes = "application/json")

@@ -770,13 +770,17 @@ $scope.gravar = function(){
 
 });
 
-personal.controller('personalController', function($scope, $compile, webservicesAula, ngDialog,growl, $timeout, $interval){
+personal.controller('personalController', function($scope, $compile, webservicesAula, ngDialog,growl, $timeout, $interval, md5){
 	
 	
 	$scope.personal = {};
 	$scope.nomeBotao = "Gravar"
 	$scope.exibeBotao = false;
 	$scope.altera = false;	
+	$scope.confirma;
+	$scope.mensagem = "Senhas não conferem"
+	$scope.exibeMensagem = false;
+		
 		
 	$interval(function(){
 		
@@ -821,6 +825,18 @@ personal.controller('personalController', function($scope, $compile, webservices
 		
 	}	
 		
+	$scope.verificarSenha = function(confirmar){
+		
+		if(md5.createHash(confirmar) != md5.createHash($scope.personal.senha)){
+		
+			$scope.exibeMensagem = true;
+			
+		}else{
+			
+			$scope.exibeMensagem = false;
+		}
+		
+	}
 		
 	$scope.limparCampos = function() {
 
@@ -834,6 +850,12 @@ personal.controller('personalController', function($scope, $compile, webservices
 	
 	$scope.gravarPersonal = function() {
 
+		
+		if(md5.createHash($scope.confirmar) != md5.createHash($scope.personal.senha)){
+			
+			growl.addErrorMessage("Senhas não conferem, verificar");
+			return;
+		}
 	
 		if($scope.nomeBotao == 'Gravar'){
 			
@@ -844,6 +866,8 @@ personal.controller('personalController', function($scope, $compile, webservices
 		}).then(
 				function(success) {
 					$scope.carregaSpinner = true;
+					
+					$scope.personal.senha = md5.createHash($scope.confirmar);
 
 					webservicesAula.gravarPersonal($scope.personal).success(function(data) {
 						

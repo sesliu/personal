@@ -105,7 +105,7 @@ personal.factory("webservicesAula", function($http) {
 		return $http.get(url + '/cadastrarNovaAula/'+idAluno+'/'+horario+'/'+mes+'/'+ano+'/'+listaDias);
 	};
 	
-	var _excluirAula = function(idAluno, databanco,diaSemana) {
+	var _excluirAulaFinanceiro = function(idAluno, databanco,diaSemana) {
 		return $http.get(url + '/excluirAula/'+idAluno+'/'+databanco+'/'+diaSemana);
 	};
 	
@@ -136,7 +136,7 @@ personal.factory("webservicesAula", function($http) {
 		buscaPersonal:_buscaPersonal,
 		verificarAulaAluno:_verificarAulaAluno,
 		cadastrarNovaAula:_cadastrarNovaAula,
-		excluirAula:_excluirAula
+		excluirAulaFinanceiro:_excluirAulaFinanceiro
 	}
 
 });

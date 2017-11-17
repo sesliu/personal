@@ -190,8 +190,18 @@ personal.controller('alunoController',function($scope, $compile, $rootScope,webs
 		}).then(
 				function(success) {
 					$scope.carregaSpinner = true;
-					webservicesAluno.excluirAluno(codigo).success(function(data, status) {
+					webservicesAluno.excluirAluno(codigo).success(function(response) {
 
+					    console.log(response);
+					    
+					    if(response != ''){
+					    	
+					    	growl.addErrorMessage('Não pode excluir aluno, existem aulas vinculadas');
+							$scope.carregaSpinner = false;
+					    	
+					    	return;
+					    }
+					    
 						webservicesAluno.buscarAluno(ultimabusca).success(function(data, status) {
 
 							$scope.listaAluno = data;
@@ -199,12 +209,15 @@ personal.controller('alunoController',function($scope, $compile, $rootScope,webs
 							$scope.carregaSpinner = false;
 
 						}).error(function(){
-							growl.addErrorMessage(mensagemErroGravar);
-							$scope.carregaSpinner = false;
+						
 						});
+						
+					
+						
 						},
 				function(error) {
-					
+							growl.addErrorMessage("Erro");
+							$scope.carregaSpinner = false;
 				});
 
 		

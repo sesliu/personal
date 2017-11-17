@@ -134,6 +134,8 @@ personal.controller('dashController', function($scope, webservicesAluno, webserv
 		let ano = data.getFullYear();
 		let dia = data.getFullYear()+'-'+('00'+(data.getMonth()+1)).slice(-2)+'-'+('00'+data.getDate()).slice(-2);
 		
+		$rootScope.dia = dia;
+		
 		mes = JSON.stringify(mes);
 		ano = JSON.stringify(ano);
 		
@@ -155,6 +157,7 @@ personal.controller('dashController', function($scope, webservicesAluno, webserv
 				webservicesAula.buscaAulaDia(dia).success(function(data){
 					
 				    $scope.listaAulas = data;
+				   
 					
 				})
 				
@@ -196,9 +199,6 @@ personal.controller('dashController', function($scope, webservicesAluno, webserv
 	$interval( function(){
 		
 		
-		
-	
-		
 		$timeout(function(){
 			
 			webservicesAluno.buscaFinanceiro(mes, ano).success(function(data){
@@ -225,6 +225,17 @@ personal.controller('dashController', function($scope, webservicesAluno, webserv
 			
 		},2000)
 	
+		if($rootScope.atualizarListaAula == true){
+			
+			webservicesAula.buscaAulaDia($rootScope.dia).success(function(data){
+				
+			    $scope.listaAulas = data;
+			    $rootScope.atualizarListaAula = false;
+				
+			})
+			
+			
+		}
 		
 		
 	},1500,false);
@@ -291,7 +302,7 @@ $scope.pagarValor =function(aluno){
 });
 
 
-personal.controller('dadosAulaController',function($scope, $rootScope, webservicesAula, growl, webservices, $timeout){
+personal.controller('dadosAulaController',function($scope, $rootScope, webservicesAula, growl, webservices, $timeout, ngDialog){
 	
 	
 	$scope.aula ={};
@@ -301,6 +312,7 @@ personal.controller('dadosAulaController',function($scope, $rootScope, webservic
 	var listaTreinos =[];
 	var listaTreinoSelecionado = [];
 	$scope.carregaSpinner = false;
+	$rootScope.atualizarListaAula = false;
 	
 
 	
@@ -341,6 +353,7 @@ personal.controller('dadosAulaController',function($scope, $rootScope, webservic
 	
 	$scope.atualizarAula = function(){
 		
+		$scope.carregaSpinner = true;
 		var listaIdTreino = [];
 		
 		$scope.aula = $scope.dadosAula;
@@ -361,7 +374,7 @@ personal.controller('dadosAulaController',function($scope, $rootScope, webservic
 		
 		webservicesAula.atualizarAulaDoDia($scope.aula).success(function(data,status){
 			
-			$scope.carregaSpinner = true;
+			$rootScope.atualizarListaAula = false;
 			if(status == 200){
 			webservices.vincularTreino($rootScope.dadosAula.idAula,listaIdTreino).success(function(data,status){
 				
@@ -369,7 +382,8 @@ personal.controller('dadosAulaController',function($scope, $rootScope, webservic
 					
 					$scope.carregaSpinner = false;
 					growl.addSuccessMessage("Aula atualizada com sucesso");
-					
+					$rootScope.atualizarListaAula = true;
+					$scope.closeThisDialog();
 				}
 				
 			});
