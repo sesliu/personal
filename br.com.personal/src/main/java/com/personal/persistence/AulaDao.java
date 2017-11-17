@@ -244,6 +244,8 @@ public class AulaDao extends Dao {
 			a.setDetalhe(rs.getString(1));
 			a.setValorTotal(rs.getString(2));
 
+		
+			
 		}
 		stmt = con.prepareStatement(procRelTreinoAnterior);
 		stmt.setString(1, mes);
@@ -255,7 +257,7 @@ public class AulaDao extends Dao {
 		// resultado, tr.nome
 
 		while (rs.next()) {
-			Aula au = new RelatorioSaida();
+			Aula au = new Aula();
 
 			au.setPersonal(a.getPersonal());
 			au.setValorTotal(a.getValorTotal());
@@ -271,10 +273,13 @@ public class AulaDao extends Dao {
 			au.setObservacao(rs.getString(7));
 			au.setResultado(rs.getString(8));
 			au.setListaTreino(rs.getString(9));
-
+			
+		
 			aulas.add(au);
 		}
 
+	
+		
 		rs.close();
 		stmt.close();
 
