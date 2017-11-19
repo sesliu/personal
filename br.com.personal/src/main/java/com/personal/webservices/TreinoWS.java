@@ -154,7 +154,7 @@ public class TreinoWS {
 			e.printStackTrace();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			
 		}
 
 	}
@@ -177,13 +177,20 @@ public class TreinoWS {
 	}
 	
 
-	@RequestMapping(value = "/excluirtreino/{codigo}", method = RequestMethod.DELETE, produces = "application/json")
-	public void atualiza(@PathVariable Integer codigo) throws Exception {
+	@RequestMapping(value = "/excluirtreino/{codigo}", method = RequestMethod.DELETE, produces = "text/plain")
+	public String atualiza(@PathVariable Integer codigo) throws Exception {
 
 		TreinoDao treinoDao  = new TreinoDao();
+		String mensagem = null;
 		
-		treinoDao.delete(codigo);
-
+		try{
+			treinoDao.delete(codigo);
+		}catch(SQLException e){
+			
+			 mensagem = e.getMessage();
+		}
+		
+		return mensagem;
 	}
 
 }

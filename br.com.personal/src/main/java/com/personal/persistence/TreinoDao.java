@@ -187,11 +187,12 @@ public class TreinoDao extends Dao {
 
 		open();
 
+		
 		stmt = con.prepareStatement(procDeletaTreino);
 		stmt.setInt(1, codigo);
 		stmt.execute();
 		stmt.close();
-
+	
 		close();
 
 	}
@@ -201,11 +202,17 @@ public class TreinoDao extends Dao {
 
 		open();
 
-		stmt = con.prepareStatement(procReorganizaAlunoTreino);
-		stmt.setInt(1, codigo);
-		stmt.execute();
-
-		stmt.close();
+		try{
+			stmt = con.prepareStatement(procReorganizaAlunoTreino);
+			stmt.setInt(1, codigo);
+			stmt.execute();
+	
+			stmt.close();
+		}catch(Exception e){
+			
+			
+		}
+		
 		close();
 
 	}
@@ -229,6 +236,10 @@ public class TreinoDao extends Dao {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		 catch (SQLException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
 		open();
 
 		int idAluno = 0;

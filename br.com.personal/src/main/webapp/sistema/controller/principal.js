@@ -1,4 +1,4 @@
-personal.controller('loginController', function($scope, $state, $rootScope, growl){
+personal.controller('loginController', function($scope, $state, $rootScope, growl, webservicesAula, md5){
 
 	
 	$scope.login ={};
@@ -12,22 +12,30 @@ personal.controller('loginController', function($scope, $state, $rootScope, grow
 		
 		$scope.carregaSpinner = true;
 		
+		webservicesAula.buscaPersonal().success(function(data){
+			
+			if($scope.login.nome.toUpperCase() == data.login.toUpperCase() &&  md5.createHash($scope.login.senha) == data.senha){
+				
+				
+				$state.go('personal');
+				$rootScope.acesso = true;
+				
+			}else{
+				
+				$rootScope.acesso = false;
+				$scope.mostraMensagem = true;
+				growl.addErrorMessage("Login ou senha inválidos");
+				
+			}
+			
+			$scope.carregaSpinner = false;
+			
+			
 		
-		if($scope.login.nome == 'anderson' && $scope.login.senha == '123'){
-			
-			
-			$state.go('personal');
-			$rootScope.acesso = true;
-			
-		}else{
-			
-			$rootScope.acesso = false;
-			$scope.mostraMensagem = true;
-			growl.addErrorMessage("Login ou senha inválidos");
-			
-		}
 		
-		$scope.carregaSpinner = false;
+		});
+		
+		
 		
 		
 	}

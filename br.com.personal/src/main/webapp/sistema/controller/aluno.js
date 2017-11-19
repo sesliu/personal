@@ -196,7 +196,7 @@ personal.controller('alunoController',function($scope, $compile, $rootScope,webs
 					    
 					    if(response != ''){
 					    	
-					    	growl.addErrorMessage('Não pode excluir aluno, existem aulas vinculadas');
+					    	growl.addErrorMessage('Não pode excluir aluno, existem pendências');
 							$scope.carregaSpinner = false;
 					    	
 					    	return;

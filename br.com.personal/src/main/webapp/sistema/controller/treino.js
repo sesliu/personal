@@ -151,7 +151,15 @@ personal.controller('treinoController',
 							
 							$scope.carregaSpinner = true;
 
-							webservices.excluirTreino(codigo).success(function(data, status)  {
+							webservices.excluirTreino(codigo).success(function(response)  {
+								
+								   if(response != ''){
+								    	
+								    	growl.addErrorMessage('Não pode excluir treino, existem pendências com aulas');
+										$scope.carregaSpinner = false;
+								    	
+								    	return;
+								    }
 
 								growl.addSuccessMessage(mensagemOKExcluir);
 								webservices.buscarTreino(ultimabusca).success(function(data, status) {
