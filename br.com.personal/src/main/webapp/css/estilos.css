@@ -272,6 +272,21 @@ ul{
 }
 
 
+
+.noteLargeDetalheAula{
+	
+ color: #333;
+  position: relative;
+  width: 560px;
+  margin: 0 auto;
+  padding: 40px;
+  font-family: Satisfy;
+  font-size: 18px;
+  box-shadow: 0 10px 10px 2px rgba(0,0,0,0.3);
+	
+}
+
+
 .noteLarge{
 	
  color: #333;

@@ -272,7 +272,21 @@ public class AulaWS {
 		return lst;
 	}
 	
-	
+	@RequestMapping(value = "/listaaulasDiaAnterior/{dia}", method = RequestMethod.GET, produces = "application/json")
+	public List<Aula> listaAulaDiaAnterior(@PathVariable("dia") String dia) {
+
+		AulaDao aulaDao  = new AulaDao();
+		
+		List<Aula> lst = new ArrayList<Aula>();
+		try {
+			lst = aulaDao.findByAulaDiaAnterior(dia);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return lst;
+	}
 	
 	@RequestMapping(value = "/buscaraulaId/{codigo}", method = RequestMethod.GET, produces = "application/json")
 	public Aula busca(@PathVariable("codigo") Integer codigo) {

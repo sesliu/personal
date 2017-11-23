@@ -56,6 +56,7 @@ personal.controller('dashController', function($scope, webservicesAluno, webserv
 	$scope.listaAniversario = [];
 	$scope.listaProfissao = [];
 	$scope.listaAulas = [];
+	$scope.listaAulasAnterior = [];
 	$scope.listaFinancas = [];
 	$scope.listaMontante = [];
 	$scope.montante = '0.00';
@@ -65,7 +66,7 @@ personal.controller('dashController', function($scope, webservicesAluno, webserv
 	var dia;
 	var dias;
 	$scope.vigente = {};
-	
+	var dataAnterior;
 	
 	$interval( function(){
 		
@@ -74,9 +75,13 @@ personal.controller('dashController', function($scope, webservicesAluno, webserv
 		dias = data.getDate();
 		ano = data.getFullYear();
 		
+		dataAnterior = new Date(data);
+		
+		$scope.dataFormatadaAnterior  = ('00'+(dataAnterior.getDate()-1)).slice(-2)+'/'+('00'+(dataAnterior.getMonth()+1)).slice(-2)+'/'+dataAnterior.getFullYear();
 		
 		
 		$scope.dataFormatada  = ('00'+data.getDate()).slice(-2)+'/'+('00'+(data.getMonth()+1)).slice(-2)+'/'+data.getFullYear();
+		
 		
 		 dia  = data.getFullYear()+'-'+('00'+(data.getMonth()+1)).slice(-2)+'-'+('00'+data.getDate()).slice(-2);
 		 
@@ -147,18 +152,7 @@ personal.controller('dashController', function($scope, webservicesAluno, webserv
 		mes = JSON.stringify(mes);
 		ano = JSON.stringify(ano);
 		
-			$scope.vigente = { 'mes' : mes, 'ano' : ano } 
 		
-			webservicesAluno.buscaMontante($scope.vigente.mes, $scope.vigente.ano).success(function(data){
-				
-				$scope.montante = data.valorTotal;
-				
-				if($scope.montante == null){
-					
-					$scope.montante = '0.00';
-				}
-				
-			});
 			
 
 				
@@ -169,13 +163,20 @@ personal.controller('dashController', function($scope, webservicesAluno, webserv
 					
 				})
 				
+				
+				webservicesAula.buscaAulaDiaAnterior(dia).success(function(data){
+					
+				    $scope.listaAulasAnterior = data;
+				   
+					
+				})
 		
 				webservicesAula.buscaPersonal().success(function(data) {
 					
 						
 					if(data.nome != null){
 						
-						$scope.nomePersonal = "Bem-vindo "+ data.nome;
+						$scope.nomePersonal = data.login;
 						
 					}else{
 						
@@ -207,31 +208,7 @@ personal.controller('dashController', function($scope, webservicesAluno, webserv
 	$interval( function(){
 		
 		
-		$timeout(function(){
-			
-			webservicesAluno.buscaFinanceiro(mes, ano).success(function(data){
-				
-				$scope.listaFinancas = data;
-			});
-			
-		},2000)
 	
-		
-		$timeout(function(){
-			
-			
-			webservicesAluno.buscaMontante($scope.vigente.mes, $scope.vigente.ano).success(function(data){
-				
-				$scope.montante = data.valorTotal;
-				
-				if($scope.montante == null){
-					
-					$scope.montante = '0.00';
-				}
-				
-			});
-			
-		},2000)
 	
 		if($rootScope.atualizarListaAula == true){
 			

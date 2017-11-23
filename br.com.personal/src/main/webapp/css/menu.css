@@ -224,3 +224,11 @@ button:{
 }
 
 button:focus {outline:0;}
+
+.capitalize {
+  display: inline-block;  
+}
+
+.capitalize::first-letter {
+  text-transform: uppercase;
+}

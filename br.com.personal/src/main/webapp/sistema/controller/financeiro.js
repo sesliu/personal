@@ -51,7 +51,7 @@ personal.controller('financeiroController',function($scope, $rootScope,$timeout,
 	$scope.dataFormatada;
 	var recarregarLista = false;
 	var listaDias = []; 
-	
+	$scope.montante = '0.00';
 	
 	
 	function getDiasMes(month, year) {
@@ -70,6 +70,8 @@ personal.controller('financeiroController',function($scope, $rootScope,$timeout,
 		
 		$scope.listaFinancas = data;
 		$scope.carregaSpinner = false;
+		
+		 
 	});
 	
 	mes = JSON.stringify(mes);
@@ -97,6 +99,24 @@ personal.controller('financeiroController',function($scope, $rootScope,$timeout,
 	
 	
 	$scope.inicio = function(){
+		
+		
+		//$scope.vigente = { 'mes' : mes, 'ano' : ano } 
+		
+		webservicesAluno.buscaMontante($scope.vigente.mes, $scope.vigente.ano).success(function(data){
+			
+			$scope.montante = data.valorTotal;
+			
+			if($scope.montante == null){
+				
+				$scope.montante = '0.00';
+			}
+			
+		});
+		
+		
+		
+		
 		webservicesAluno.buscarAlunos().success(function(data){
 			
 			$scope.listaAlunos = data;
@@ -348,6 +368,19 @@ personal.controller('financeiroController',function($scope, $rootScope,$timeout,
 		
 		$scope.listaDias = [];
 		
+		
+		   webservicesAluno.buscaMontante($scope.vigente.mes, $scope.vigente.ano).success(function(data){
+				
+				$scope.montante = data.valorTotal;
+				
+				if($scope.montante == null){
+					
+					$scope.montante = '0.00';
+				}
+				
+			});
+		
+		
 		$scope.carregaSpinner = true;
 		$timeout(function(){
 			
@@ -386,9 +419,13 @@ personal.controller('financeiroController',function($scope, $rootScope,$timeout,
 				$scope.listaDiasAula = [] 
 				$scope.listaDiasAulaAnterior = [];
 				$scope.abatimento = "0";
+				
+			
 			
 			
 		});
+		
+		
 		
 	}
 	
@@ -421,6 +458,17 @@ personal.controller('financeiroController',function($scope, $rootScope,$timeout,
 			growl.addSuccessMessage("Pagamento realizado com sucesso");
 			$scope.listaFinancas = data;
 			$scope.carregaSpinner = false;
+			
+			webservicesAluno.buscaMontante($scope.vigente.mes, $scope.vigente.ano).success(function(data){
+				
+				$scope.montante = data.valorTotal;
+				
+				if($scope.montante == null){
+					
+					$scope.montante = '0.00';
+				}
+				
+			});
 		
 		});
 		
@@ -440,6 +488,17 @@ personal.controller('financeiroController',function($scope, $rootScope,$timeout,
 			growl.addSuccessMessage("Estorno realizado com sucesso");
 			$scope.listaFinancas = data;
 			$scope.carregaSpinner = false;
+			
+	   webservicesAluno.buscaMontante($scope.vigente.mes, $scope.vigente.ano).success(function(data){
+				
+				$scope.montante = data.valorTotal;
+				
+				if($scope.montante == null){
+					
+					$scope.montante = '0.00';
+				}
+				
+			});
 		
 		});
 		

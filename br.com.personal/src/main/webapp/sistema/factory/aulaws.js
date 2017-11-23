@@ -40,6 +40,11 @@ personal.factory("webservicesAula", function($http) {
 		return $http.get(url + '/listaaulasDia/'+dia);
 	};
 	
+	var _buscaAulaDiaAnterior = function(dia) {
+		return $http.get(url + '/listaaulasDiaAnterior/'+dia);
+	};
+	
+	
 	var _buscaDadosDia = function(codigo) {
 		return $http.get(url + '/buscarDadosAula/'+codigo);
 	};
@@ -121,6 +126,7 @@ personal.factory("webservicesAula", function($http) {
 		vincularAula:_vincularAula,
 		listaAulas:_listaAulas,
 		buscaAulaDia:_buscaAulaDia,
+		buscaAulaDiaAnterior:_buscaAulaDiaAnterior,
 		buscaDadosDia:_buscaDadosDia,
 		buscaDiasAula:_buscaDiasAula,
 		vincularAulaAluno:_vincularAulaAluno,

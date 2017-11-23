@@ -32,6 +32,12 @@ public class Dao {
 		String password = "Personal@Gym@22";
 		
 		
+		/*String url = "jdbc:mysql://personalgymprod.mysql.uhserver.com:3306/personalgymprod?autoReconnect=true";
+		String user = "persosnalgym";
+		String password = "Personal@6";
+		*/
+		
+		
 		Class.forName("com.mysql.jdbc.Driver");
 		con = DriverManager.getConnection(url,user,password);
 	

@@ -29,6 +29,8 @@ public class AulaDao extends Dao {
 	private String proclistaAulaAlunoAnterior = "call sp_verificaDiasAulaAnterior(?,?,?)";
 
 	private String procListaAulaDia = "call sp_buscaAulaDia(?)";
+	
+	private String procListaAulaDiaAnterior = "call sp_buscaAulaDiaAnterior(?)";
 
 	private String procDadosAula = "call sp_DadosAula(?)";
 
@@ -661,6 +663,38 @@ public class AulaDao extends Dao {
 
 	}
 
+	
+	public List<Aula> findByAulaDiaAnterior(String dia)
+			throws SQLException, InstantiationException, IllegalAccessException, ClassNotFoundException {
+
+		open();
+
+		ArrayList<Aula> aulas = new ArrayList<Aula>();
+
+		stmt = con.prepareStatement(procListaAulaDiaAnterior);
+		stmt.setString(1, dia);
+		rs = stmt.executeQuery();
+		while (rs.next()) {
+
+			Aula a = new Aula();
+
+			a.setIdAula(rs.getInt(1));
+			a.setHorario(rs.getString(2));
+			a.setPresenca(rs.getString(3));
+			a.setFalta(rs.getString(4));
+			a.setFaltajusticada(rs.getString(5));
+			aulas.add(a);
+		}
+
+		rs.close();
+		stmt.close();
+
+		close();
+
+		return aulas;
+
+	}
+	
 	public List<Aula> findByName(String nome)
 			throws SQLException, InstantiationException, IllegalAccessException, ClassNotFoundException {
 
