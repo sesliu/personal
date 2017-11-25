@@ -14,6 +14,15 @@ personal.controller('loginController', function($scope, $state, $rootScope, grow
 		
 		webservicesAula.buscaPersonal().success(function(data){
 			
+			if(data.login == null || data.login == undefined){
+				
+				growl.addErrorMessage("Login ou senha inválidos");
+				
+				return;
+				
+			}
+			
+			
 			if($scope.login.nome.toUpperCase() == data.login.toUpperCase() &&  md5.createHash($scope.login.senha) == data.senha){
 				
 				
@@ -48,11 +57,12 @@ personal.controller('loginController', function($scope, $state, $rootScope, grow
 
 
 personal.controller('dashController', function($scope, webservicesAluno, webservicesAula, ngDialog, $rootScope, $interval, 
-		$timeout, growl){
+		$timeout, growl,webservices, $compile){
 	
 	
 	
-	
+	$scope.dadosAula;
+	$scope.aula;
 	$scope.listaAniversario = [];
 	$scope.listaProfissao = [];
 	$scope.listaAulas = [];
@@ -67,6 +77,11 @@ personal.controller('dashController', function($scope, webservicesAluno, webserv
 	var dias;
 	$scope.vigente = {};
 	var dataAnterior;
+	$scope.exibeAula = false;
+	var listaTreinos =[];
+	var listaTreinoSelecionado = [];
+	$scope.dataAula = "";
+	
 	
 	$interval( function(){
 		
@@ -75,9 +90,10 @@ personal.controller('dashController', function($scope, webservicesAluno, webserv
 		dias = data.getDate();
 		ano = data.getFullYear();
 		
-		dataAnterior = new Date(data);
+		dataAnterior = new Date();
+		dataAnterior.setDate(dataAnterior.getDate() -1);
 		
-		$scope.dataFormatadaAnterior  = ('00'+(dataAnterior.getDate()-1)).slice(-2)+'/'+('00'+(dataAnterior.getMonth()+1)).slice(-2)+'/'+dataAnterior.getFullYear();
+		$scope.dataFormatadaAnterior  = ('00'+(dataAnterior.getDate())).slice(-2)+'/'+('00'+(dataAnterior.getMonth()+1)).slice(-2)+'/'+dataAnterior.getFullYear();
 		
 		
 		$scope.dataFormatada  = ('00'+data.getDate()).slice(-2)+'/'+('00'+(data.getMonth()+1)).slice(-2)+'/'+data.getFullYear();
@@ -142,6 +158,8 @@ personal.controller('dashController', function($scope, webservicesAluno, webserv
 	
 	$scope.inicio = function(){
 		
+		$scope.exibeAula = false;
+		$scope.carregaSpinner = true;
 		let data = new Date();
 		let mes = data.getMonth();
 		let ano = data.getFullYear();
@@ -182,6 +200,8 @@ personal.controller('dashController', function($scope, webservicesAluno, webserv
 						
 						$scope.nomePersonal ="";
 					}
+					
+					$scope.carregaSpinner = false;
 						
 				});
 				
@@ -205,43 +225,114 @@ personal.controller('dashController', function($scope, webservicesAluno, webserv
 	}
 	
 	
-	$interval( function(){
+	
+	
+	$scope.mudaData = function(data){
 		
+		$scope.dataAula =" - "+data;
 		
+	}
 	
 	
-		if($rootScope.atualizarListaAula == true){
-			
-			webservicesAula.buscaAulaDia($rootScope.dia).success(function(data){
-				
-			    $scope.listaAulas = data;
-			    $rootScope.atualizarListaAula = false;
-				
-			})
-			
-			
-		}
+	$scope.detalhesAula = function(codigo){
 		
-		
-	},1500,false);
-	
-	
-	
-	
-	$scope.dadosAula = function(codigo){
+		$scope.exibeAula = true;
+		$scope.carregaSpinner = true;
 		
 		webservicesAula.buscaDadosDia(codigo).success(function(data){
 			
 		
-			$rootScope.dadosAula = data;
-					
-			ngDialog.open({
-						template : 'telas/dialogo/dialogoDadosAula.html',
-						className : 'ngdialog-theme-default'
-					});
-					
+			$scope.dadosAula = data;
+			
+			webservices.buscarTreinosAula(codigo).success(function(data){
+				
+			    listaTreinos = data;
+				
+			});
+			
+			webservices.buscarTreinosVicunlados(codigo).success(function(data){
+				
+				listaTreinoSelecionado = data;
+			
+			});
+			
+			$timeout(function(){	
+				$scope.demoOptions = {
+					title : 'Escolha os treinos da aula',
+					filterPlaceHolder : 'Buscar nome do treino abaixo',
+					labelAll : 'Não vinculados',
+					labelSelected : 'vinculados',
+					helpMessage : 'Clicar no nome do treino para transferir entre os campos',
+					orderProperty : 'nome',
+					items : listaTreinos,
+					selectedItems : listaTreinoSelecionado
+				};			
+
+			},1000);
+			
+			$scope.carregaSpinner = false;
 				
 		});
+		
+	}
+
+	
+$scope.sairDetalheAula = function(){
+	
+	
+	$scope.exibeAula = false;
+	$scope.dataAula = '';
+	
+}	
+	
+$scope.atualizarAula = function(){
+		
+		$scope.carregaSpinner = true;
+		var listaIdTreino = [];
+		
+		$scope.aula = $scope.dadosAula;
+		
+		var dadoTreino = $scope.demoOptions.selectedItems;
+		
+		for (var i = 0; i < dadoTreino.length; i++) {
+
+			listaIdTreino.push(dadoTreino[i].idTreino);
+		}
+
+
+		if(listaIdTreino.length == 0){
+			
+			listaIdTreino = 0;
+		}
+		
+		
+		webservicesAula.atualizarAulaDoDia($scope.aula).success(function(data,status){
+			
+			
+			if(status == 200){
+			webservices.vincularTreino($scope.dadosAula.idAula,listaIdTreino).success(function(data,status){
+				
+				if(status == 200){
+					
+					$scope.carregaSpinner = false;
+					$rootScope.atualizarListaAula = false;
+					growl.addSuccessMessage("Aula atualizada com sucesso");
+					$scope.exibeAula = false;
+					$scope.dataAula = '';
+					
+					$("#paginas").empty();
+					var compiledeHTML = $compile("<dashboard></dashboard>")
+					($rootScope);
+					$("#paginas").append(compiledeHTML);
+				}
+				
+			});
+			
+			}
+			
+		});
+		
+	
 		
 	}
 	
