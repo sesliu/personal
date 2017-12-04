@@ -1,12 +1,47 @@
-personal.controller('loginController', function($scope, $state, $rootScope, growl, webservicesAula, md5){
+personal.controller('loginController', function($scope, $state, $rootScope, growl, webservicesAula, md5, $timeout){
 
+	
+	
 	
 	$scope.login ={};
 	$rootScope.acesso = false;
 	$scope.mostraMensagem = false;
 	$scope.carregaSpinner = false;
+	$scope.numeroVersao;
+	var listaVersao;
 	
+	var getVersion = function(){
+		
+	  var listaVersoes = []
+		
+		var url = "https://api.github.com/repos/sesliu/personal/tags";
+		
+		 $.getJSON(url, function(result){
+		        
+			 listaVersao =	result;
+			 console.log(listaVersao)
+			 
+			 for(var i = 0; i < listaVersao.length; i++){
+				 
+				 listaVersoes.push(listaVersao[i].name);
+			 }
+			 
+			 
+			 $timeout(function(){
+				 $scope.numeroVersao ="";
+				 console.log(listaVersoes);
+				 $scope.numeroVersao = "Release: "+listaVersoes[0];
+				 
+			 },10)
+			 
+			 	
+		    
+		 });
+		
+		
+	}
 	
+	getVersion();
 	
 	$scope.acessar = function(){
 		
@@ -171,9 +206,6 @@ personal.controller('dashController', function($scope, webservicesAluno, webserv
 		ano = JSON.stringify(ano);
 		
 		
-			
-
-				
 				webservicesAula.buscaAulaDia(dia).success(function(data){
 					
 				    $scope.listaAulas = data;
@@ -393,8 +425,10 @@ personal.controller('dadosAulaController',function($scope, $rootScope, webservic
 
 	
 	$scope.inicio = function(){
+	
+	$timeout(function(){
 		
-		webservices.buscarTreinosAula($rootScope.dadosAula.idAula).success(function(data){
+	webservices.buscarTreinosAula($rootScope.dadosAula.idAula).success(function(data){
 			
 		    listaTreinos = data;
 			
@@ -405,6 +439,9 @@ personal.controller('dadosAulaController',function($scope, $rootScope, webservic
 			listaTreinoSelecionado = data;
 		
 		})
+		
+	},1000)	
+	
 		
 			
 		
