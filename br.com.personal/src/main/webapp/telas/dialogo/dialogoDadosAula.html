@@ -1,0 +1,171 @@
+<div ng-controller="dadosAulaController" ng-init="inicio()">
+	<div growl></div>
+	<div ng-show="carregaSpinner">
+		<span style="margin-top: 15%"
+			us-spinner="{radius:25,width:8,length:16}" spinner-on="showSpinner"></span>
+	</div>
+	<div class="container-fluid">
+
+		<div class="panel panel-info"
+			style="margin-top: 20px; position: relative;">
+			<div class="panel-heading">
+				<strong>Aula</strong>
+			</div>
+			<div class="panel-body">
+				<p>
+					<label class="pull-left">Resumo da Aula</label>
+				</p>
+				<div class="col-sm-12">
+					<div class="pull-left"
+						style="margin-top: 28px; margin-bottom: 10px">
+						<button type="button" class="btn btn-info btnTamanho"
+							ng-click="closeThisDialog()" title="Sair">Sair</button>
+					</div>
+					<div class="pull-left"
+						style="margin-top: 28px; margin-bottom: 10px">
+						<button type="button" class="btn btn-success btnTamanho"
+							ng-click="atualizarAula()" title="Atualizar Aula">Atualizar</button>
+					</div>
+				</div>
+
+
+				<div class="col-md-12" style="margin-bottom: 20px">
+					<div class="well">
+						<p>
+						<h4>
+							<strong>Nome Aluno: </strong> <span
+								style="white-space: pre-wrap; color: red">{{dadosAula.nomeAluno}}</span>
+						</h4>
+						</p>
+						<p>
+						<h4>
+							<strong>Horário Aula: </strong> <span
+								style="white-space: pre-wrap; color: red">{{dadosAula.horario}}</span>
+						</h4>
+						</p>
+
+					</div>
+					<div class="col-xs-12">
+						<hr>
+					</div>
+					<div class="col-sm-12" style="margin-bottom:12px">
+						<div class="col-sm-4">
+							<label class="pull-left">Tipo da Aula</label> <select
+								class="form-control" ng-model="dadosAula.tipo">
+								<option value="">Selecione</option>
+								<option value="Extra">Extra</option>
+								<option value="Normal">Normal</option>
+								<option value="Reposição">Reposição</option>
+							</select>
+						</div>
+					</div>
+					<div class="col-xs-12">
+						<hr>
+					</div>
+					<div class="col-xs-12 well">
+						<div class="col-xs-10" style="margin-bottom: 12px">
+							<dualmultiselect options="demoOptions"> </dualmultiselect>
+
+						</div>
+
+					</div>
+
+					<div class="col-xs-12" style="margin-bottom: 20px">
+						<div class="col-sm-12">
+							<label class="pull-left">Observação</label>
+							<textarea class="form-control" ng-model="dadosAula.observacao"
+								cols="100" rows="5" wrap="soft">
+							</textarea>
+						</div>
+					</div>
+
+					<hr>
+					<div class="col-sm-offset-2">
+						<div class="col-sm-3">
+							<label class="pull-left">Presente</label> <select
+								class="form-control obrigatorio" ng-model="dadosAula.presenca"
+								ng-disabled="dadosAula.falta =='1' || dadosAula.faltajusticada == '1'">
+								<option value="">Selecione</option>
+								<option value="0">Não</option>
+								<option value="1">Sim</option>
+							</select>
+						</div>
+						<div class="col-sm-3">
+							<label class="pull-left">Falta</label> <select
+								class="form-control obrigatorio" ng-model="dadosAula.falta"
+								ng-disabled="dadosAula.presenca=='1' || dadosAula.faltajusticada == '1'">
+								<option value="">Selecione</option>
+								<option value="0">Não</option>
+								<option value="1">Sim</option>
+							</select>
+						</div>
+						<div class="col-sm-3">
+							<label class="pull-left">Falta Justificada</label> <select
+								class="form-control obrigatorio"
+								ng-model="dadosAula.faltajusticada"
+								ng-disabled="dadosAula.presenca=='1' || dadosAula.falta == '1'">
+								<option value="">Selecione</option>
+								<option value="0">Não</option>
+								<option value="1">Sim</option>
+							</select>
+						</div>
+					</div>
+				</div>
+				<div ng-show="dadosAula.faltajusticada == '1'">
+					<div class="col-xs-12" style="margin-bottom: 40px">
+						<div class="col-xs-10">
+							<label class="pull-left">Motivo Falta</label>
+							<textarea class="form-control"
+								ng-model="dadosAula.obsjustificada" cols="100" rows="5"
+								wrap="soft">
+					</textarea>
+						</div>
+					</div>
+				</div>
+				<hr>
+				<div class="col-sm-12" style="margin-bottom: 30px">
+					<label class="pull-left">Resultado do treino(PSE)</label>
+				</div>
+				<div class="col-sm-12 col-sm-offset-2">
+
+					<div class="imagens">
+						<input type="radio" name="imagem" id="resultado1" value="1"
+							ng-model="dadosAula.resultado" /> <label for="resultado1">
+							<i class="fa fa-smile-o" style="font-size: 4em; color: #009966"></i>
+						</label> <input type="radio" name="imagem" id="resultado2" value="2"
+							ng-model="dadosAula.resultado" /> <label for="resultado2">
+							<i class="fa fa-smile-o" style="font-size: 4em; color: #009966"></i>
+						</label> <input type="radio" name="imagem" id="resultado3" value="3"
+							ng-model="dadosAula.resultado" /> <label for="resultado3">
+							<i class="fa fa-smile-o" style="font-size: 4em; color: #009966"></i>
+						</label> <input type="radio" name="imagem" id="resultado4" value="4"
+							ng-model="dadosAula.resultado" /> <label for="resultado4">
+							<i class="fa fa-smile-o" style="font-size: 4em; color: #009966"></i>
+						</label> <input type="radio" name="imagem" id="resultado5" value="5"
+							ng-model="dadosAula.resultado" /> <label for="resultado5">
+							<i class="fa fa-smile-o" style="font-size: 4em; color: #009966"></i>
+						</label> <input type="radio" name="imagem" id="resultado6" value="6"
+							ng-model="dadosAula.resultado" /> <label for="resultado6">
+							<i class="fa fa-smile-o" style="font-size: 4em; color: #FFFF33"></i>
+						</label> <input type="radio" name="imagem" id="resultado7" value="7"
+							ng-model="dadosAula.resultado" /> <label for="resultado7">
+							<i class="fa fa-smile-o" style="font-size: 4em; color: #FFFF33"></i>
+						</label> <input type="radio" name="imagem" id="resultado8" value="8"
+							ng-model="dadosAula.resultado" /> <label for="resultado8">
+							<i class="fa fa-smile-o" style="font-size: 4em; color: #FFFF33"></i>
+						</label> <input type="radio" name="imagem" id="resultado9" value="9"
+							ng-model="dadosAula.resultado" /> <label for="resultado9">
+							<i class="fa fa-smile-o" style="font-size: 4em; color: #FF0033"></i>
+						</label> <input type="radio" name="imagem" id="resultado10" value="10"
+							ng-model="dadosAula.resultado" /> <label for="resultado10">
+							<i class="fa fa-smile-o" style="font-size: 4em; color: #FF0000"></i>
+						</label>
+
+					</div>
+				</div>
+
+
+			</div>
+		</div>
+	</div>
+</div>

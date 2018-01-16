@@ -1,0 +1,98 @@
+<div ng-controller="mobileController">
+	<div ng-show="carregaSpinner">
+		<span style="margin-top: 15%"
+			us-spinner="{radius:25,width:8,length:16}" spinner-on="showSpinner"></span>
+	</div>
+	<div class="container">
+		<div id="mobileMain">
+
+			<div class="fixo">
+				<div class="text-center logo">
+					<span>Personal GYM Trainer</span>
+				</div>
+				<div class="dia">
+					<span>{{data}} - {{hora}}</span>
+				</div>
+				<div ng-show="exibeAula">
+					<div class="logoAula">
+						<span>Próxima aula: {{proximaAula.nomeAula}} -
+							{{proximaAula.horarioAula}} </span>
+					</div>
+				</div>
+			</div>
+			<div ng-show ="telaPrincipal">
+			<div ng-show="exibeAula">
+				<div class="col-xs-12 selecionaAluno">
+					<div class="col-xs-2 col-xs-offset-3" style="margin-bottom: 16px">
+						<div>
+							<button class="btn botaoCarregarAluno"
+								ng-click="carregarAlunos()">Carregar Alunos</button>
+						</div>
+					</div>
+
+					<div class="col-xs-10 col-xs-offset-1">
+						<select class="form-control" ng-model="mobile.idAluno"
+							ng-change="buscaDadosAluno(mobile.idAluno)">
+							<option value="">Selecione</option>
+							<option ng-repeat="pesq in listaaluno" value={{pesq.idAluno}}>{{pesq.nomeAluno}}</option>
+						</select>
+					</div>
+				</div>
+			</div>
+			<div ng-show="exibeTreino">
+			<div class="col-xs-12">
+				<div class="scrollTabelaMobile tabela">
+					
+					<div ng-repeat="tipo in listaTodosTreinos">
+						<input type="checkbox" class="checkbox-inline"
+								data-checklist-model=""
+								data-checklist-value="tipo.value"> {{tipo.text}}</input>
+					</div>
+				</div>
+
+			</div>
+			<div class="col-xs-12 text-center" style="margin-bottom:4px">
+				<hr>
+				<div class="col-xs-6 col-xs-offset-3">
+					<button btn="button" class="btn btn-info">Alterar Treino</button>
+			    </div>
+   			</div>
+			
+			<div class="col-xs-12 text-center">
+			<hr>
+				<div class="col-xs-6">
+					<button btn="button" class="btn btn-success">Presente</button>
+			    </div>
+			    <div class="col-xs-6">
+			    	<button btn="button" class="btn btn-danger">Ausente</button>
+			    </div>
+			</div>
+			
+			<div class="col-xs-12 text-center">
+			<hr>
+				
+				<div class="col-xs-6">
+			    		<button btn="button" class="btn btn-success" ng-click="comecaAula()"><span style="white-space: pre;">Iniciar</span></button>
+			   	 </div>
+			  
+			   	<div class="col-xs-6">
+			   		<button btn="button" class="btn btn-danger" ng-click="encerrarAula()"><span style="white-space: pre;">Encerrar</span></button>
+			   	</div>
+			</div>
+			
+			
+		</div>	
+	</div>	
+		<div ng-show="carregaAula">
+		<div class="col-xs-12" style="margin-top:25%">
+			<hr>
+				<div class="text-center">
+			    		<button btn="button" class="btn btn-success" ng-click="encerrarAula()"><span style="white-space: pre;">Encerrar Aula</span></button>
+			   	 </div>
+			</div>
+		
+		</div>
+		
+		</div>
+	</div>
+</div>

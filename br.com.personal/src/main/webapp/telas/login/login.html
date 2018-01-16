@@ -1,0 +1,50 @@
+<div ng-controller="loginController">
+<div growl></div>
+	<div ng-show="carregaSpinner">
+		<span style="margin-top: 15%"
+			us-spinner="{radius:25,width:8,length:16}" spinner-on="showSpinner"></span>
+	</div>
+
+	<div class="container-fluid" style="margin: 0 auto">
+		<nav class="navbar navbar-inverse">
+			<div class="container-fluid">
+				<div class="navbar-header"></div>
+					<a class="navbar-brand brand">Personal <span style="color:yellow">GYM</span> Manager</a>
+			</div>
+		</nav>
+		<div class="col-sm-6 col-sm-offset-3 loginTela" >
+		
+			<div class="pull-right" style="clear:both; float:right; opacity: 0.3; padding-right: 18px;padding-top:10px;text-shadow: inset 3px 3px 3px white">
+			<span>&copy; 2017 - sistema desenvolvido por Ulisses de Castro</span></div>
+			<div class="col-sm-8" style="margin-top:8%">
+		<form name="formLogin">
+			<div class="col-sm-8" style="margin-bottom: 12px; margin-left: 45%">
+					<input type="text" class="form-control"  required ng-model="login.nome"
+						placeholder="Digite o login" autofocus />
+				</div>
+				<div class="col-sm-8"
+					style="float: left; clear: left; margin-left: 45%;margin-bottom:12px">
+					<input type="password" class="form-control" required ng-model="login.senha"
+						placeholder="Digite a senha" />
+				</div>
+				<div class="col-sm-8 col-sm-offset-5" style="margin-left: 45%">
+					<button class="btn btn-success btn-block" ng-disabled="formLogin.$invalid" 
+					ng-click="acessar()"
+					>Acessar</button>
+				</div>
+				<div>
+				<strong>{{numeroVersao}}</strong>
+			</div>
+		</form>
+				<div ng-show="mostraMensagem" class="col-sm-8 col-sm-offset-6">
+						<h5><span style="color:red"><strong>{{mensagem}}</strong></span></h5>
+				</div>
+			</div>
+		
+		</div>
+
+	</div>
+
+</div>
+
+

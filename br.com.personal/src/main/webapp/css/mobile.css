@@ -1,0 +1,114 @@
+@CHARSET "ISO-8859-1";
+
+#mobileMain {
+	
+	width: 100%;
+	background: #000000; /* fallback for old browsers */
+	background: -webkit-linear-gradient(to bottom, #FFFFFF, #000000);
+	/* Chrome 10-25, Safari 5.1-6 */
+	background: linear-gradient(to bottom, #FFFFFF, #000000);
+	/* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+	height: 800px;
+  	float: right;
+  
+}
+
+
+@media screen and (max-width: 767px) {
+  #mobileMain {
+  	
+  	height: 740px;
+
+  	float: right;
+  	overflow-y: auto;
+  	
+  }
+} 
+
+.fixo {
+	display: block;
+	position: fixed;
+	background-color: black;
+	border: 1px solid black;
+	height: 90px;
+	width: 90.8%;
+	box-shadow: 10px 4px 10px gray;
+	margin-bottom: 30px;
+	z-index: 1000;
+}
+
+.tabela{
+	
+	position: relative;
+	margin-top: 10px;
+	border: 1px solid black;
+	margin-left:2px;
+	width:97.9%;
+	font-size: 18px;
+	box-shadow: 3px 3px 3px black;
+	background-color: white;
+	border-radius: 12px;
+}
+
+.btnTreino {
+	
+		
+	
+}
+
+.botaoCarregarAluno {
+	
+	color: white;
+	background-color: green;
+	
+}
+
+.botaoAula {
+	
+	position: relative;
+	margin-top: 140px;
+	border: 1px solid black;
+	border-radius: 12px 12px 12px;
+	color: white;
+	background-color: green;
+}
+
+.botaoFinalizar {
+	
+	position: relative;
+	margin-top: 140px;
+	border: 1px solid black;
+	border-radius: 12px 12px 12px;
+	color: white;
+	background-color: red;
+}
+
+.logo {
+	color: white;
+	font-size: 30px;
+}
+
+.dia {
+	color: white;
+	font-size: 15px;
+	text-align: center;
+}
+
+.logoAula {
+	color: green;
+	font-size: 18px;
+	text-align: center;
+	text-shadow: 6px 6px 6px black;
+}
+
+.scrollTabelaMobile {
+	
+	height: 150px;
+	overflow: auto;
+}
+
+.selecionaAluno{
+	
+	position: relative;
+	margin-top: 120px;
+}
