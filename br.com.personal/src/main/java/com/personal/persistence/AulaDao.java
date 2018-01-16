@@ -40,7 +40,7 @@ public class AulaDao extends Dao {
 
 	private String procRelTreino = "call sp_rl_geraTreino(?,?,?)";
 	
-	private String procRelFinanceiro = "call sp_rl_geraTreino(?,?,?)";
+	private String procRelFinanceiro = "call sp_rl_geraFinanceiroResultado(?)";
 	
 	private String procRelTreinoAnterior = "call sp_rl_geraTreinoResultado(?,?,?)";
 
@@ -261,7 +261,6 @@ public class AulaDao extends Dao {
 
 			au.setPersonal(a.getPersonal());
 			au.setValorTotal(a.getValorTotal());
-			au.setMesAnterior(mesAnoAnterior);
 			au.setMesVigente(mesAno);
 			au.setDetalhe(a.getDetalhe());
 			au.setNomeAluno(rs.getString(1));
@@ -277,7 +276,7 @@ public class AulaDao extends Dao {
 		stmt.close();
 
 		try {
-			new GerarRelatorio().imprimirPdf(aulas, "presenca");
+			new GerarRelatorio().imprimirPdf(aulas, "financeiro");
 		} catch (JRException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
