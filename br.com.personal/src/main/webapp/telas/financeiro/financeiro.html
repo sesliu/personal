@@ -108,7 +108,7 @@
 						ng-change="carregaDias()" required>
 						<option value="">Selecione</option>
 						<option ng-repeat=" lista in listaAlunos"
-							value="{{lista.idAluno}}">{{lista.nome}}</option>
+							value="{{::lista.idAluno}}">{{::lista.nome}}</option>
 					</select>
 				</div>
 
@@ -125,7 +125,7 @@
 					<div class="well scrollDiasAula">
 						<div class="pull-left">
 							<ul ng-repeat="pesq in listaDiasAulaAnterior">
-								<li>{{pesq.texto}} <span style="color: red">{{pesq.dias
+								<li>{{::pesq.texto}} <span style="color: red">{{::pesq.dias
 										== null ? 0: pesq.dias}}</span></li>
 							</ul>
 						</div>
@@ -138,7 +138,7 @@
 					<div class="well scrollDiasAula">
 						<div class="pull-left">
 							<ul ng-repeat="pesq in listaDiasAula">
-								<li>{{pesq.texto}} <span style="color: red">{{pesq.dias
+								<li>{{::pesq.texto}} <span style="color: red">{{::pesq.dias
 										== null ? 0: pesq.dias}}</span></li>
 							</ul>
 						</div>
@@ -162,7 +162,7 @@
 							    ng-click="cadastrarAula(vigente.idAluno,dias.text,selecionado.dataAula)"
 						        data-checklist-model="selecionado.dataAula"
 					          
-								data-checklist-value="dias.value">{{dias.text}}</span>
+								data-checklist-value="dias.value">{{::dias.text}}</span>
 						</div>
 					</div>
 				</div>
@@ -311,10 +311,10 @@
 					<tbody>
 
 						<tr ng-repeat='pesq in listaFinancas'>
-							<td>{{pesq.nome}}</td>
-							<td>{{pesq.horaAula}}</td>
-							<td>{{pesq.valorPagamento}}</td>
-							<td>{{pesq.dataPagamento}}</td>
+							<td>{{::pesq.nome}}</td>
+							<td>{{::pesq.horaAula}}</td>
+							<td>{{::pesq.valorPagamento}}</td>
+							<td>{{::pesq.dataPagamento}}</td>
 							<td></td>
 							<td><button type="button" title="Pagar mensalidade"
 									class="btn btn-success" ng-click="pagarValor(pesq)"

@@ -514,7 +514,8 @@ personal.controller('dadosAulaController',function($scope, $rootScope, webservic
 
 personal.controller('principalController',function($scope,$compile,$timeout, $state,$rootScope, ngDialog){
 	
-	
+	var compiledeHTML;
+	var scope;
 	$scope.exibeTela = true;
 	
 	
@@ -552,9 +553,16 @@ personal.controller('principalController',function($scope,$compile,$timeout, $st
 		
 	$timeout(function(){
 		
+		
+		if(scope !=null){
+			
+			scope.$destroy()
+		}
+		
+		scope = $rootScope.$new();
 		$("#paginas").empty();
-		var compiledeHTML = $compile("<dashboard></dashboard>")
-		($scope);
+		compiledeHTML = $compile("<dashboard></dashboard>")
+		(scope);
 		$("#paginas").append(compiledeHTML);
 		
 	},1000);	
@@ -565,9 +573,17 @@ personal.controller('principalController',function($scope,$compile,$timeout, $st
 	
 	$scope.buscarProfissao = function(){
 		
+		
+		if(scope !=null){
+			
+			scope.$destroy()
+		}
+		scope = $rootScope.$new();
+		
+		
 		$("#paginas").empty();
-		var compiledeHTML = $compile("<profissao></profissao>")
-		($scope);
+		compiledeHTML = $compile("<profissao></profissao>")
+		(scope);
 		$("#paginas").append(compiledeHTML);
 		
 	}
@@ -576,9 +592,16 @@ personal.controller('principalController',function($scope,$compile,$timeout, $st
 	
 	$scope.dashboard = function(){
 		
+		if(scope !=null){
+			
+			scope.$destroy()
+		}
+		scope = $rootScope.$new();
+		
+		
 		$("#paginas").empty();
 		var compiledeHTML = $compile("<dashboard></dashboard>")
-		($scope);
+		(scope);
 		$("#paginas").append(compiledeHTML);
 		
 	}
@@ -586,124 +609,156 @@ personal.controller('principalController',function($scope,$compile,$timeout, $st
 	
 	$scope.buscarAluno = function(){
 		
+		if(scope !=null){
+			
+			scope.$destroy()
+		}
+		scope = $rootScope.$new();
+		
 		$scope.exibeTela = false;
 		$("#paginas").empty();
-		var compiledeHTML = $compile("<buscaaluno></buscaaluno>")
-		($scope);
+		compiledeHTML = $compile("<buscaaluno></buscaaluno>")
+		(scope);
 		$("#paginas").append(compiledeHTML);
 		
 	}
 	
 	$scope.buscarAniversariante = function(){
 		
+		if(scope !=null){
+			
+			scope.$destroy()
+		}
+		scope = $rootScope.$new();
+		
 		$scope.exibeTela = false;
 		$("#paginas").empty();
-		var compiledeHTML = $compile("<aniversariante></aniversariante>")
-		($scope);
+		compiledeHTML = $compile("<aniversariante></aniversariante>")
+		(scope);
 		$("#paginas").append(compiledeHTML);
 		
 	}
 	
 	$scope.buscarProfissional = function(){
 		
+		if(scope !=null){
+			
+			scope.$destroy()
+		}
+		scope = $rootScope.$new();
+		
 		$scope.exibeTela = false;
 		$("#paginas").empty();
-		var compiledeHTML = $compile("<profissional></profissional>")
-		($scope);
+		compiledeHTML = $compile("<profissional></profissional>")
+		(scope);
 		$("#paginas").append(compiledeHTML);
 		
 	}
 	
 	
 	
-	$scope.buscarAlunoHora = function(){
-		
-		$scope.exibeTela = false;
-		
-		$("#paginas").empty();
-		var compiledeHTML = $compile("<alunohora></alunohora>")
-		($scope);
-		$("#paginas").append(compiledeHTML);
-		
-	}
 	
 	
 	$scope.buscarTreino = function(){
 		
+		if(scope !=null){
+			
+			scope.$destroy()
+		}
+		scope = $rootScope.$new();
+		
 		$scope.exibeTela = false;
 		$("#paginas").empty();
-		var compiledeHTML = $compile("<buscatreino></buscatreino>")
-		($scope);
+		compiledeHTML = $compile("<buscatreino></buscatreino>")
+		(scope);
 		$("#paginas").append(compiledeHTML);
 		
 	}
 	
 	$scope.buscarAula = function(){
 		
+		if(scope !=null){
+			
+			scope.$destroy()
+		}
+		scope = $rootScope.$new();
+		
 		$scope.exibeTela = false;
 		$("#paginas").empty();
-		var compiledeHTML = $compile("<buscaaula></buscaaula>")
-		($scope);
+		compiledeHTML = $compile("<buscaaula></buscaaula>")
+		(scope);
+		$("#paginas").append(compiledeHTML);
+		
+	}
+	
+	$scope.buscarHistorico = function(){
+		
+		if(scope !=null){
+			
+			scope.$destroy()
+		}
+		scope = $rootScope.$new();
+		
+		$scope.exibeTela = false;
+		
+		$("#paginas").empty();
+		compiledeHTML = $compile("<historicofinanceiro></historicofinanceiro>")
+		(scope);
 		$("#paginas").append(compiledeHTML);
 		
 	}
 	
 	$scope.buscarRelatorioTreino = function(){
 		
+		
+		if(scope !=null){
+			
+			scope.$destroy()
+		}
+		scope = $rootScope.$new();
+		
+		
 		$scope.exibeTela = false;
 		
 		$("#paginas").empty();
-		var compiledeHTML = $compile("<relatoriotreino></relatoriotreino>")
-		($scope);
+		compiledeHTML = $compile("<relatoriotreino></relatoriotreino>")
+		(scope);
 		$("#paginas").append(compiledeHTML);
 		
 	}
 	
 	$scope.buscarRelatorioFinanceiro = function(){
 		
-		$scope.exibeTela = false;
-		
-		$("#paginas").empty();
-		var compiledeHTML = $compile("<relatoriofinanceiro></relatoriofinanceiro>")
-		($scope);
-		$("#paginas").append(compiledeHTML);
-		
-	}
-	
-	
-	
-	
-	
-	$scope.buscarHistorico = function(){
+		if(scope !=null){
+			
+			scope.$destroy()
+		}
+		scope = $rootScope.$new();
 		
 		$scope.exibeTela = false;
 		
 		$("#paginas").empty();
-		var compiledeHTML = $compile("<historicofinanceiro></historicofinanceiro>")
-		($scope);
+		compiledeHTML = $compile("<relatoriofinanceiro></relatoriofinanceiro>")
+		(scope);
 		$("#paginas").append(compiledeHTML);
 		
 	}
 	
-	$scope.buscarAulaExtra = function(){
-		
-		$scope.exibeTela = false;
-		
-		$("#paginas").empty();
-		var compiledeHTML = $compile("<historicoaulaextra></historicoaulaextra>")
-		($scope);
-		$("#paginas").append(compiledeHTML);
-		
-	}
 	
 	
 	$scope.personal = function(){
 		
+		if(scope !=null){
+			
+			scope.$destroy()
+		}
+		scope = $rootScope.$new();
+		
 		$scope.exibeTela = false;
 		
 		$("#paginas").empty();
-		var compiledeHTML = $compile("<personal></personal>")
-		($scope);
+		compiledeHTML = $compile("<personal></personal>")
+		(scope);
 		$("#paginas").append(compiledeHTML);
 		
 	}

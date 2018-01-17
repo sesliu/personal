@@ -58,13 +58,13 @@
 						<tbody>
 							<tr ng-repeat ="pesq in listaAula | filter: busca ">
 								<td style="white-space:pre-line;">{{pesq.nomeAluno}}</td>
-								<td>{{pesq.dataAula}}</td>
-								<td>{{pesq.diaSemana}}</td>
-								<td>{{pesq.horario}}</td>
-								<td>{{pesq.tipo == null? "Não Informado": pesq.tipo}}</td>
-								<td>{{pesq.presenca == 0? "Não" :"Sim" }}</td>
-								<td>{{pesq.falta == 0? "Não":"Sim"}}</td>
-								<td>{{pesq.faltajusticada == 0 ? "Não" : "Sim"}}</td>
+								<td>{{::pesq.dataAula}}</td>
+								<td>{{::pesq.diaSemana}}</td>
+								<td>{{::pesq.horario}}</td>
+								<td>{{::pesq.tipo == null? "Não Informado": pesq.tipo}}</td>
+								<td>{{::pesq.presenca == 0? "Não" :"Sim" }}</td>
+								<td>{{::pesq.falta == 0? "Não":"Sim"}}</td>
+								<td>{{::pesq.faltajusticada == 0 ? "Não" : "Sim"}}</td>
 								<td><div ng-if = "pesq.resultado == ''"><span class="carinha text-center"><label><i class="fa fa-frown-o" style="font-size: 2em; color:#000000"></i></label></span></div>
 									<div ng-if = "pesq.resultado == 0"><span class="carinha text-center"><label><i class="fa fa-frown-o" style="font-size: 2em; color:#000000"></i></label></span></div>
 								    <div ng-if = "pesq.resultado == 1"><span class="carinha text-center"><label><i class="fa fa-smile-o" style="font-size: 2em; color:#009966"></i></label></span></div>

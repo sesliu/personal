@@ -9,13 +9,13 @@
 			<div class="pull-left" style="margin-top: 28px; margin-bottom: 20px">
 				<button type="button" class="btn btn-success btnTamanho" ng-click ="gravarPersonal()"
 				    ng-disabled="formTreino.$invalid"
-					title="Gravar Personal">{{nomeBotao}}</button>
+					title="Gravar Personal">{{::nomeBotao}}</button>
 			</div>
 			<div class="pull-left" style="margin-top: 28px; margin-bottom: 20px">
 				<button type="button" class="btn btn-warning btnTamanho" ng-click="limparCampos()"
 					title="Limpar campos">Limpar</button>
 			</div>
-			<div class="pull-left" style="margin-top: 28px; margin-bottom: 20px" ng-show="exibeBotao">
+			<div class="pull-left" style="margin-top: 28px; margin-bottom: 20px" nf-if="exibeBotao">
 				<button type="button" class="btn btn-danger btnTamanho" ng-click="excluirPersonal()"
 					title="Excluir Personal">Excluir</button>
 			</div>
@@ -68,7 +68,7 @@
 			<input type="password"  class="form-control obrigatorio" ng-model="confirmar" 
 			       ng-blur="verificarSenha(confirmar)"
 					required maxlength="100" style="margin-bottom: 12px">
-					<div ng-show="exibeMensagem" class="text-center"><span style="color:red"><strong>{{mensagem}}</strong></span></div>
+					<div ng-show="exibeMensagem" class="text-center"><span style="color:red"><strong>{{::mensagem}}</strong></span></div>
 		</div>
 		
 	</div>

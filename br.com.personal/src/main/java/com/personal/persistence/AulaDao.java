@@ -253,6 +253,9 @@ public class AulaDao extends Dao {
 		stmt.setString(1, lista);
 		rs = stmt.executeQuery();
 
+		
+		String nomeMes;
+		
 		// presenca, falta, faltajusticada, obsjustificada, observacao,
 		// resultado, tr.nome
 
@@ -267,7 +270,51 @@ public class AulaDao extends Dao {
 			au.setDataPagamento(rs.getString(2));
 			au.setValorDevido(rs.getString(3));
 			au.setValorPago(rs.getString(4));
+			
+						
 			au.setMes(rs.getString(5));
+			
+			if (rs.getString(5).equals("0")) {
+
+				mesAnoAnterior = "Janeiro";
+			} else if (rs.getString(5).equals("1")) {
+
+				mesAnoAnterior = "Fevereiro";
+			} else if (rs.getString(5).equals("2")) {
+
+				mesAnoAnterior = "Março";
+			} else if (rs.getString(5).equals("3")) {
+
+				mesAnoAnterior = "Abril";
+			} else if (rs.getString(5).equals("4")) {
+
+				mesAnoAnterior = "Maio";
+			} else if (rs.getString(5).equals("5")) {
+
+				mesAnoAnterior = "Junho";
+			} else if (rs.getString(5).equals("6")) {
+
+				mesAnoAnterior = "Julho";
+			} else if (rs.getString(5).equals("7")) {
+
+				mesAnoAnterior = "Agosto";
+			} else if (rs.getString(5).equals("8")) {
+
+				mesAnoAnterior = "Setembro";
+			} else if (rs.getString(5).equals("9")) {
+
+				mesAnoAnterior = "Outubro";
+			} else if (rs.getString(5).equals("10")) {
+
+				mesAnoAnterior = "Novembro";
+			} else {
+
+				mesAnoAnterior = "Dezembro";
+
+			}
+
+			
+			au.setMes(mesAnoAnterior);
 			au.setAno(rs.getString(6));
 			aulas.add(au);
 		}

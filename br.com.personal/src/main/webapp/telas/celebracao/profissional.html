@@ -19,7 +19,7 @@
 
 <div class="aniversario"  >	
 	<div class="text-center">
-		<span ng-model="mesvigente"><h2>Mês: {{mesvigente}}</h2></span>
+		<span ng-model="mesvigente"><h2>Mês: {{::mesvigente}}</h2></span>
 	</div>
 	<div class="col-md-12">
 		<hr/>
@@ -29,7 +29,7 @@
 						<div style="margin-top:5%">
 							<div class="text-center">
 								<ul ng-repeat="pesq in listaProfissao">
-									<span><h3>{{pesq.nome}} - {{pesq.profissao}}</h3></span>
+									<span><h3>{{::pesq.nome}} - {{::pesq.profissao}}</h3></span>
 								</ul>
 							</div>
 						</div>

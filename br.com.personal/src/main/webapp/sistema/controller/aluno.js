@@ -8,6 +8,10 @@ personal.controller('alunoController',function($scope, $compile, $rootScope,webs
 	$rootScope.codigo;
 	var data = new Date;
 	$scope.carregaSpinner = false;
+	var compiledeHTML; 
+	var scope;
+	
+	
 	
 	$scope.aluno = { ajuste:'10.00' , horaAula:'0.00'  }
 	
@@ -78,10 +82,17 @@ personal.controller('alunoController',function($scope, $compile, $rootScope,webs
 	
 	$scope.cadastraAluno = function(){
 		
+		if(scope !=null){
+			
+			scope.$destroy()
+		}
+		scope = $rootScope.$new();
+		
+		
 		$scope.exibeTela = false;
 		$("#paginas").empty();
-		var compiledeHTML = $compile("<cadastraaluno></cadastraaluno>")
-		($scope);
+		compiledeHTML = $compile("<cadastraaluno></cadastraaluno>")
+		(scope);
 		$("#paginas").append(compiledeHTML);
 		
 		
@@ -89,11 +100,17 @@ personal.controller('alunoController',function($scope, $compile, $rootScope,webs
 	
 	$scope.atualizaAluno = function(codigo) {
 
+		if(scope !=null){
+			
+			scope.$destroy()
+		}
+		scope = $rootScope.$new();
+		
 		$rootScope.codigo = codigo;
 		$scope.exibeTela = false;
 		$("#paginas").empty();
-		var compiledeHTML = $compile(
-				"<atualizaaluno></atualizaaluno>")($scope);
+		compiledeHTML = $compile(
+				"<atualizaaluno></atualizaaluno>")(scope);
 		$("#paginas").append(compiledeHTML);
 	
 	}
@@ -101,9 +118,15 @@ personal.controller('alunoController',function($scope, $compile, $rootScope,webs
 	
 	$scope.voltarBuscaAluno = function(){
 		
+		if(scope !=null){
+			
+			scope.$destroy()
+		}
+		scope = $rootScope.$new();
+		
 		$("#paginas").empty();
-		var compiledeHTML = $compile("<buscaaluno></buscaaluno>")
-		($rootScope);
+		compiledeHTML = $compile("<buscaaluno></buscaaluno>")
+		(scope);
 		$("#paginas").append(compiledeHTML);
 		
 	}
@@ -156,10 +179,16 @@ personal.controller('alunoController',function($scope, $compile, $rootScope,webs
 	
 	$scope.limparCampos = function() {
 
+		if(scope !=null){
+			
+			scope.$destroy()
+		}
+		scope = $rootScope.$new();
+		
 		$scope.exibeTela = false;
 		$("#paginas").empty();
-		var compiledeHTML = $compile(
-				"<cadastraaluno></cadastraaluno>")($scope);
+		compiledeHTML = $compile(
+				"<cadastraaluno></cadastraaluno>")(scope);
 		$("#paginas").append(compiledeHTML);
 
 	}
@@ -254,7 +283,7 @@ personal.controller('atualizaAlunoController',
 	webservicesAluno.buscarAlunoId($rootScope.codigo).success(function(data, status) {
 
 		$scope.aluno = data;
-		
+		var compiledeHTML;
 		var date = data.dataNascimento.replace("-", "");
 		date = date.replace("-", "");
 		var newdate = date;
@@ -292,9 +321,15 @@ personal.controller('atualizaAlunoController',
 								
 								if (status == 200) {
 
+									if(scope !=null){
+										
+										scope.$destroy()
+									}
+									scope = $rootScope.$new();
+									
 									$("#paginas").empty();
-									var compiledeHTML = $compile("<buscaaluno></buscaaluno>")(
-											$rootScope);
+									compiledeHTML = $compile("<buscaaluno></buscaaluno>")(
+										scope);
 									$("#paginas").append(compiledeHTML);
 
 								}

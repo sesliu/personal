@@ -19,7 +19,8 @@ personal.controller('aulaController',function($scope, $rootScope, $compile,webse
 	var objetoId = {};
 	var gravarLista = [];
 	var dadoAluno = [];
-	
+	var compiledeHTML;
+	var scope;
 	
 	var mensagemErroGravar = "Erro ao gravar registro";
 	var mensagemErroBuscar = "Sem registros para busca";
@@ -99,21 +100,32 @@ personal.controller('aulaController',function($scope, $rootScope, $compile,webse
 	
 		
 		$scope.cadastraAula = function(){
+		
+		if(scope !=null){
+			
+			scope.$destroy()
+		}
+		scope = $rootScope.$new();
 			
 			$scope.exibeTela = false;
 			$("#paginas").empty();
 			var compiledeHTML = $compile("<cadastraaula></cadastraaula>")
-			($scope);
+			(scope);
 			$("#paginas").append(compiledeHTML);
 			
 			
 		}
 		
 		$scope.voltarBuscaAula = function(){
-			
+		if(scope !=null){
+				
+				scope.$destroy()
+			}
+		scope = $rootScope.$new();
+				
 			$("#paginas").empty();
-			var compiledeHTML = $compile("<buscaaula></buscaaula>")
-			($rootScope);
+			compiledeHTML = $compile("<buscaaula></buscaaula>")
+			(scope);
 			$("#paginas").append(compiledeHTML);
 			
 		}
@@ -121,11 +133,17 @@ personal.controller('aulaController',function($scope, $rootScope, $compile,webse
 
 		$scope.atualizaAula = function(codigo) {
 
+			if(scope !=null){
+				
+				scope.$destroy()
+			}
+			scope = $rootScope.$new();
+			
 			$rootScope.codigo = codigo;
 			$scope.exibeTela = false;
 			$("#paginas").empty();
-			var compiledeHTML = $compile(
-					"<atualizaaula></atualizaaula>")($scope);
+			compiledeHTML = $compile(
+					"<atualizaaula></atualizaaula>")(scope);
 			$("#paginas").append(compiledeHTML);
 		
 		}
@@ -288,11 +306,17 @@ personal.controller('aulaController',function($scope, $rootScope, $compile,webse
 													
 												},100)	
 												
+												if(scope !=null){
+													
+													scope.$destroy()
+												}
+												scope = $rootScope.$new();
+												
 												$scope.exibeTela = false;
 												$("#paginas").empty();
-												var compiledeHTML = $compile(
+												compiledeHTML = $compile(
 														"<cadastraaula></cadastraaula>")(
-														$scope);
+														scope);
 												$("#paginas").append(compiledeHTML);
 												
 											}
@@ -319,10 +343,16 @@ personal.controller('aulaController',function($scope, $rootScope, $compile,webse
 		
 		$scope.limparCampos = function() {
 
+			if(scope !=null){
+				
+				scope.$destroy()
+			}
+			scope = $rootScope.$new();
+			
 			$scope.exibeTela = false;
 			$("#paginas").empty();
-			var compiledeHTML = $compile(
-					"<cadastraaula></cadastraaula>")($scope);
+			compiledeHTML = $compile(
+					"<cadastraaula></cadastraaula>")(scope);
 			$("#paginas").append(compiledeHTML);
 
 		}

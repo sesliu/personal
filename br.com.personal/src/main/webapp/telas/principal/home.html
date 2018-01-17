@@ -9,7 +9,7 @@
 		<div class="container-fluid">
 			<div class="text-center ">
 				<span><h3>
-						<strong>Bem-vindo <span class="capitalize">{{nomePersonal}}</span></strong>
+						<strong>Bem-vindo <span class="capitalize">{{::nomePersonal}}</span></strong>
 					</h3></span>
 			</div>
 			<div class="scrolltela" id="fundoHaltere" style="height: 480px">
@@ -34,23 +34,23 @@
 									<li><div ng-if="pesq.presenca == 1">
 											<a style="color: green" href=""
 												ng-click="detalhesAula(pesq.idAula);mudaData(dataFormatadaAnterior)"><h4>
-													{{pesq.horario}} - {{pesq.nomeAluno}}</h4></a>
+													{{::pesq.horario}} - {{::pesq.nomeAluno}}</h4></a>
 										</div>
 										<div ng-if="pesq.falta == 1">
 											<a style="color: red" href=""
 												ng-click="detalhesAula(pesq.idAula);mudaData(dataFormatadaAnterior)"><h4>
-													{{pesq.horario}} - {{pesq.nomeAluno}}</h4></a>
+													{{::pesq.horario}} - {{::pesq.nomeAluno}}</h4></a>
 										</div>
 										<div ng-if="pesq.faltajusticada == 1">
 											<a style="color: red" href=""
 												ng-click="detalhesAula(pesq.idAula);mudaData(dataFormatadaAnterior)"><h4>
-													{{pesq.horario}} - {{pesq.nomeAluno}}</h4></a>
+													{{::pesq.horario}} - {{::pesq.nomeAluno}}</h4></a>
 										</div>
 										<div
 											ng-if="pesq.faltajusticada == 0 && pesq.falta == 0  && pesq.presenca == 0">
 											<a style="color: blue" href=""
 												ng-click="detalhesAula(pesq.idAula);mudaData(dataFormatadaAnterior)"><h4>
-													{{pesq.horario}} - {{pesq.nomeAluno}}</h4></a>
+													{{::pesq.horario}} - {{::pesq.nomeAluno}}</h4></a>
 										</div></li>
 								</ul>
 
@@ -63,28 +63,28 @@
 
 						<div class="scrollDashFinanceiro">
 							<div style="margin-left: -40px">
-							<span class="text-center" style="color:green"><strong>Aulas do Dia {{dataFormatada}}</strong></span>
+							<span class="text-center" style="color:green"><strong>Aulas do Dia {{::dataFormatada}}</strong></span>
 								<ul ng-repeat="pesq in listaAulas">
 									<li><div ng-if="pesq.presenca == 1">
 											<a style="color: green" href=""
 												ng-click="detalhesAula(pesq.idAula);mudaData(dataFormatada)"><h4>
-													{{pesq.horario}} - {{pesq.nomeAluno}}</h4></a>
+													{{::pesq.horario}} - {{::pesq.nomeAluno}}</h4></a>
 										</div>
 										<div ng-if="pesq.falta == 1">
 											<a style="color: red" href=""
 												ng-click="detalhesAula(pesq.idAula);mudaData(dataFormatada)"><h4>
-													{{pesq.horario}} - {{pesq.nomeAluno}}</h4></a>
+													{{::pesq.horario}} - {{::pesq.nomeAluno}}</h4></a>
 										</div>
 										<div ng-if="pesq.faltajusticada == 1">
 											<a style="color: red" href=""
 												ng-click="detalhesAula(pesq.idAula)"><h4>
-													{{pesq.horario}} - {{pesq.nomeAluno}}</h4></a>
+													{{::pesq.horario}} - {{::pesq.nomeAluno}}</h4></a>
 										</div>
 										<div
 											ng-if="pesq.faltajusticada == 0 && pesq.falta == 0  && pesq.presenca == 0">
 											<a style="color: blue" href=""
 												ng-click="detalhesAula(pesq.idAula);mudaData(dataFormatada)"><h4>
-													{{pesq.horario}} - {{pesq.nomeAluno}}</h4></a>
+													{{::pesq.horario}} - {{::pesq.nomeAluno}}</h4></a>
 										</div></li>
 								</ul>
 
@@ -95,7 +95,7 @@
 				</div>	
 				<div class="col-sm-12"	style="margin-left: 238px; margin-top: -35.1%;">
 				<div class="text-center">
-						<h4><strong>Detalhes da Aula {{dataAula}}</strong></h4>
+						<h4><strong>Detalhes da Aula {{::dataAula}}</strong></h4>
 					</div>
 				
 					<div class="noteLargeDetalheAula yellow  dash">

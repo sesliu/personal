@@ -48,9 +48,9 @@
 
 						<tbody>
 							<tr ng-repeat ="pesq in listaAluno | filter : busca">
-								<td>{{pesq.nome}}</td>
-								<td>{{pesq.email}}</td>
-								<td>{{pesq.telefoneCelular}}</td>
+								<td>{{::pesq.nome}}</td>
+								<td>{{::pesq.email}}</td>
+								<td>{{::pesq.telefoneCelular}}</td>
 								<td><span><a href="" ng-click="atualizaAluno(pesq.idAluno)"
 									class="fa fa-edit  fa-2x" title="Alterar" style="color: blue"></a></span></td>
 								<td><span><a href="" ng-click="excluirAluno(pesq.idAluno)"
