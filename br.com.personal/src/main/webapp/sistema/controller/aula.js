@@ -20,8 +20,7 @@ personal.controller('aulaController',function($scope, $rootScope, $compile,webse
 	var gravarLista = [];
 	var dadoAluno = [];
 	var compiledeHTML;
-	var scope;
-	
+
 	var mensagemErroGravar = "Erro ao gravar registro";
 	var mensagemErroBuscar = "Sem registros para busca";
 	var mensagemOK = "Registros gravados com sucesso";
@@ -117,11 +116,14 @@ personal.controller('aulaController',function($scope, $rootScope, $compile,webse
 		}
 		
 		$scope.voltarBuscaAula = function(){
-		if(scope !=null){
+		
+			
+			if(scope !=null){
 				
 				scope.$destroy()
 			}
-		scope = $rootScope.$new();
+		    
+		   scope = $rootScope.$new();
 				
 			$("#paginas").empty();
 			compiledeHTML = $compile("<buscaaula></buscaaula>")
@@ -429,6 +431,7 @@ personal.controller('atualizaAulaController',
 	var dadoAluno;
 	var dadoAula;
 
+	var compiledeHTML;
 	
 	
 	$scope.openDatIni = false;
@@ -463,6 +466,22 @@ personal.controller('atualizaAulaController',
 	}
 	;
 	
+	$scope.voltarBuscaAula = function(){
+		
+		
+		if(scope !=null){
+			
+			scope.$destroy()
+		}
+	    
+	   scope = $rootScope.$new();
+			
+		$("#paginas").empty();
+		compiledeHTML = $compile("<buscaaula></buscaaula>")
+		(scope);
+		$("#paginas").append(compiledeHTML);
+		
+	}
 	
 	
 	$scope.inicio = function(){
@@ -638,9 +657,17 @@ personal.controller('atualizaAulaController',
 											
 										},200)	
 										
+										if(scope != null){
+											
+											scope.$destroy();
+											
+										}
+										
+										scope = $rootScope.$new();
+										
 										$("#paginas").empty();
-										var compiledeHTML = $compile("<buscaaula></buscaaula>")(
-												$rootScope);
+										compiledeHTML = $compile("<buscaaula></buscaaula>")(
+												scope);
 										$("#paginas").append(compiledeHTML);
 										
 									});
@@ -716,7 +743,8 @@ personal.controller('vinculaAulaController',
 	var gravarLista = [];
 	var exibeMensagemOk = false;
 	var mensagemOK = "Registros atualizados com sucesso";
-	
+	var compiledeHTML;
+
 
 	$scope.nomeAula = $rootScope.aula.nome;
 	$scope.diaSemana = $rootScope.aula.diaSemana;
@@ -810,7 +838,8 @@ personal.controller('personalController', function($scope, $compile, webservices
 	$scope.confirma;
 	$scope.mensagem = "Senhas não conferem"
 	$scope.exibeMensagem = false;
-		
+	var compiledeHTML;
+
 		
 	$interval(function(){
 		
@@ -872,10 +901,19 @@ personal.controller('personalController', function($scope, $compile, webservices
 		
 	$scope.limparCampos = function() {
 
+		
+		if(scope != null){
+			
+			scope.$destroy();
+			
+		}
+		
+		scope = $rootScope.$new();
+		
 		$scope.exibeTela = false;
 		$("#paginas").empty();
-		var compiledeHTML = $compile(
-			"<personal></personal>")($scope);
+		compiledeHTML = $compile(
+			"<personal></personal>")(scope);
 		$("#paginas").append(compiledeHTML);
 
 	}
@@ -965,10 +1003,17 @@ personal.controller('personalController', function($scope, $compile, webservices
 						growl.addSuccessMessage('Registro excluído com sucesso');
 						$scope.altera = false;
 						
+						if(scope != null){
+							
+							scope.$destroy()
+						}
+						
+						scope = $rootScope.$new();
+						
 						$scope.exibeTela = false;
 						$("#paginas").empty();
-						var compiledeHTML = $compile(
-							"<personal></personal>")($scope);
+						compiledeHTML = $compile(
+							"<personal></personal>")(scope);
 						$("#paginas").append(compiledeHTML);
 					
 						

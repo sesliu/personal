@@ -13,6 +13,8 @@ personal.controller('profissaoController',function($scope,ngDialog, webservicesP
 	var mensagemErroBuscar = "Sem registros para busca";
 	var mensagemOK = "Registros gravados com sucesso";
 	var mensagemOKExcluir = "Registro excluído com sucesso";
+	var compiledeHTML;
+
 	
 	
 	
@@ -33,12 +35,19 @@ personal.controller('profissaoController',function($scope,ngDialog, webservicesP
 	}
 	$scope.cadastraProfissao = function() {
 
+		if(scope != null){
+			
+			scope.$destroy();
+		}
+		
+		scope = $rootScope.$new();
+		
 		$scope.exibeTela = false;
 		$("#paginas").empty();
-		var compiledeHTML = $compile(
-				"<cadastraprofissao></cadastraprofissao>")($scope);
+		compiledeHTML = $compile(
+				"<cadastraprofissao></cadastraprofissao>")(scope);
 		$("#paginas").append(compiledeHTML);
-
+ 
 	}
 	
 
@@ -62,10 +71,18 @@ personal.controller('profissaoController',function($scope,ngDialog, webservicesP
 
 						
 					},100)	
+					
+					
+					        if(scope != null){
+					        	
+					        	scope.$destroy();
+					        }
+					
+							scope = $rootScope.$new();
 							$("#paginas").empty();
-							var compiledeHTML = $compile(
+							compiledeHTML = $compile(
 									"<cadastraprofissao></cadastraprofissao>")(
-									$scope);
+									scope);
 							$("#paginas").append(compiledeHTML);
 					}).error(function(){
 						growl.addErrorMessage(mensagemErroGravar);
@@ -79,21 +96,35 @@ personal.controller('profissaoController',function($scope,ngDialog, webservicesP
 }
 	$scope.limparCampos = function() {
 
+		if(scope != null){
+			
+			scope.$destroy();
+		}
+		
+		scope = $rootScope.$new();
 		$scope.exibeTela = false;
 		$("#paginas").empty();
-		var compiledeHTML = $compile(
-				"<cadastraprofissao></cadastraprofissao>")($scope);
+		compiledeHTML = $compile(
+				"<cadastraprofissao></cadastraprofissao>")(scope);
 		$("#paginas").append(compiledeHTML);
 
 	}
 	
 	$scope.atualizaProfissao = function(codigo) {
 
+		
+		if(scope != null){
+			
+			scope.$destroy();
+		}
+		
+		scope = $rootScope.$new();
+		
 		$rootScope.codigo = codigo;
 		$scope.exibeTela = false;
 		$("#paginas").empty();
-		var compiledeHTML = $compile(
-				"<atualizaprofissao></atualizaprofissao>")($scope);
+		compiledeHTML = $compile(
+				"<atualizaprofissao></atualizaprofissao>")(scope);
 		$("#paginas").append(compiledeHTML);
 		
 	
@@ -101,9 +132,16 @@ personal.controller('profissaoController',function($scope,ngDialog, webservicesP
 
 	$scope.voltarBuscaProfissao = function() {
 	
+		if(scope != null){
+			
+			scope.$destroy();
+		}
+		
+		scope = $rootScope.$new();
+		
 		$("#paginas").empty();
-		var compiledeHTML = $compile("<profissao></profissao>")(
-				$rootScope);
+		compiledeHTML = $compile("<profissao></profissao>")(
+				scope);
 		$("#paginas").append(compiledeHTML);
 
 	}
@@ -156,7 +194,8 @@ personal.controller('atualizaProfissaoController',
 	var mensagemOK = "Registros atualizados com sucesso";
 	var mensagemErro = "Registros não atualizados";
 	$scope.carregaSpinner = false;
-	
+	var compiledeHTML;
+
 	var dia; 
 	var mes;
 	
@@ -181,7 +220,22 @@ personal.controller('atualizaProfissaoController',
 	});
 	
 	
+	$scope.voltarBuscaProfissao = function() {
 		
+		if(scope != null){
+			
+			scope.$destroy();
+		}
+		
+		scope = $rootScope.$new();
+		
+		$("#paginas").empty();
+		compiledeHTML = $compile("<profissao></profissao>")(
+				scope);
+		$("#paginas").append(compiledeHTML);
+
+	}
+	
 	
 	$scope.atualizaProfissao = function() {
 
@@ -204,10 +258,16 @@ personal.controller('atualizaProfissaoController',
 						
 						
 						if (status == 200) {
-
+							
+							if(scope != null){
+								
+								scope.$destroy();
+							}
+							scope = $rootScope.$new();
+							
 							$("#paginas").empty();
-							var compiledeHTML = $compile("<profissao></profissao>")(
-									$rootScope);
+							compiledeHTML = $compile("<profissao></profissao>")(
+									scope);
 							$("#paginas").append(compiledeHTML);
 
 						}
@@ -227,9 +287,17 @@ personal.controller('atualizaProfissaoController',
 	}
 	$scope.voltarBuscaProfissao = function() {
 		
+		if(scope != null){
+			
+			scope.$destroy();
+			
+		}
+		
+		scope = $rootScope.$new();
+		
 		$("#paginas").empty();
-		var compiledeHTML = $compile("<profissao></profissao>")(
-				$rootScope);
+		compiledeHTML = $compile("<profissao></profissao>")(
+				scope);
 		$("#paginas").append(compiledeHTML);
 
 	}

@@ -9,7 +9,7 @@ personal.controller('alunoController',function($scope, $compile, $rootScope,webs
 	var data = new Date;
 	$scope.carregaSpinner = false;
 	var compiledeHTML; 
-	var scope;
+	
 	
 	
 	
@@ -154,11 +154,19 @@ personal.controller('alunoController',function($scope, $compile, $rootScope,webs
 								
 								if (status == 200) {
 
+									
+									if(scope != null){
+										
+										scope.$destroy()
+									}
+									
+									scope = $rootScope.$new();
+									
 									$scope.exibeTela = false;
 									$("#paginas").empty();
-									var compiledeHTML = $compile(
+								    compiledeHTML = $compile(
 											"<cadastraaluno></cadastraaluno>")(
-											$scope);
+											scope);
 									$("#paginas").append(compiledeHTML);
 
 								}
@@ -266,6 +274,8 @@ personal.controller('atualizaAlunoController',
 	var mensagemErro = "Registros não atualizados";
 	$scope.carregaSpinner = false;
 	
+	var compiledeHTML;
+	
 	$scope.inicioTela = function(){
 		
 		webservicesProfissao.buscarProfissao().success(function(data, status) {
@@ -276,6 +286,21 @@ personal.controller('atualizaAlunoController',
 
 
 		});
+		
+	}
+	
+	$scope.voltarBuscaAluno = function(){
+		
+		if(scope !=null){
+			
+			scope.$destroy()
+		}
+		scope = $rootScope.$new();
+		
+		$("#paginas").empty();
+		compiledeHTML = $compile("<buscaaluno></buscaaluno>")
+		(scope);
+		$("#paginas").append(compiledeHTML);
 		
 	}
 	

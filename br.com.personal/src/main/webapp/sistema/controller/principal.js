@@ -1,3 +1,5 @@
+var scope;
+
 personal.controller('loginController', function($scope, $state, $rootScope, growl, webservicesAula, md5, $timeout){
 
 	
@@ -515,7 +517,6 @@ personal.controller('dadosAulaController',function($scope, $rootScope, webservic
 personal.controller('principalController',function($scope,$compile,$timeout, $state,$rootScope, ngDialog){
 	
 	var compiledeHTML;
-	var scope;
 	$scope.exibeTela = true;
 	
 	
@@ -600,7 +601,7 @@ personal.controller('principalController',function($scope,$compile,$timeout, $st
 		
 		
 		$("#paginas").empty();
-		var compiledeHTML = $compile("<dashboard></dashboard>")
+		compiledeHTML = $compile("<dashboard></dashboard>")
 		(scope);
 		$("#paginas").append(compiledeHTML);
 		
