@@ -29,7 +29,7 @@ public class AulaDao extends Dao {
 	private String proclistaAulaAlunoAnterior = "call sp_verificaDiasAulaAnterior(?,?,?)";
 
 	private String procListaAulaDia = "call sp_buscaAulaDia(?)";
-	
+
 	private String procListaAulaDiaAnterior = "call sp_buscaAulaDiaAnterior(?)";
 
 	private String procDadosAula = "call sp_DadosAula(?)";
@@ -39,9 +39,9 @@ public class AulaDao extends Dao {
 	private String procAtualizaDiaAula = "call sp_atualizaAuladoDia(?,?,?,?,?,?,?,?)";
 
 	private String procRelTreino = "call sp_rl_geraTreino(?,?,?)";
-	
+
 	private String procRelFinanceiro = "call sp_rl_geraFinanceiroResultado(?)";
-	
+
 	private String procRelTreinoAnterior = "call sp_rl_geraTreinoResultado(?,?,?)";
 
 	private String procRelTreinoHeader = "call sp_rl_geraTreinoHeader(?,?,?)";
@@ -53,21 +53,18 @@ public class AulaDao extends Dao {
 	private String procExcluirPersonal = "call sp_excluirPersonal()";
 
 	private String procVerificarAulaAluno = "call sp_verificarAulaDias(?,?,?,?)";
-	
+
 	private String procCadastrarAulaNova = "call sp_cadastraAulaFinaceiro(?,?,?,?,?)";
-	
-	private String procExcluirAula  =  "call sp_excluirAulaFinaceiro(?,?,?)";
+
+	private String procExcluirAula = "call sp_excluirAulaFinaceiro(?,?,?)";
 
 	private static Integer idAlula;
-	
-	
-	
-	public void excluirAula(Integer idAluno, String diaSemana,String dataAula)
+
+	public void excluirAula(Integer idAluno, String diaSemana, String dataAula)
 			throws SQLException, InstantiationException, IllegalAccessException, ClassNotFoundException {
 
 		open();
-		
-		
+
 		stmt = con.prepareStatement(procExcluirAula);
 		stmt.setInt(1, idAluno);
 		stmt.setString(2, diaSemana);
@@ -78,18 +75,16 @@ public class AulaDao extends Dao {
 		close();
 
 	}
-	
 
 	// idAluno,horario, mes, ano, listaDias
 
-	public void cadastrarNovaAula(Integer idAluno, String horario ,String mes, String ano,List<String> listaDias)
+	public void cadastrarNovaAula(Integer idAluno, String horario, String mes, String ano, List<String> listaDias)
 			throws SQLException, InstantiationException, IllegalAccessException, ClassNotFoundException {
 
 		open();
-		
-		
-		for(String s: listaDias){
-			
+
+		for (String s : listaDias) {
+
 			stmt = con.prepareStatement(procCadastrarAulaNova);
 			stmt.setInt(1, idAluno);
 			stmt.setString(2, horario);
@@ -97,16 +92,14 @@ public class AulaDao extends Dao {
 			stmt.setString(4, ano);
 			stmt.setString(5, s);
 			stmt.execute();
-	
+
 		}
-	
+
 		stmt.close();
 		close();
 
 	}
-	
-	
-	
+
 	public Aula verificarAlunoAula(String mes, String ano, String dia, Integer idAluno)
 			throws SQLException, InstantiationException, IllegalAccessException, ClassNotFoundException {
 
@@ -122,7 +115,7 @@ public class AulaDao extends Dao {
 		if (rs.first()) {
 
 			a.setQuantidadeDia(rs.getInt(1));
-		
+
 		}
 
 		rs.close();
@@ -246,16 +239,13 @@ public class AulaDao extends Dao {
 			a.setDetalhe(rs.getString(1));
 			a.setValorTotal(rs.getString(2));
 
-		
-			
 		}
 		stmt = con.prepareStatement(procRelFinanceiro);
 		stmt.setString(1, lista);
 		rs = stmt.executeQuery();
 
-		
 		String nomeMes;
-		
+
 		// presenca, falta, faltajusticada, obsjustificada, observacao,
 		// resultado, tr.nome
 
@@ -270,10 +260,9 @@ public class AulaDao extends Dao {
 			au.setDataPagamento(rs.getString(2));
 			au.setValorDevido(rs.getString(3));
 			au.setValorPago(rs.getString(4));
-			
-						
+
 			au.setMes(rs.getString(5));
-			
+
 			if (rs.getString(5).equals("0")) {
 
 				mesAnoAnterior = "Janeiro";
@@ -307,13 +296,16 @@ public class AulaDao extends Dao {
 			} else if (rs.getString(5).equals("10")) {
 
 				mesAnoAnterior = "Novembro";
-			} else {
+			} else if (rs.getString(5).equals(11)) {
 
 				mesAnoAnterior = "Dezembro";
 
+			} else {
+
+				mesAnoAnterior = "Não Informado";
+
 			}
 
-			
 			au.setMes(mesAnoAnterior);
 			au.setAno(rs.getString(6));
 			aulas.add(au);
@@ -341,9 +333,6 @@ public class AulaDao extends Dao {
 		return pdf;
 
 	}
-
-
-	
 
 	public RetornaPDF geraRelatorioTreino(String mes, String ano, String lista)
 			throws SQLException, InstantiationException, IllegalAccessException, ClassNotFoundException {
@@ -457,8 +446,6 @@ public class AulaDao extends Dao {
 			a.setDetalhe(rs.getString(1));
 			a.setValorTotal(rs.getString(2));
 
-		
-			
 		}
 		stmt = con.prepareStatement(procRelTreinoAnterior);
 		stmt.setString(1, mes);
@@ -486,13 +473,10 @@ public class AulaDao extends Dao {
 			au.setObservacao(rs.getString(7));
 			au.setResultado(rs.getString(8));
 			au.setListaTreino(rs.getString(9));
-			
-		
+
 			aulas.add(au);
 		}
 
-	
-		
 		rs.close();
 		stmt.close();
 
@@ -874,7 +858,6 @@ public class AulaDao extends Dao {
 
 	}
 
-	
 	public List<Aula> findByAulaDiaAnterior(String dia)
 			throws SQLException, InstantiationException, IllegalAccessException, ClassNotFoundException {
 
@@ -905,7 +888,7 @@ public class AulaDao extends Dao {
 		return aulas;
 
 	}
-	
+
 	public List<Aula> findByName(String nome)
 			throws SQLException, InstantiationException, IllegalAccessException, ClassNotFoundException {
 
