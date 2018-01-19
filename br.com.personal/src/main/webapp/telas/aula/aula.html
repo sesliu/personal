@@ -65,18 +65,18 @@
 								<td>{{::pesq.presenca == 0? "Não" :"Sim" }}</td>
 								<td>{{::pesq.falta == 0? "Não":"Sim"}}</td>
 								<td>{{::pesq.faltajusticada == 0 ? "Não" : "Sim"}}</td>
-								<td><div ng-if = "pesq.resultado == ''"><span class="carinha text-center"><label><i class="fa fa-frown-o" style="font-size: 2em; color:#000000"></i></label></span></div>
-									<div ng-if = "pesq.resultado == 0"><span class="carinha text-center"><label><i class="fa fa-frown-o" style="font-size: 2em; color:#000000"></i></label></span></div>
-								    <div ng-if = "pesq.resultado == 1"><span class="carinha text-center"><label><i class="fa fa-smile-o" style="font-size: 2em; color:#009966"></i></label></span></div>
-								    <div ng-if = "pesq.resultado == 2"><span class="carinha text-center"><label><i class="fa fa-smile-o" style="font-size: 2em; color:#009966"></i></label></span></div>
-								    <div ng-if = "pesq.resultado == 3"><span class="carinha text-center"><label><i class="fa fa-smile-o" style="font-size: 2em; color:#009900"></i></label></span></div>
-								    <div ng-if = "pesq.resultado == 4"><span class="carinha text-center"><label><i class="fa fa-smile-o" style="font-size: 2em; color:#009966"></i></label></span></div>
-									<div ng-if = "pesq.resultado == 5"><span class="carinha text-center"><label><i class="fa fa-smile-o" style="font-size: 2em; color:#009966"></i></label></span></div>
-									<div ng-if = "pesq.resultado == 6"><span class="carinha text-center"><label><i class="fa fa-smile-o" style="font-size: 2em; color:#FFFF66"></i></label></span></div>
-									<div ng-if = "pesq.resultado == 7"><span class="carinha text-center"><label><i class="fa fa-smile-o" style="font-size: 2em; color:#FFFF66"></i></label></span></div>
-									<div ng-if = "pesq.resultado == 8"><span class="carinha text-center"><label><i class="fa fa-smile-o" style="font-size: 2em; color:#FFFF66"></i></label></span></div>
-									<div ng-if = "pesq.resultado == 9"><span class="carinha text-center"><label><i class="fa fa-smile-o" style="font-size: 2em; color:#FF0033"></i></label></span></div>
-									<div ng-if = "pesq.resultado == 10"><span class="carinha text-center"><label><i class="fa fa-smile-o" style="font-size: 2em; color:#FF0000"></i></label></span></div>
+								<td><div ng-if = "pesq.resultado == ''"><span title="Não avaliado"  class="carinha text-center"><label><i class="fa fa-frown-o" style="font-size: 2em; color:#000000"></i></label></span></div>
+									<div ng-if = "pesq.resultado == 0"><span  title="Não avaliado"   class="carinha text-center"><label><i class="fa fa-frown-o" style="font-size: 2em; color:#000000"></i></label></span></div>
+								    <div ng-if = "pesq.resultado == 1"><span title="10%" class="carinha text-center"><label><i class="fa fa-smile-o" style="font-size: 2em; color:#009966"></i></label></span></div>
+								    <div ng-if = "pesq.resultado == 2"><span title="20%" class="carinha text-center"><label><i class="fa fa-smile-o" style="font-size: 2em; color:#009966"></i></label></span></div>
+								    <div ng-if = "pesq.resultado == 3"><span title="30%"class="carinha text-center"><label><i class="fa fa-smile-o" style="font-size: 2em; color:#009900"></i></label></span></div>
+								    <div ng-if = "pesq.resultado == 4"><span title="40%" class="carinha text-center"><label><i class="fa fa-smile-o" style="font-size: 2em; color:#009966"></i></label></span></div>
+									<div ng-if = "pesq.resultado == 5"><span title="50%" class="carinha text-center"><label><i class="fa fa-smile-o" style="font-size: 2em; color:#009966"></i></label></span></div>
+									<div ng-if = "pesq.resultado == 6"><span title="60%" class="carinha text-center"><label><i class="fa fa-smile-o" style="font-size: 2em; color:#FFFF66"></i></label></span></div>
+									<div ng-if = "pesq.resultado == 7"><span title="70%" class="carinha text-center"><label><i class="fa fa-smile-o" style="font-size: 2em; color:#FFFF66"></i></label></span></div>
+									<div ng-if = "pesq.resultado == 8"><span title="80%"class="carinha text-center"><label><i class="fa fa-smile-o" style="font-size: 2em; color:#FFFF66"></i></label></span></div>
+									<div ng-if = "pesq.resultado == 9"><span title="90%" class="carinha text-center"><label><i class="fa fa-smile-o" style="font-size: 2em; color:#FF0033"></i></label></span></div>
+									<div ng-if = "pesq.resultado == 10"><span title="100%" class="carinha text-center"><label><i class="fa fa-smile-o" style="font-size: 2em; color:#FF0000"></i></label></span></div>
 								</td>
 								
 								<td></td>
