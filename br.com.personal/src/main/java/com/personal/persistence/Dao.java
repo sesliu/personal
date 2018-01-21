@@ -27,15 +27,15 @@ public class Dao {
       //		String user = "b8acf746965ef8";
 	// 	String password = "4260704f";
 		
-		String url = "jdbc:mysql://personalgym.mysql.uhserver.com:3306/personalgym?connectTimeout=0&socketTimeout=0&autoReconnect=true";
+		/*String url = "jdbc:mysql://personalgym.mysql.uhserver.com:3306/personalgym?connectTimeout=0&socketTimeout=0&autoReconnect=true";
 		String user = "personalgym";
 		String password = "Personal@Gym@22";
+		*/
 		
-		
-		/*String url = "jdbc:mysql://personalgymprod.mysql.uhserver.com:3306/personalgymprod?autoReconnect=true";
+		String url = "jdbc:mysql://personalgymprod.mysql.uhserver.com:3306/personalgymprod?autoReconnect=true";
 		String user = "persosnalgym";
 		String password = "Personal@6";
-		*/
+		
 		
 		
 		Class.forName("com.mysql.jdbc.Driver");
