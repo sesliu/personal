@@ -296,7 +296,7 @@ public class AulaDao extends Dao {
 			} else if (rs.getString(5).equals("10")) {
 
 				mesAnoAnterior = "Novembro";
-			} else if (rs.getString(5).equals(11)) {
+			} else if (rs.getString(5).equals("11")) {
 
 				mesAnoAnterior = "Dezembro";
 
