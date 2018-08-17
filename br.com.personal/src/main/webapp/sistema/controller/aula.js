@@ -167,7 +167,8 @@ personal.controller('aulaController',function($scope, $rootScope, $compile,webse
 
 		$scope.inicio = function(){
 			
-			
+	
+		$timeout(function(){	
 			webservices.buscarTodosTreinos().success(function(data){
 				
 				listaTreinos = data;
@@ -185,7 +186,7 @@ personal.controller('aulaController',function($scope, $rootScope, $compile,webse
 			});
 			
 			
-			
+		},1000);	
 			
 		}
 		
