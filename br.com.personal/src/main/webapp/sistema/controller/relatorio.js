@@ -17,17 +17,7 @@ personal.controller('treinoRelController', function($rootScope, $scope, $timeout
 			
 			listaAluno = data;
 			
-		});
-		
-		
-	}
-	
-	
-	$timeout(function(){
-		
-		
-		
-		$scope.alunoOptions = {
+			$scope.alunoOptions = {
 				title : 'Escolha os alunos',
 				filterPlaceHolder : 'Buscar nome do aluno abaixo',
 				labelAll : 'Não selecionados',
@@ -37,11 +27,14 @@ personal.controller('treinoRelController', function($rootScope, $scope, $timeout
 				items : listaAluno,
 				selectedItems : listaAlunoSelecionado
 	};			
-
+			
+		});
 		
 		
+	}
+	
+	
 		
-	},1000);		
 	
 	
 	$scope.gerarRelatorio =  function(){
@@ -149,18 +142,7 @@ personal.controller('financeiroRelController', function($rootScope, $scope, $tim
 		webservicesAluno.buscarAlunos().success(function(data){
 			
 			listaAluno = data;
-			
-		});
-		
-		
-	}
-	
-	
-	$timeout(function(){
-		
-		
-		
-		$scope.alunoOptions = {
+			$scope.alunoOptions = {
 				title : 'Escolha os alunos',
 				filterPlaceHolder : 'Buscar nome do aluno abaixo',
 				labelAll : 'Não selecionados',
@@ -169,12 +151,13 @@ personal.controller('financeiroRelController', function($rootScope, $scope, $tim
 				orderProperty : 'nome',
 				items : listaAluno,
 				selectedItems : listaAlunoSelecionado
-	};			
-
+			
+		});
 		
 		
-		
-	},1000);		
+	}
+	
+	
 	
 	
 	$scope.gerarRelatorio =  function(){
