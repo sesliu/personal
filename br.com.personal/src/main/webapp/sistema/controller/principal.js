@@ -280,18 +280,8 @@ personal.controller('dashController', function($scope, webservicesAluno, webserv
 			
 			webservices.buscarTreinosAula(codigo).success(function(data){
 				
-			    listaTreinos = data;
-				
-			});
-			
-			webservices.buscarTreinosVicunlados(codigo).success(function(data){
-				
-				listaTreinoSelecionado = data;
-			
-			});
-			
-			$timeout(function(){	
-				$scope.demoOptions = {
+                listaTreinos = data;
+                $scope.demoOptions = {
 					title : 'Escolha os treinos da aula',
 					filterPlaceHolder : 'Buscar nome do treino abaixo',
 					labelAll : 'Não vinculados',
@@ -300,9 +290,16 @@ personal.controller('dashController', function($scope, webservicesAluno, webserv
 					orderProperty : 'nome',
 					items : listaTreinos,
 					selectedItems : listaTreinoSelecionado
-				};			
-
-			},1000);
+				};	
+				
+			});
+			
+			webservices.buscarTreinosVicunlados(codigo).success(function(data){
+				
+				listaTreinoSelecionado = data;
+			
+			});
+		
 			
 			$scope.carregaSpinner = false;
 				
@@ -438,18 +435,9 @@ personal.controller('dadosAulaController',function($scope, $rootScope, webservic
 		
 		webservices.buscarTreinosVicunlados($rootScope.dadosAula.idAula).success(function(data){
 			
-			listaTreinoSelecionado = data;
-		
-		})
-		
-	},1000)	
-	
-		
-			
-		
-		
-		
-		$timeout(function(){	
+            listaTreinoSelecionado = data;
+            
+
 			$scope.demoOptions = {
 				title : 'Escolha os treinos da aula',
 				filterPlaceHolder : 'Buscar nome do treino abaixo',
@@ -460,8 +448,12 @@ personal.controller('dadosAulaController',function($scope, $rootScope, webservic
 				items : listaTreinos,
 				selectedItems : listaTreinoSelecionado
 			};			
-
-		},1000);
+		
+		})
+		
+	},1000)	
+	
+	
 	}
 	
 	
