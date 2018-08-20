@@ -64,11 +64,7 @@
 
 			</plugin>
 		</plugins>
-		<resources>
-			<resource>
-				<directory>${project.basedir}</directory>
-			</resource>
-		</resources>
+		
 
 	</build>
 
