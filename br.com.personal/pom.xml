@@ -64,7 +64,13 @@
 
 			</plugin>
 		</plugins>
-		
+		<resource>
+    			<filtering>false</filtering>
+    			<directory>src</directory>
+    			<includes>
+        			<include>**/*.jrxml</include>
+    			</includes>
+		</resource>
 
 	</build>
 
