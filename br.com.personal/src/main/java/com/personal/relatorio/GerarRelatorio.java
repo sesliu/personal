@@ -37,6 +37,8 @@ public class GerarRelatorio {
 			caminho =  arquivo+".jrxml";
 			
 			 URL nome = getClass().getClassLoader().getResource(caminho);
+			 
+			 System.out.println(nome.getPath());
 			File file = new File(nome.getFile());
 				
 		JasperReport relatorio = JasperCompileManager.compileReport(file.getAbsolutePath());
