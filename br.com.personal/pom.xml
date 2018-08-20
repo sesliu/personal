@@ -68,13 +68,9 @@
 			<resource>
 				<directory>src/main/resources</directory>
 			</resource>
-			  <resource>
-       			<directory>src/main/resources</directory><!-- from -->
-       			<targetPath>${project.build.directory}</targetPath><!-- to -->
-       			<includes><!-- what -->
-          		<include>**/*.jrxml</include>
-       			</includes>
-    </resource> 
+			<includes>
+                		<include>**/*</include>
+            		</includes>
 		</resources>
 
 	</build>
