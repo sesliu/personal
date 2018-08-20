@@ -331,6 +331,7 @@ personal.controller('vinculaTreinoController',
 		webservicesAluno.buscarAlunoIdTreino($rootScope.treino.idTreino).success(function(data){
 			
 			listaAlunos = data;
+			
 		
 			
 		});
@@ -338,21 +339,7 @@ personal.controller('vinculaTreinoController',
 	 webservicesAluno.buscarAlunoIdTreinoVinculado($rootScope.treino.idTreino).success(function(data){
 			
 		 listaAlunoSelecionado = data;
-			
-			
-		});
-		
-	}
-	
-
-	
-	
-$timeout(function(){
-	
-	
-	
-	
-	$scope.demoOptions = {
+		 $scope.demoOptions = {
 			title : 'Vincular alunos ao treino',
 			filterPlaceHolder : 'Buscar nome do aluno abaixo',
 			labelAll : 'Não vinculados',
@@ -361,10 +348,15 @@ $timeout(function(){
 			orderProperty : 'nome',
 			items : listaAlunos,
 			selectedItems : listaAlunoSelecionado
-};			
+			
+			
+		});
+		
+	}
+	
 
 	
-},1000);	
+
 	
 
 $scope.gravar = function(){
