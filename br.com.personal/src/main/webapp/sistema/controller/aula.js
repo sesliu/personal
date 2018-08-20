@@ -185,18 +185,7 @@ personal.controller('aulaController',function($scope, $rootScope, $compile,webse
 				
 			});
 			
-			
-		},1000);	
-			
-		}
-		
-		
-		
-
-		$timeout(function(){
-			
-			
-			
+				
 			
 			$scope.demoOptions = {
 					title : 'Escolha os treinos da aula',
@@ -219,12 +208,15 @@ personal.controller('aulaController',function($scope, $rootScope, $compile,webse
 					orderProperty : 'nome',
 					items : listaAluno,
 					selectedItems : listaAlunoSelecionado
-		};			
-	
+		};	
 			
 			
+		},1000);	
 			
-		},1000);		
+		}
+		
+		
+				
 		
 /////////////exibe vinculo treino////////////////////
 		
