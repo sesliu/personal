@@ -67,10 +67,10 @@
 		<resources>
 			<resource>
 				<directory>src/main/resources</directory>
-			</resource>
 			<includes>
                 		<include>**/*</include>
             		</includes>
+			</resource>
 		</resources>
 
 	</build>
