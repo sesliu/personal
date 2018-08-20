@@ -172,6 +172,7 @@ personal.controller('aulaController',function($scope, $rootScope, $compile,webse
 			webservices.buscarTodosTreinos().success(function(data){
 				
 				listaTreinos = data;
+				console.log("treino: "+data);
 				
 			});
 			
