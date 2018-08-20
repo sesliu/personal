@@ -1,6 +1,6 @@
 personal.factory("webservicesAula", function($http) {
 
-	var url = "../api";
+	var url = "../personal/api";
 
 	var _gravarAula = function(aula) {
 		return $http.post(url + '/gravaraula', aula);

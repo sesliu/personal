@@ -1,6 +1,6 @@
 personal.factory("webservices", function($http) {
 
-	var url = "../api";
+	var url = "../personal/api";
 
 	var _gravarTreino = function(treino) {
 		return $http.post(url + '/gravartreino', treino);

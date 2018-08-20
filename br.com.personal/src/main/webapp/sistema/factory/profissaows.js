@@ -1,6 +1,6 @@
 personal.factory("webservicesProfissao", function($http) {
 
-	var url = "../api";
+	var url = "../personal/api";
 	
 	var _gravarProfissao = function(profissao) {
 		
