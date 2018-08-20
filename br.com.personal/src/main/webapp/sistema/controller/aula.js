@@ -172,7 +172,19 @@ personal.controller('aulaController',function($scope, $rootScope, $compile,webse
 			webservices.buscarTodosTreinos().success(function(data){
 				
 				listaTreinos = data;
-				console.log("treino: "+data);
+				
+					
+			$scope.demoOptions = {
+					title : 'Escolha os treinos da aula',
+					filterPlaceHolder : 'Buscar nome do treino abaixo',
+					labelAll : 'Não vinculados',
+					labelSelected : 'vinculados',
+					helpMessage : 'Clicar no nome do treino para transferir entre os campos',
+					orderProperty : 'nome',
+					items : listaTreinos,
+					selectedItems : listaTreinoSelecionado
+		};	
+				
 				
 			});
 			
@@ -184,23 +196,7 @@ personal.controller('aulaController',function($scope, $rootScope, $compile,webse
 				
 				listaAluno = data;
 				
-			});
-			
-				
-			
-			$scope.demoOptions = {
-					title : 'Escolha os treinos da aula',
-					filterPlaceHolder : 'Buscar nome do treino abaixo',
-					labelAll : 'Não vinculados',
-					labelSelected : 'vinculados',
-					helpMessage : 'Clicar no nome do treino para transferir entre os campos',
-					orderProperty : 'nome',
-					items : listaTreinos,
-					selectedItems : listaTreinoSelecionado
-		};			
-
-			
-			$scope.alunoOptions = {
+					$scope.alunoOptions = {
 					title : 'Escolha os alunos',
 					filterPlaceHolder : 'Buscar nome do aluno abaixo',
 					labelAll : 'Não vinculados',
@@ -210,6 +206,14 @@ personal.controller('aulaController',function($scope, $rootScope, $compile,webse
 					items : listaAluno,
 					selectedItems : listaAlunoSelecionado
 		};	
+				
+			});
+			
+				
+				
+
+			
+		
 			
 			
 		
