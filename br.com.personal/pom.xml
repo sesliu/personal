@@ -67,7 +67,7 @@
 	      <resources>	
 		<resource>
     			<filtering>false</filtering>
-    			<directory>src</directory>
+    			<directory>src/main/resources</directory>
     			<includes>
         			<include>**/*.jrxml</include>
     			</includes>
