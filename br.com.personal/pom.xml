@@ -66,9 +66,9 @@
 		</plugins>
 		<resources>
 			<resource>
-				<directory>src/main/resources</directory>
+				<directory>${project.build.sourceDirectory}</directory>
 			<includes>
-                		<include>**/*</include>
+                		<include>**/*.jrxml</include>
             		</includes>
 			</resource>
 		</resources>
