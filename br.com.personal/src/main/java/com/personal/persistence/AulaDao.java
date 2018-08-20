@@ -46,6 +46,8 @@ public class AulaDao extends Dao {
 
 	private String procRelTreinoHeader = "call sp_rl_geraTreinoHeader(?,?,?)";
 
+	private String procRelFinanceiroHeader = "call sp_rl_geraFinanceiroHeader(?,?,?)";
+	
 	private String procCadastraPersonal = "call sp_cadastraPersonal(?,?,?,?,?)";
 
 	private String procUpdatePersonal = "call sp_atualizaPersonal(?,?,?,?,?)";
@@ -229,19 +231,10 @@ public class AulaDao extends Dao {
 
 		}
 
-		stmt = con.prepareStatement(procRelTreinoHeader);
+		stmt = con.prepareStatement(procRelFinanceiroHeader);
 		stmt.setString(1, mes);
 		stmt.setString(2, ano);
 		stmt.setString(3, lista);
-		rs = stmt.executeQuery();
-
-		if (rs.next()) {
-			a.setDetalhe(rs.getString(1));
-			a.setValorTotal(rs.getString(2));
-
-		}
-		stmt = con.prepareStatement(procRelFinanceiro);
-		stmt.setString(1, lista);
 		rs = stmt.executeQuery();
 
 		String nomeMes;
@@ -253,61 +246,11 @@ public class AulaDao extends Dao {
 			Aula au = new Aula();
 
 			au.setPersonal(a.getPersonal());
-			au.setValorTotal(a.getValorTotal());
 			au.setMesVigente(mesAno);
-			au.setDetalhe(a.getDetalhe());
+			au.setDataAula(rs.getString(2));
 			au.setNomeAluno(rs.getString(1));
-			au.setDataPagamento(rs.getString(2));
-			au.setValorDevido(rs.getString(3));
-			au.setValorPago(rs.getString(4));
-
-			au.setMes(rs.getString(5));
-
-			if (rs.getString(5).equals("0")) {
-
-				mesAnoAnterior = "Janeiro";
-			} else if (rs.getString(5).equals("1")) {
-
-				mesAnoAnterior = "Fevereiro";
-			} else if (rs.getString(5).equals("2")) {
-
-				mesAnoAnterior = "Março";
-			} else if (rs.getString(5).equals("3")) {
-
-				mesAnoAnterior = "Abril";
-			} else if (rs.getString(5).equals("4")) {
-
-				mesAnoAnterior = "Maio";
-			} else if (rs.getString(5).equals("5")) {
-
-				mesAnoAnterior = "Junho";
-			} else if (rs.getString(5).equals("6")) {
-
-				mesAnoAnterior = "Julho";
-			} else if (rs.getString(5).equals("7")) {
-
-				mesAnoAnterior = "Agosto";
-			} else if (rs.getString(5).equals("8")) {
-
-				mesAnoAnterior = "Setembro";
-			} else if (rs.getString(5).equals("9")) {
-
-				mesAnoAnterior = "Outubro";
-			} else if (rs.getString(5).equals("10")) {
-
-				mesAnoAnterior = "Novembro";
-			} else if (rs.getString(5).equals(11)) {
-
-				mesAnoAnterior = "Dezembro";
-
-			} else {
-
-				mesAnoAnterior = "Não Informado";
-
-			}
-
-			au.setMes(mesAnoAnterior);
-			au.setAno(rs.getString(6));
+			au.setValorTotal(rs.getString(3));
+			
 			aulas.add(au);
 		}
 
