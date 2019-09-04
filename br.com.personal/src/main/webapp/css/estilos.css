@@ -163,7 +163,7 @@ button:focus {outline:0;!important;}
 	height: 460px;
 	padding: 0 0 2px;
 	margin: 0 auto;
-	max-height: 1500px;
+	max-height: 80vh;
 	overflow-y: auto;
 	overflow-x: hidden;
 	border: 1px solid #e4e4e4;
@@ -176,13 +176,13 @@ button:focus {outline:0;!important;}
 
 .scrollDash {
 	
-	height: 90px;
+	height: 80vh;
 	overflow: auto;
 }
 
 .scrollDashFinanceiro {
 	
-	height: 90px;
+	height:80vh;
 	overflow: auto;
 }
 
