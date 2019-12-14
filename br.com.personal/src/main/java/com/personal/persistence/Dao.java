@@ -27,9 +27,9 @@ public class Dao {
       //		String user = "b8acf746965ef8";
 	// 	String password = "4260704f";
 		
-		String url = "jdbc:mysql://personalgym.mysql.uhserver.com:3306/personalgym?connectTimeout=0&socketTimeout=0&autoReconnect=true";
-		String user = "personalgym";
-		String password = "Personal@Gym@22";
+		String url = "jdbc:mysql://k3xio06abqa902qt.cbetxkdyhwsb.us-east-1.rds.amazonaws.com:3306/g6fm0cjyyh9cnayj?connectTimeout=0&socketTimeout=0&autoReconnect=true";
+		String user = "qjm3kc2blqyt1gce";
+		String password = "hzfv08k6vqht7wsj";
 		
 		
 		/*String url = "jdbc:mysql://personalgymprod.mysql.uhserver.com:3306/personalgymprod?autoReconnect=true";
