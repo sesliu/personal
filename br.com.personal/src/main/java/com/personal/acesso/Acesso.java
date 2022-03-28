@@ -3,9 +3,6 @@ package com.personal.acesso;
 import java.util.HashSet;
 import java.util.Set;
 
-import com.personal.modelo.Personal;
-import com.personal.persistence.AulaDao;
-
 public class Acesso {
 	
 	

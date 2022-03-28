@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.personal.modelo.Aluno;
-import com.personal.modelo.Aula;
 
 
 public class AlunoDao extends Dao{

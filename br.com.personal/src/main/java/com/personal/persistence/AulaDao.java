@@ -38,9 +38,9 @@ public class AulaDao extends Dao {
 
 	private String procAtualizaDiaAula = "call sp_atualizaAuladoDia(?,?,?,?,?,?,?,?)";
 
-	private String procRelTreino = "call sp_rl_geraTreino(?,?,?)";
+	//private String procRelTreino = "call sp_rl_geraTreino(?,?,?)";
 
-	private String procRelFinanceiro = "call sp_rl_geraFinanceiroResultado(?)";
+	//private String procRelFinanceiro = "call sp_rl_geraFinanceiroResultado(?)";
 
 	private String procRelTreinoAnterior = "call sp_rl_geraTreinoResultado(?,?,?)";
 
