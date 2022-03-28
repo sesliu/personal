@@ -1,25 +1,13 @@
 package com.personal.modelo;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 public class AlunoTreino {
-	
+
 	private Integer idAluno;
 	private Integer idAlunoTreino;
-	
-	
-	public Integer getIdAluno() {
-		return idAluno;
-	}
-	public void setIdAluno(Integer idAluno) {
-		this.idAluno = idAluno;
-	}
-	public Integer getIdAlunoTreino() {
-		return idAlunoTreino;
-	}
-	public void setIdAlunoTreino(Integer idAlunoTreino) {
-		this.idAlunoTreino = idAlunoTreino;
-	}
-	
 
-	
-	
 }
