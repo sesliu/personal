@@ -4,8 +4,11 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.personal.modelo.Mobile;
+import org.springframework.stereotype.Repository;
 
+import com.personal.model.Mobile;
+
+@Repository
 public class MobileDao extends Dao {
 
 	private String procProximaAula = "call sp_proximaAula(?,?)";

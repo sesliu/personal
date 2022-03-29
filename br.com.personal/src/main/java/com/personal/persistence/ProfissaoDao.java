@@ -4,10 +4,11 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.personal.modelo.Aluno;
-import com.personal.modelo.Profissao;
-import com.personal.modelo.Treino;
+import org.springframework.stereotype.Repository;
 
+import com.personal.model.Profissao;
+
+@Repository
 public class ProfissaoDao extends Dao {
 
 	

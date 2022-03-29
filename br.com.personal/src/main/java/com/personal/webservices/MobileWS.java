@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.personal.modelo.Mobile;
-import com.personal.modelo.Treino;
+import com.personal.model.Mobile;
+import com.personal.model.Treino;
 import com.personal.persistence.MobileDao;
 import com.personal.persistence.TreinoDao;
 

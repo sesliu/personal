@@ -1,4 +1,4 @@
-package com.personal.modelo;
+package com.personal.model;
 
 import lombok.Getter;
 import lombok.Setter;

@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.personal.modelo.Aluno;
-import com.personal.modelo.AulaExtra;
+import com.personal.model.Aluno;
+import com.personal.model.AulaExtra;
 import com.personal.persistence.AlunoDao;
 import com.personal.persistence.AulaExtraDao;
 

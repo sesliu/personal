@@ -1,13 +1,12 @@
-package com.personal.modelo;
+package com.personal.model;
 
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
-public class Treino {
+public class Versao {
 
-	private Integer idTreino;
 	private String nome;
 
 }

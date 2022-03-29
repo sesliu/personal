@@ -5,14 +5,17 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.personal.modelo.Aula;
-import com.personal.modelo.Personal;
-import com.personal.modelo.RelatorioSaida;
-import com.personal.modelo.RetornaPDF;
+import org.springframework.stereotype.Repository;
+
+import com.personal.model.Aula;
+import com.personal.model.Personal;
+import com.personal.model.RelatorioSaida;
+import com.personal.model.RetornaPDF;
 import com.personal.relatorio.GerarRelatorio;
 
 import net.sf.jasperreports.engine.JRException;
 
+@Repository
 public class AulaDao extends Dao {
 
 	private String procListaAulas = "call sp_buscaAula()";
@@ -569,6 +572,34 @@ public class AulaDao extends Dao {
 		return p;
 
 	}
+	
+	public Personal findPersonalbyName(String nome)
+			throws SQLException, InstantiationException, IllegalAccessException, ClassNotFoundException {
+
+		open();
+
+		Personal p = new Personal();
+		stmt = con.prepareStatement("select * from personal where nome = ?");
+		stmt.setString(1, nome);
+		rs = stmt.executeQuery();
+		if (rs.first()) {
+
+			p.setNome(rs.getString(1));
+			p.setEmail(rs.getString(2));
+			p.setTelefone(rs.getString(3));
+			p.setLogin(rs.getString(4));
+			p.setSenha(rs.getString(5));
+		}
+
+		rs.close();
+		stmt.close();
+
+		close();
+
+		return p;
+
+	}
+	
 
 	public void create(Aula a)
 			throws SQLException, InstantiationException, IllegalAccessException, ClassNotFoundException {

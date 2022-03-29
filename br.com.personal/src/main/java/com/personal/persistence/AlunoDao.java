@@ -4,9 +4,11 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.personal.modelo.Aluno;
+import org.springframework.stereotype.Repository;
 
+import com.personal.model.Aluno;
 
+@Repository
 public class AlunoDao extends Dao{
 
 

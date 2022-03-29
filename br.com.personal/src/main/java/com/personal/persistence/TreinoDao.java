@@ -5,8 +5,11 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.personal.modelo.Treino;
+import org.springframework.stereotype.Repository;
 
+import com.personal.model.Treino;
+
+@Repository
 public class TreinoDao extends Dao {
 
 	private String procCadastraTreino = "call sp_cadastraTreino(?)";

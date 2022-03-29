@@ -10,10 +10,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.personal.modelo.Aula;
-import com.personal.modelo.Personal;
-import com.personal.modelo.RetornaPDF;
-import com.personal.modelo.Treino;
+import com.personal.model.Aula;
+import com.personal.model.Personal;
+import com.personal.model.RetornaPDF;
+import com.personal.model.Treino;
 import com.personal.persistence.AulaDao;
 import com.personal.persistence.TreinoDao;
 
